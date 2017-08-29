@@ -1,0 +1,9 @@
+uuid: c38312f1-f958-4f91-aa15-2a9eb89220a4
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: gIOTjGVpbMvQbnxkIJLxPr1PJANXDzxV23vhP_aXWfM
+id: bp_view
+label: View
+behavior_plugins: {  }

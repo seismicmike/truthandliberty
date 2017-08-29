@@ -1,0 +1,9 @@
+uuid: 350c26f7-4f08-4e19-a9e6-42c9e58482e9
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: ddtZ4X8geXjWvsFH9Mfu0mZBoWO4T72bd6ahXfAUMNE
+id: bp_contact
+label: 'Contact Form'
+behavior_plugins: {  }

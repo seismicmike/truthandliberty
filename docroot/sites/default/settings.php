@@ -295,7 +295,7 @@ $config_directories = array();
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = '';
+$settings['hash_salt'] = 'av42Ql5_rD6IH-Dp4hb14LSNqCYnSM4FTt1Yg5pkwfk1CGxh8sGsDZZqMFMFTjGNGDgAPBzrXA';
 
 /**
  * Deployment identifier.
@@ -763,3 +763,23 @@ $settings['file_scan_ignore_directories'] = [
 # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
+
+/**
+ * Load local development override configuration, if available.
+ *
+ * Use settings.local.php to override variables on secondary (staging,
+ * development, etc) installations of this site. Typically used to disable
+ * caching, JavaScript/CSS compression, re-routing of outgoing emails, and
+ * other things that should not happen on development and testing sites.
+ *
+ * Keep this code block at the end of this file to take full effect.
+ */
+if (file_exists(__DIR__ . '/settings.local.php')) {
+  include __DIR__ . '/settings.local.php';
+}
+
+$settings['install_profile'] = 'standard';
+// $config_directories['sync'] = 'sites/default/files/config_QEAlpOqVM7jTQhLcixRdTh2idkkAxKN7CWmCs-Lg-Q5LmhDzHMYYulEM7VA5z_g7b_bB2UNkGw/sync';
+$config_directories = array(
+  CONFIG_SYNC_DIRECTORY => '../config',
+);

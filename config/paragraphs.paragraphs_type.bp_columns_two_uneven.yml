@@ -1,0 +1,9 @@
+uuid: 95aa3c0d-66c2-45e2-96ac-2f74f8c87dc8
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: taVBeR1aK9UcQxj0JQBmIHOyokEEVS3b5KoGbF04MSc
+id: bp_columns_two_uneven
+label: 'Columns (Two Uneven)'
+behavior_plugins: {  }
