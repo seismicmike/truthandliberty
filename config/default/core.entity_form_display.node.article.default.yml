@@ -7,12 +7,14 @@ dependencies:
     - field.field.node.article.field_article_image_banner
     - field.field.node.article.field_date
     - field.field.node.article.field_image
+    - field.field.node.article.field_metatags
     - field.field.node.article.field_tags
     - image.style.thumbnail
     - node.type.article
   module:
     - datetime
     - image
+    - metatag
     - path
     - text
 _core:
@@ -59,6 +61,12 @@ content:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
+  field_metatags:
+    weight: 123
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
   field_tags:
     type: entity_reference_autocomplete_tags
     weight: 3
