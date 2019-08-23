@@ -4,6 +4,7 @@ namespace Drupal\Core\Entity\Query;
 
 use Drupal\Core\Database\Query\PagerSelectExtender;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Utility\TableSort;
 
 /**
  * The base entity query class.
@@ -107,6 +108,13 @@ abstract class QueryBase implements QueryInterface {
    * @var bool
    */
   protected $allRevisions = FALSE;
+
+  /**
+   * Flag indicating whether to query the latest revision.
+   *
+   * @var bool
+   */
+  protected $latestRevision = FALSE;
 
   /**
    * The query pager data.
@@ -252,6 +260,16 @@ abstract class QueryBase implements QueryInterface {
    */
   public function currentRevision() {
     $this->allRevisions = FALSE;
+    $this->latestRevision = FALSE;
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function latestRevision() {
+    $this->allRevisions = TRUE;
+    $this->latestRevision = TRUE;
     return $this;
   }
 
@@ -260,6 +278,7 @@ abstract class QueryBase implements QueryInterface {
    */
   public function allRevisions() {
     $this->allRevisions = TRUE;
+    $this->latestRevision = FALSE;
     return $this;
   }
 
@@ -311,8 +330,8 @@ abstract class QueryBase implements QueryInterface {
       }
     }
 
-    $order = tablesort_get_order($headers);
-    $direction = tablesort_get_sort($headers);
+    $order = TableSort::getOrder($headers, \Drupal::request());
+    $direction = TableSort::getSort($headers, \Drupal::request());
     foreach ($headers as $header) {
       if (is_array($header) && ($header['data'] == $order['name'])) {
         $this->sort($header['specifier'], $direction, isset($header['langcode']) ? $header['langcode'] : NULL);
@@ -348,14 +367,14 @@ abstract class QueryBase implements QueryInterface {
    * {@inheritdoc}
    */
   public function hasAllTags() {
-    return !(boolean)array_diff(func_get_args(), array_keys($this->alterTags));
+    return !(boolean) array_diff(func_get_args(), array_keys($this->alterTags));
   }
 
   /**
    * {@inheritdoc}
    */
   public function hasAnyTag() {
-    return (boolean)array_intersect(func_get_args(), array_keys($this->alterTags));
+    return (boolean) array_intersect(func_get_args(), array_keys($this->alterTags));
   }
 
   /**
@@ -431,7 +450,7 @@ abstract class QueryBase implements QueryInterface {
   }
 
   /**
-   * Generates an alias for a field and it's aggregated function.
+   * Generates an alias for a field and its aggregated function.
    *
    * @param string $field
    *   The field name used in the alias.

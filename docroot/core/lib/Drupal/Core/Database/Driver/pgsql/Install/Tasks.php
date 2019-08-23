@@ -58,7 +58,7 @@ class Tasks extends InstallTasks {
   protected function connect() {
     try {
       // This doesn't actually test the connection.
-      db_set_active();
+      Database::setActiveConnection();
       // Now actually do a check.
       Database::getConnection();
       $this->pass('Drupal can CONNECT to the database ok.');
@@ -156,7 +156,7 @@ class Tasks extends InstallTasks {
 
         // Close the database connection so that the configuration parameter
         // is applied to the current connection.
-        db_close();
+        Database::closeConnection();
 
         // Recheck, if it fails, finally just rely on the end user to do the
         // right thing.
@@ -254,7 +254,7 @@ class Tasks extends InstallTasks {
           \'SELECT random();\'
           LANGUAGE \'sql\'',
           [],
-          [ 'allow_delimiter_in_query' => TRUE ]
+          ['allow_delimiter_in_query' => TRUE]
         );
       }
 
@@ -263,7 +263,7 @@ class Tasks extends InstallTasks {
           \'SELECT array_to_string((string_to_array($1, $2)) [1:$3], $2);\'
           LANGUAGE \'sql\'',
           [],
-          [ 'allow_delimiter_in_query' => TRUE ]
+          ['allow_delimiter_in_query' => TRUE]
         );
       }
       $connection->query('SELECT pg_advisory_unlock(1)');

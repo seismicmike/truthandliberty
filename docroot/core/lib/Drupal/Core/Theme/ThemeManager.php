@@ -303,7 +303,7 @@ class ThemeManager implements ThemeManagerInterface {
       unset($preprocess_bubbleable['#cache']['keys']);
       if ($preprocess_bubbleable) {
         // @todo Inject the Renderer in https://www.drupal.org/node/2529438.
-        drupal_render($preprocess_bubbleable);
+        \Drupal::service('renderer')->render($preprocess_bubbleable);
       }
     }
 
@@ -427,11 +427,7 @@ class ThemeManager implements ThemeManagerInterface {
       }
     }
 
-    $theme_keys = [];
-    foreach ($theme->getBaseThemes() as $base) {
-      $theme_keys[] = $base->getName();
-    }
-
+    $theme_keys = array_keys($theme->getBaseThemeExtensions());
     $theme_keys[] = $theme->getName();
     $functions = [];
     foreach ($theme_keys as $theme_key) {

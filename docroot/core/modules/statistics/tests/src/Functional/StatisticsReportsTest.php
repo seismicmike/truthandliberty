@@ -3,7 +3,7 @@
 namespace Drupal\Tests\statistics\Functional;
 
 use Drupal\Core\Cache\Cache;
-use Drupal\system\Tests\Cache\AssertPageCacheContextsAndTagsTrait;
+use Drupal\Tests\system\Functional\Cache\AssertPageCacheContextsAndTagsTrait;
 
 /**
  * Tests display of statistics report blocks.
@@ -57,7 +57,7 @@ class StatisticsReportsTest extends StatisticsTestBase {
     $this->assertCacheContexts($contexts);
 
     // Check if the node link is displayed.
-    $this->assertRaw(\Drupal::l($node->label(), $node->urlInfo('canonical')), 'Found link to visited node.');
+    $this->assertRaw(\Drupal::l($node->label(), $node->toUrl('canonical')), 'Found link to visited node.');
   }
 
 }

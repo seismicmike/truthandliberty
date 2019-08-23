@@ -2,6 +2,8 @@
 
 namespace Drupal\system\Tests\Cache;
 
+@trigger_error(__NAMESPACE__ . '\GenericCacheBackendUnitTestBase is deprecated for removal before Drupal 9.0.0. Use \Drupal\KernelTests\Core\Cache\GenericCacheBackendUnitTestBase instead.', E_USER_DEPRECATED);
+
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\simpletest\KernelTestBase;
@@ -69,7 +71,7 @@ abstract class GenericCacheBackendUnitTestBase extends KernelTestBase {
    * @return \Drupal\Core\Cache\CacheBackendInterface
    *   Cache backend to test.
    */
-  protected abstract function createCacheBackend($bin);
+  abstract protected function createCacheBackend($bin);
 
   /**
    * Allows specific implementation to change the environment before a test run.
@@ -303,9 +305,11 @@ abstract class GenericCacheBackendUnitTestBase extends KernelTestBase {
     $reference = [
       'test3',
       'test7',
-      'test21', // Cid does not exist.
+      // Cid does not exist.
+      'test21',
       'test6',
-      'test19', // Cid does not exist until added before second getMultiple().
+      // Cid does not exist until added before second getMultiple().
+      'test19',
       'test2',
     ];
 
@@ -443,13 +447,16 @@ abstract class GenericCacheBackendUnitTestBase extends KernelTestBase {
     $backend->set('test7', 17);
 
     $backend->delete('test1');
-    $backend->delete('test23'); // Nonexistent key should not cause an error.
+    // Nonexistent key should not cause an error.
+    $backend->delete('test23');
     $backend->deleteMultiple([
       'test3',
       'test5',
       'test7',
-      'test19', // Nonexistent key should not cause an error.
-      'test21', // Nonexistent key should not cause an error.
+      // Nonexistent key should not cause an error.
+      'test19',
+      // Nonexistent key should not cause an error.
+      'test21',
     ]);
 
     // Test if expected keys have been deleted.

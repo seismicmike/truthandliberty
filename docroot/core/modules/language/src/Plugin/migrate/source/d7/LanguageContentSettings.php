@@ -10,6 +10,7 @@ use Drupal\migrate_drupal\Plugin\migrate\source\DrupalSqlBase;
  *
  * @MigrateSource(
  *   id = "d7_language_content_settings",
+ *   source_module = "locale"
  * )
  */
 class LanguageContentSettings extends DrupalSqlBase {
@@ -49,6 +50,10 @@ class LanguageContentSettings extends DrupalSqlBase {
     else {
       $row->setSourceProperty('i18n_lock_node', 0);
     }
+
+    // Get the entity translation entity settings.
+    $entity_translation_entity_types = $this->variableGet('entity_translation_entity_types', NULL);
+    $row->setSourceProperty('entity_translation_entity_types', $entity_translation_entity_types);
     return parent::prepareRow($row);
   }
 

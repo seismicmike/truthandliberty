@@ -152,6 +152,9 @@ class LinkGeneratorTest extends UnitTestCase {
   /**
    * Tests the generate() method with the <nolink> route.
    *
+   * The set_active_class option is set to TRUE to ensure we do not get the
+   * active class and the data-drupal-link-system-path attribute.
+   *
    * @covers ::generate
    */
   public function testGenerateNoLink() {
@@ -163,10 +166,37 @@ class LinkGeneratorTest extends UnitTestCase {
 
     $url = Url::fromRoute('<nolink>');
     $url->setUrlGenerator($this->urlGenerator);
+    $url->setOption('set_active_class', TRUE);
 
     $result = $this->linkGenerator->generate('Test', $url);
     $this->assertTrue($result instanceof GeneratedNoLink);
     $this->assertSame('<span>Test</span>', (string) $result);
+  }
+
+  /**
+   * Tests the generate() method with the <none> route.
+   *
+   * The set_active_class option is set to TRUE to ensure we do not get the
+   * active class and the data-drupal-link-system-path attribute.
+   *
+   * @covers ::generate
+   */
+  public function testGenerateNone() {
+    $this->urlGenerator->expects($this->once())
+      ->method('generateFromRoute')
+      ->with('<none>', [], ['set_active_class' => TRUE] + $this->defaultOptions)
+      ->willReturn((new GeneratedUrl())->setGeneratedUrl(''));
+
+    $this->moduleHandler->expects($this->once())
+      ->method('alter')
+      ->with('link', $this->isType('array'));
+
+    $url = Url::fromRoute('<none>');
+    $url->setUrlGenerator($this->urlGenerator);
+    $url->setOption('set_active_class', TRUE);
+
+    $result = $this->linkGenerator->generate('Test', $url);
+    $this->assertSame('<a href="">Test</a>', (string) $result);
   }
 
   /**
@@ -397,7 +427,7 @@ class LinkGeneratorTest extends UnitTestCase {
   public function testGenerateActive() {
     $this->urlGenerator->expects($this->exactly(5))
       ->method('generateFromRoute')
-      ->willReturnCallback(function($name, $parameters = [], $options = [], $collect_bubbleable_metadata = FALSE) {
+      ->willReturnCallback(function ($name, $parameters = [], $options = [], $collect_bubbleable_metadata = FALSE) {
         switch ($name) {
           case 'test_route_1':
             return (new GeneratedUrl())->setGeneratedUrl('/test-route-1');

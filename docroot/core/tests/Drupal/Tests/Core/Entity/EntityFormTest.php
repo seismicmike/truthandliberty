@@ -52,7 +52,7 @@ class EntityFormTest extends UnitTestCase {
   public function testFormId($expected, $definition) {
     $this->entityType->set('entity_keys', ['bundle' => $definition['bundle']]);
 
-    $entity = $this->getMockForAbstractClass('Drupal\Core\Entity\Entity', [[], $definition['entity_type']], '', TRUE, TRUE, TRUE, ['getEntityType', 'bundle']);
+    $entity = $this->getMockForAbstractClass('Drupal\Core\Entity\EntityBase', [[], $definition['entity_type']], '', TRUE, TRUE, TRUE, ['getEntityType', 'bundle']);
 
     $entity->expects($this->any())
       ->method('getEntityType')
@@ -73,30 +73,35 @@ class EntityFormTest extends UnitTestCase {
   public function providerTestFormIds() {
     return [
       ['node_article_form', [
-        'entity_type' => 'node',
-        'bundle' => 'article',
-        'operation' => 'default',
-      ]],
+          'entity_type' => 'node',
+          'bundle' => 'article',
+          'operation' => 'default',
+        ],
+      ],
       ['node_article_delete_form', [
-        'entity_type' => 'node',
-        'bundle' => 'article',
-        'operation' => 'delete',
-      ]],
+          'entity_type' => 'node',
+          'bundle' => 'article',
+          'operation' => 'delete',
+        ],
+      ],
       ['user_user_form', [
-        'entity_type' => 'user',
-        'bundle' => 'user',
-        'operation' => 'default',
-      ]],
+          'entity_type' => 'user',
+          'bundle' => 'user',
+          'operation' => 'default',
+        ],
+      ],
       ['user_form', [
-        'entity_type' => 'user',
-        'bundle' => '',
-        'operation' => 'default',
-      ]],
+          'entity_type' => 'user',
+          'bundle' => '',
+          'operation' => 'default',
+        ],
+      ],
       ['user_delete_form', [
-        'entity_type' => 'user',
-        'bundle' => '',
-        'operation' => 'delete',
-      ]],
+          'entity_type' => 'user',
+          'bundle' => '',
+          'operation' => 'delete',
+        ],
+      ],
     ];
   }
 

@@ -109,7 +109,7 @@ class MigrateImageCacheTest extends MigrateDrupal6TestBase {
     $count = 0;
     foreach ($messages as $message) {
       $count++;
-      $this->assertEqual($message->message, 'The "image_deprecated_scale" plugin does not exist.');
+      $this->assertContains('The "image_deprecated_scale" plugin does not exist.', $message->message);
       $this->assertEqual($message->level, MigrationInterface::MESSAGE_ERROR);
     }
     // There should be only the one message.
@@ -141,9 +141,11 @@ class MigrateImageCacheTest extends MigrateDrupal6TestBase {
 
     $this->startCollectingMessages();
     $this->executeMigration('d6_imagecache_presets');
-    $this->assertEqual(['error' => [
-     'The Drupal 8 image crop effect does not support numeric values for x and y offsets. Use keywords to set crop effect offsets instead.'
-    ]], $this->migrateMessages);
+    $this->assertEqual([
+      'error' => [
+        'The Drupal 8 image crop effect does not support numeric values for x and y offsets. Use keywords to set crop effect offsets instead.',
+      ],
+    ], $this->migrateMessages);
   }
 
   /**

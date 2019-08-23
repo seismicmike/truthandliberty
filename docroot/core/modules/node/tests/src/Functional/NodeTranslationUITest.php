@@ -21,13 +21,17 @@ class NodeTranslationUITest extends ContentTranslationUITestBase {
    */
   protected $defaultCacheContexts = [
     'languages:language_interface',
-    'session',
     'theme',
     'route',
     'timezone',
     'url.path.parent',
     'url.query_args:_wrapper_format',
-    'user'
+    'url.site',
+    'user.roles',
+    'url.path.is_front',
+    // These two cache contexts are added by BigPipe.
+    'cookies:big_pipe_nojs',
+    'session.exists',
   ];
 
   /**
@@ -97,9 +101,11 @@ class NodeTranslationUITest extends ContentTranslationUITestBase {
     $add_url = Url::fromRoute("entity.$entity_type_id.content_translation_add", [
       $entity->getEntityTypeId() => $entity->id(),
       'source' => $default_langcode,
-      'target' => $langcode
+      'target' => $langcode,
     ], ['language' => $language]);
-    $this->drupalPostForm($add_url, $this->getEditValues($values, $langcode), t('Save and unpublish (this translation)'));
+    $edit = $this->getEditValues($values, $langcode);
+    $edit['status[value]'] = FALSE;
+    $this->drupalPostForm($add_url, $edit, t('Save (this translation)'));
 
     $storage->resetCache([$this->entityId]);
     $entity = $storage->load($this->entityId);
@@ -139,18 +145,6 @@ class NodeTranslationUITest extends ContentTranslationUITestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getFormSubmitAction(EntityInterface $entity, $langcode) {
-    if ($entity->getTranslation($langcode)->isPublished()) {
-      return t('Save and keep published') . $this->getFormSubmitSuffix($entity, $langcode);
-    }
-    else {
-      return t('Save and keep unpublished') . $this->getFormSubmitSuffix($entity, $langcode);
-    }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   protected function doTestPublishedStatus() {
     $storage = $this->container->get('entity_type.manager')
       ->getStorage($this->entityTypeId);
@@ -158,18 +152,18 @@ class NodeTranslationUITest extends ContentTranslationUITestBase {
     $entity = $storage->load($this->entityId);
     $languages = $this->container->get('language_manager')->getLanguages();
 
-    $actions = [
-      t('Save and keep published'),
-      t('Save and unpublish'),
+    $statuses = [
+      TRUE,
+      FALSE,
     ];
 
-    foreach ($actions as $index => $action) {
+    foreach ($statuses as $index => $value) {
       // (Un)publish the node translations and check that the translation
       // statuses are (un)published accordingly.
       foreach ($this->langcodes as $langcode) {
         $options = ['language' => $languages[$langcode]];
-        $url = $entity->urlInfo('edit-form', $options);
-        $this->drupalPostForm($url, [], $action . $this->getFormSubmitSuffix($entity, $langcode), $options);
+        $url = $entity->toUrl('edit-form', $options);
+        $this->drupalPostForm($url, ['status[value]' => $value], t('Save') . $this->getFormSubmitSuffix($entity, $langcode), $options);
       }
       $storage->resetCache([$this->entityId]);
       $entity = $storage->load($this->entityId);
@@ -203,15 +197,17 @@ class NodeTranslationUITest extends ContentTranslationUITestBase {
         'sticky' => (bool) mt_rand(0, 1),
         'promote' => (bool) mt_rand(0, 1),
       ];
+      /** @var \Drupal\Core\Datetime\DateFormatterInterface $date_formatter */
+      $date_formatter = $this->container->get('date.formatter');
       $edit = [
-        'uid[0][target_id]' => $user->getUsername(),
-        'created[0][value][date]' => format_date($values[$langcode]['created'], 'custom', 'Y-m-d'),
-        'created[0][value][time]' => format_date($values[$langcode]['created'], 'custom', 'H:i:s'),
+        'uid[0][target_id]' => $user->getAccountName(),
+        'created[0][value][date]' => $date_formatter->format($values[$langcode]['created'], 'custom', 'Y-m-d'),
+        'created[0][value][time]' => $date_formatter->format($values[$langcode]['created'], 'custom', 'H:i:s'),
         'sticky[value]' => $values[$langcode]['sticky'],
         'promote[value]' => $values[$langcode]['promote'],
       ];
       $options = ['language' => $languages[$langcode]];
-      $url = $entity->urlInfo('edit-form', $options);
+      $url = $entity->toUrl('edit-form', $options);
       $this->drupalPostForm($url, $edit, $this->getFormSubmitAction($entity, $langcode), $options);
     }
 
@@ -292,7 +288,7 @@ class NodeTranslationUITest extends ContentTranslationUITestBase {
       $translation = $node->addTranslation($langcode, $values[$langcode]);
       // Publish and promote the translation to frontpage.
       $translation->setPromoted(TRUE);
-      $translation->setPublished(TRUE);
+      $translation->setPublished();
     }
     $node->save();
 
@@ -360,7 +356,7 @@ class NodeTranslationUITest extends ContentTranslationUITestBase {
     $this->doTestTranslations('node/' . $node->id(), $values);
 
     // Test that the node page has the correct alternate hreflang links.
-    $this->doTestAlternateHreflangLinks($node->urlInfo());
+    $this->doTestAlternateHreflangLinks($node->toUrl());
   }
 
   /**
@@ -447,7 +443,7 @@ class NodeTranslationUITest extends ContentTranslationUITestBase {
       // We only want to test the title for non-english translations.
       if ($langcode != 'en') {
         $options = ['language' => $languages[$langcode]];
-        $url = $entity->urlInfo('edit-form', $options);
+        $url = $entity->toUrl('edit-form', $options);
         $this->drupalGet($url);
 
         $title = t('<em>Edit @type</em> @title [%language translation]', [
@@ -507,6 +503,30 @@ class NodeTranslationUITest extends ContentTranslationUITestBase {
     // Contents should be in French, of correct revision.
     $this->assertText('First rev fr title');
     $this->assertNoText('First rev en title');
+  }
+
+  /**
+   * Test that title is not escaped (but XSS-filtered) for details form element.
+   */
+  public function testDetailsTitleIsNotEscaped() {
+    $this->drupalLogin($this->administrator);
+    // Make the image field a multi-value field in order to display a
+    // details form element.
+    $edit = ['cardinality_number' => 2];
+    $this->drupalPostForm('admin/structure/types/manage/article/fields/node.article.field_image/storage', $edit, t('Save field settings'));
+
+    // Make the image field non-translatable.
+    $edit = ['settings[node][article][fields][field_image]' => FALSE];
+    $this->drupalPostForm('admin/config/regional/content-language', $edit, t('Save configuration'));
+
+    // Create a node.
+    $nid = $this->createEntity(['title' => 'Node with multi-value image field en title'], 'en');
+
+    // Add a French translation and assert the title markup is not escaped.
+    $this->drupalGet("node/$nid/translations/add/en/fr");
+    $markup = 'Image <span class="translation-entity-all-languages">(all languages)</span>';
+    $this->assertSession()->assertNoEscaped($markup);
+    $this->assertSession()->responseContains($markup);
   }
 
 }

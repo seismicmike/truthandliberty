@@ -28,7 +28,7 @@ class RouteBuilder implements RouteBuilderInterface, DestructableInterface {
   /**
    * The used lock backend instance.
    *
-   * @var \Drupal\Core\Lock\LockBackendInterface $lock
+   * @var \Drupal\Core\Lock\LockBackendInterface
    */
   protected $lock;
 
@@ -167,6 +167,11 @@ class RouteBuilder implements RouteBuilderInterface, DestructableInterface {
           'schemes' => [],
           'methods' => [],
           'condition' => '',
+        ];
+        // Ensure routes default to using Drupal's route compiler instead of
+        // Symfony's.
+        $route_info['options'] += [
+          'compiler_class' => RouteCompiler::class,
         ];
 
         $route = new Route($route_info['path'], $route_info['defaults'], $route_info['requirements'], $route_info['options'], $route_info['host'], $route_info['schemes'], $route_info['methods'], $route_info['condition']);

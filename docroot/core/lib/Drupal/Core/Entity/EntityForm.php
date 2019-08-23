@@ -38,6 +38,8 @@ class EntityForm extends FormBase implements EntityFormInterface {
    * @var \Drupal\Core\Entity\EntityManagerInterface
    *
    * @deprecated in Drupal 8.0.0, will be removed before Drupal 9.0.0.
+   *
+   * @see https://www.drupal.org/node/2549139
    */
   protected $entityManager;
 
@@ -219,6 +221,17 @@ class EntityForm extends FormBase implements EntityFormInterface {
   /**
    * Returns an array of supported actions for the current entity form.
    *
+   * This function generates a list of Form API elements which represent
+   * actions supported by the current entity form.
+   *
+   * @param array $form
+   *   An associative array containing the structure of the form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   *
+   * @return array
+   *   An array of supported Form API action elements keyed by name.
+   *
    * @todo Consider introducing a 'preview' action here, since it is used by
    *   many entity types.
    */
@@ -233,7 +246,7 @@ class EntityForm extends FormBase implements EntityFormInterface {
     ];
 
     if (!$this->entity->isNew() && $this->entity->hasLinkTemplate('delete-form')) {
-      $route_info = $this->entity->urlInfo('delete-form');
+      $route_info = $this->entity->toUrl('delete-form');
       if ($this->getRequest()->query->has('destination')) {
         $query = $route_info->getOption('query');
         $query['destination'] = $this->getRequest()->query->get('destination');

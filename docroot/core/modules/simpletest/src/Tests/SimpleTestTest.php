@@ -12,6 +12,7 @@ use Drupal\simpletest\WebTestBase;
  * internal browser and APIs implicitly.
  *
  * @group simpletest
+ * @group WebTestBase
  */
 class SimpleTestTest extends WebTestBase {
 
@@ -175,7 +176,7 @@ EOD;
         // along by the rethrow.
         assert(FALSE, 'Lorem Ipsum');
       }
-      catch ( \AssertionError $e ) {
+      catch (\AssertionError $e) {
         $this->assertEqual($e->getMessage(), 'Lorem Ipsum', 'Runtime assertions Enabled and running.');
       }
     }

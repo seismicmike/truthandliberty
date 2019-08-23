@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+## Sync remote db and files to local environment.
+##
+## Usage: fin sync dev
+##        fin sync test
+##        fin sync live
+##
+## Append "--skip-updates" to skip updb and configuration imports.
+##
+## Example: fin sync dev --skip-updates
+##
+rm -f /tmp/freebornd8-database.sql.gz
+fin drush cache-clear drush
+echo "Running composer install"
+composer install
+echo "Dropping all tables on local"
+fin drush sql-drop -y
+echo "Downloading database"
+terminus backup:create freebornd8."$1" --element=db
+terminus backup:get freebornd8."$1" --element=db --to=/tmp/freebornd8-database.sql.gz
+echo "Importing database"
+gunzip </tmp/freebornd8-database.sql.gz | fin db import 2>/dev/null
+echo "Clearing Caches"
+fin drush cache-rebuild
+fin drush sqlq "TRUNCATE cache_entity" --no-interaction --ansi
+
+if [[ $@ == *no-dev* ]]
+then
+  echo "Skipping local setup"
+else
+  echo "Enabling Dev Modules"
+  fin drush en stage_file_proxy kint devel dblog update views_ui -y
+  fin drush config-import -y
+  fin drush config-import -y
+fi
+
+if [[ $@ == *include-files* ]]
+then
+  echo "Downloading files"
+  terminus backup:create freebornd8."$1" --element=files
+  terminus backup:get freebornd8."$1" --element=files --to=/tmp/files.tar.gz
+  echo "Importing files"
+  rm -rf docroot/sites/default/files
+  tar xvf /tmp/files.tar.gz -C docroot/sites/default &>/dev/null
+  mv "docroot/sites/default/files_$1" docroot/sites/default/files
+  rm -f docroot/sites/default/files/skipped.log
+  echo "# Turn off all options we don't need.
+Options -Indexes -ExecCGI -Includes -MultiViews
+# Set the catch-all handler to prevent scripts from being executed.
+SetHandler Drupal_Security_Do_Not_Remove_See_SA_2006_006
+<Files *>
+  # Override the handler again if we're run later in the evaluation list.
+  SetHandler Drupal_Security_Do_Not_Remove_See_SA_2013_003
+</Files>
+# If we know how to do it safely, disable the PHP engine entirely.
+<IfModule mod_php5.c>
+  php_flag engine off
+</IfModule>
+" > docroot/sites/default/files/.htaccess
+  chmod 444 docroot/sites/default/settings.php
+fi
+
+fin drush cache-rebuild
+
+echo "Sync is complete"
+echo "Admin login:"
+fin drush --uri=http://freebornd8.docksal uli

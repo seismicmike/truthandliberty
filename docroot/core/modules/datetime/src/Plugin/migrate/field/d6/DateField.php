@@ -14,10 +14,24 @@ use Drupal\migrate_drupal\Plugin\migrate\field\FieldPluginBase;
  *     "datestamp" =  "timestamp",
  *     "datetime" =  "datetime",
  *   },
- *   core = {6}
+ *   core = {6},
+ *   source_module = "date",
+ *   destination_module = "datetime",
+ *   weight = 9999999,
  * )
+ *
+ * @deprecated in Drupal 8.4.x, to be removed before Drupal 9.0.x. Use
+ * \Drupal\datetime\Plugin\migrate\field\DateField instead.
  */
 class DateField extends FieldPluginBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition) {
+    @trigger_error('DateField is deprecated in Drupal 8.4.x and will be removed before Drupal 9.0.x. Use \Drupal\datetime\Plugin\migrate\field\DateField instead.', E_USER_DEPRECATED);
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+  }
 
   /**
    * {@inheritdoc}
@@ -33,16 +47,7 @@ class DateField extends FieldPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function getFieldFormatterMap() {
-    // See d6_field_formatter_settings.yml and
-    // FieldPluginBase::processFieldFormatter().
-    return [];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function processFieldValues(MigrationInterface $migration, $field_name, $data) {
+  public function defineValueProcessPipeline(MigrationInterface $migration, $field_name, $data) {
     switch ($data['type']) {
       case 'date':
         $from_format = 'Y-m-d\TH:i:s';
@@ -69,7 +74,7 @@ class DateField extends FieldPluginBase {
     ];
 
     $process = [
-      'plugin' => 'iterator',
+      'plugin' => 'sub_process',
       'source' => $field_name,
       'process' => $process,
     ];

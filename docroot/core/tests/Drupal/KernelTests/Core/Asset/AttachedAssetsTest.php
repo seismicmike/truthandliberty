@@ -3,14 +3,13 @@
 namespace Drupal\KernelTests\Core\Asset;
 
 use Drupal\Component\Serialization\Json;
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Asset\AttachedAssets;
 use Drupal\KernelTests\KernelTestBase;
 
 /**
  * Tests #attached assets: attached asset libraries and JavaScript settings.
  *
- * i.e. tests:
+ * I.e. tests:
  *
  * @code
  * $build['#attached']['library'] = …
@@ -70,7 +69,7 @@ class AttachedAssetsTest extends KernelTestBase {
     $build['#attached']['library'][] = 'core/unknown';
     $assets = AttachedAssets::createFromRenderArray($build);
 
-    $this->assertIdentical([], $this->assetResolver->getJsAssets($assets, FALSE)[0], 'Unknown library was not added to the page.');
+    $this->assertSame([], $this->assetResolver->getJsAssets($assets, FALSE)[0], 'Unknown library was not added to the page.');
   }
 
   /**
@@ -90,7 +89,7 @@ class AttachedAssetsTest extends KernelTestBase {
     $rendered_css = $this->renderer->renderPlain($css_render_array);
     $rendered_js = $this->renderer->renderPlain($js_render_array);
     $query_string = $this->container->get('state')->get('system.css_js_query_string') ?: '0';
-    $this->assertNotIdentical(strpos($rendered_css, '<link rel="stylesheet" href="' . file_url_transform_relative(file_create_url('core/modules/system/tests/modules/common_test/bar.css')) . '?' . $query_string . '" media="all" />'), FALSE, 'Rendering an external CSS file.');
+    $this->assertNotIdentical(strpos($rendered_css, '<link rel="stylesheet" media="all" href="' . file_url_transform_relative(file_create_url('core/modules/system/tests/modules/common_test/bar.css')) . '?' . $query_string . '" />'), FALSE, 'Rendering an external CSS file.');
     $this->assertNotIdentical(strpos($rendered_js, '<script src="' . file_url_transform_relative(file_create_url('core/modules/system/tests/modules/common_test/foo.js')) . '?' . $query_string . '"></script>'), FALSE, 'Rendering an external JavaScript file.');
   }
 
@@ -129,7 +128,7 @@ class AttachedAssetsTest extends KernelTestBase {
     $js_render_array = \Drupal::service('asset.js.collection_renderer')->render($js);
     $rendered_css = $this->renderer->renderPlain($css_render_array);
     $rendered_js = $this->renderer->renderPlain($js_render_array);
-    $this->assertNotIdentical(strpos($rendered_css, '<link rel="stylesheet" href="http://example.com/stylesheet.css" media="all" />'), FALSE, 'Rendering an external CSS file.');
+    $this->assertNotIdentical(strpos($rendered_css, '<link rel="stylesheet" media="all" href="http://example.com/stylesheet.css" />'), FALSE, 'Rendering an external CSS file.');
     $this->assertNotIdentical(strpos($rendered_js, '<script src="http://example.com/script.js"></script>'), FALSE, 'Rendering an external JavaScript file.');
   }
 
@@ -205,7 +204,7 @@ class AttachedAssetsTest extends KernelTestBase {
     $end = strrpos($rendered_js, $endToken);
     // Convert to a string, as $renderer_js is a \Drupal\Core\Render\Markup
     // object.
-    $json  = Unicode::substr($rendered_js, $start, $end - $start + 1);
+    $json = mb_substr($rendered_js, $start, $end - $start + 1);
     $parsed_settings = Json::decode($json);
 
     // Test whether the settings for core/drupalSettings are available.
@@ -299,7 +298,8 @@ class AttachedAssetsTest extends KernelTestBase {
       "-8_2",
       "-8_3",
       "-8_4",
-      "-5_1", // The external script.
+      // The external script.
+      "-5_1",
       "-3_1",
       "-3_2",
       "0_1",
@@ -435,12 +435,12 @@ class AttachedAssetsTest extends KernelTestBase {
     $dynamic_library = $library_discovery->getLibraryByName('common_test', 'dynamic_library');
     $this->assertTrue(is_array($dynamic_library));
     if ($this->assertTrue(isset($dynamic_library['version']))) {
-      $this->assertIdentical('1.0', $dynamic_library['version']);
+      $this->assertSame('1.0', $dynamic_library['version']);
     }
     // Make sure the dynamic library definition could be altered.
     // @see common_test_library_info_alter()
     if ($this->assertTrue(isset($dynamic_library['dependencies']))) {
-      $this->assertIdentical(['core/jquery'], $dynamic_library['dependencies']);
+      $this->assertSame(['core/jquery'], $dynamic_library['dependencies']);
     }
   }
 
@@ -473,7 +473,7 @@ class AttachedAssetsTest extends KernelTestBase {
     $js_render_array = \Drupal::service('asset.js.collection_renderer')->render($js);
     $rendered_js = $this->renderer->renderPlain($js_render_array);
     $query_string = $this->container->get('state')->get('system.css_js_query_string') ?: '0';
-    $this->assertNotIdentical(strpos($rendered_css, '<link rel="stylesheet" href="' . str_replace('&', '&amp;', file_url_transform_relative(file_create_url('core/modules/system/tests/modules/common_test/querystring.css?arg1=value1&arg2=value2'))) . '&amp;' . $query_string . '" media="all" />'), FALSE, 'CSS file with query string gets version query string correctly appended..');
+    $this->assertNotIdentical(strpos($rendered_css, '<link rel="stylesheet" media="all" href="' . str_replace('&', '&amp;', file_url_transform_relative(file_create_url('core/modules/system/tests/modules/common_test/querystring.css?arg1=value1&arg2=value2'))) . '&amp;' . $query_string . '" />'), FALSE, 'CSS file with query string gets version query string correctly appended..');
     $this->assertNotIdentical(strpos($rendered_js, '<script src="' . str_replace('&', '&amp;', file_url_transform_relative(file_create_url('core/modules/system/tests/modules/common_test/querystring.js?arg1=value1&arg2=value2'))) . '&amp;' . $query_string . '"></script>'), FALSE, 'JavaScript file with query string gets version query string correctly appended.');
   }
 

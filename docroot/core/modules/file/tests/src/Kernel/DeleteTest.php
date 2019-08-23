@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\file\Kernel;
 
+use Drupal\Core\Database\Database;
 use Drupal\file\Entity\File;
 
 /**
@@ -10,6 +11,7 @@ use Drupal\file\Entity\File;
  * @group file
  */
 class DeleteTest extends FileManagedUnitTestBase {
+
   /**
    * Tries deleting a normal file (as opposed to a directory, symlink, etc).
    */
@@ -28,6 +30,11 @@ class DeleteTest extends FileManagedUnitTestBase {
    * Tries deleting a file that is in use.
    */
   public function testInUse() {
+    // This test expects unused managed files to be marked as a temporary file
+    // and then deleted up by file_cron().
+    $this->config('file.settings')
+      ->set('make_unused_managed_files_temporary', TRUE)
+      ->save();
     $file = $this->createFile();
     $file_usage = $this->container->get('file.usage');
     $file_usage->add($file, 'testing', 'test', 1);
@@ -54,8 +61,9 @@ class DeleteTest extends FileManagedUnitTestBase {
 
     // Call file_cron() to clean up the file. Make sure the changed timestamp
     // of the file is older than the system.file.temporary_maximum_age
-    // configuration value.
-    db_update('file_managed')
+    // configuration value. We use an UPDATE statement because using the API
+    // would set the timestamp.
+    Database::getConnection()->update('file_managed')
       ->fields([
         'changed' => REQUEST_TIME - ($this->config('system.file')->get('temporary_maximum_age') + 1),
       ])
@@ -66,6 +74,30 @@ class DeleteTest extends FileManagedUnitTestBase {
     // file_cron() loads
     $this->assertFileHooksCalled(['delete']);
     $this->assertFalse(file_exists($file->getFileUri()), 'File has been deleted after its last usage was removed.');
+    $this->assertFalse(File::load($file->id()), 'File was removed from the database.');
+  }
+
+  /**
+   * Tries to run cron deletion on file deleted from the file-system.
+   */
+  public function testCronDeleteNonExistingTemporary() {
+    $file = $this->createFile();
+    // Delete the file, but leave it in the file_managed table.
+    \Drupal::service('file_system')->delete($file->getFileUri());
+    $this->assertFalse(file_exists($file->getFileUri()), 'File is deleted from the filesystem.');
+    $this->assertTrue(File::load($file->id()), 'File exist in file_managed table');
+
+    // Call file_cron() to clean up the file. Make sure the changed timestamp
+    // of the file is older than the system.file.temporary_maximum_age
+    // configuration value.
+    \Drupal::database()->update('file_managed')
+      ->fields([
+        'changed' => REQUEST_TIME - ($this->config('system.file')->get('temporary_maximum_age') + 1),
+      ])
+      ->condition('fid', $file->id())
+      ->execute();
+    \Drupal::service('cron')->run();
+
     $this->assertFalse(File::load($file->id()), 'File was removed from the database.');
   }
 

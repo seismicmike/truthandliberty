@@ -2,6 +2,8 @@
 
 namespace Drupal\system\Tests\Update;
 
+@trigger_error(__NAMESPACE__ . '\UpdatePathTestBase is deprecated in Drupal 8.4.0 and will be removed before Drupal 9.0.0. Use \Drupal\FunctionalTests\Update\UpdatePathTestBase instead. See https://www.drupal.org/node/2896640.', E_USER_DEPRECATED);
+
 use Drupal\Component\Utility\Crypt;
 use Drupal\Tests\SchemaCheckTestTrait;
 use Drupal\Core\Database\Database;
@@ -33,6 +35,10 @@ use Symfony\Component\HttpFoundation\Request;
  *   UpdatePathTestBaseFilledTest for an example.
  *
  * @ingroup update_api
+ *
+ * @deprecated in Drupal 8.4.0 and will be removed before Drupal 9.0.0.
+ *   Use \Drupal\FunctionalTests\Update\UpdatePathTestBase.
+ * @see https://www.drupal.org/node/2896640
  *
  * @see hook_update_N()
  */
@@ -237,10 +243,14 @@ abstract class UpdatePathTestBase extends WebTestBase {
     }
     // The site might be broken at the time so logging in using the UI might
     // not work, so we use the API itself.
-    drupal_rewrite_settings(['settings' => ['update_free_access' => (object) [
-      'value' => TRUE,
-      'required' => TRUE,
-    ]]]);
+    drupal_rewrite_settings([
+      'settings' => [
+        'update_free_access' => (object) [
+          'value' => TRUE,
+          'required' => TRUE,
+        ],
+      ],
+    ]);
 
     $this->drupalGet($this->updateUrl);
     $this->clickLink(t('Continue'));
@@ -335,7 +345,7 @@ abstract class UpdatePathTestBase extends WebTestBase {
     $account = User::load(1);
     $account->setPassword($this->rootUser->pass_raw);
     $account->setEmail($this->rootUser->getEmail());
-    $account->setUsername($this->rootUser->getUsername());
+    $account->setUsername($this->rootUser->getAccountName());
     $account->save();
   }
 

@@ -2,15 +2,17 @@
 
 namespace Drupal\Tests\search\Functional;
 
+use Drupal\Core\Database\Database;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\language\Entity\ConfigurableLanguage;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Tests entities with multilingual fields.
  *
  * @group search
  */
-class SearchMultilingualEntityTest extends SearchTestBase {
+class SearchMultilingualEntityTest extends BrowserTestBase {
 
   /**
    * List of searchable nodes.
@@ -26,10 +28,15 @@ class SearchMultilingualEntityTest extends SearchTestBase {
    */
   protected $plugin;
 
-  public static $modules = ['language', 'locale', 'comment'];
+  /**
+   * {@inheritdoc}
+   */
+  protected static $modules = ['language', 'locale', 'comment', 'node', 'search'];
 
   protected function setUp() {
     parent::setUp();
+
+    $this->drupalCreateContentType(['type' => 'page', 'name' => 'Basic page']);
 
     // Create a user who can administer search, do searches, see the status
     // report, and administer cron. Log in.
@@ -78,16 +85,11 @@ class SearchMultilingualEntityTest extends SearchTestBase {
       // After the third node, we don't care what the settings are. But we
       // need to have at least 5 to make sure the throttling is working
       // correctly. So, let's make 8 total.
-      [
-      ],
-      [
-      ],
-      [
-      ],
-      [
-      ],
-      [
-      ],
+      [],
+      [],
+      [],
+      [],
+      [],
     ];
     $this->searchableNodes = [];
     foreach ($nodes as $setting) {
@@ -206,14 +208,15 @@ class SearchMultilingualEntityTest extends SearchTestBase {
     // previously.
     $current = REQUEST_TIME;
     $old = $current - 10;
-    db_update('search_dataset')
+    $connection = Database::getConnection();
+    $connection->update('search_dataset')
       ->fields(['reindex' => $old])
       ->condition('reindex', $current, '>=')
       ->execute();
 
     // Save the node again. Verify that the request time on it is not updated.
     $this->searchableNodes[1]->save();
-    $result = db_select('search_dataset', 'd')
+    $result = $connection->select('search_dataset', 'd')
       ->fields('d', ['reindex'])
       ->condition('type', 'node_search')
       ->condition('sid', $this->searchableNodes[1]->id())
@@ -301,7 +304,8 @@ class SearchMultilingualEntityTest extends SearchTestBase {
    */
   protected function assertDatabaseCounts($count_node, $count_foo, $message) {
     // Count number of distinct nodes by ID.
-    $results = db_select('search_dataset', 'i')
+    $connection = Database::getConnection();
+    $results = $connection->select('search_dataset', 'i')
       ->fields('i', ['sid'])
       ->condition('type', 'node_search')
       ->groupBy('sid')
@@ -310,7 +314,7 @@ class SearchMultilingualEntityTest extends SearchTestBase {
     $this->assertEqual($count_node, count($results), 'Node count was ' . $count_node . ' for ' . $message);
 
     // Count number of "foo" records.
-    $results = db_select('search_dataset', 'i')
+    $results = $connection->select('search_dataset', 'i')
       ->fields('i', ['sid'])
       ->condition('type', 'foo')
       ->execute()

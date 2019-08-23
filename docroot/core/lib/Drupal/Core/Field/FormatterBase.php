@@ -100,6 +100,7 @@ abstract class FormatterBase extends PluginSettingsBase implements FormatterInte
         '#items' => $items,
         '#formatter' => $this->getPluginId(),
         '#is_multiple' => $this->fieldDefinition->getFieldStorageDefinition()->isMultiple(),
+        '#third_party_settings' => $this->getThirdPartySettings(),
       ];
 
       $elements = array_merge($info, $elements);
@@ -125,7 +126,7 @@ abstract class FormatterBase extends PluginSettingsBase implements FormatterInte
   /**
    * {@inheritdoc}
    */
-  public function prepareView(array $entities_items) { }
+  public function prepareView(array $entities_items) {}
 
   /**
    * Returns the array of field settings.

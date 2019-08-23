@@ -75,7 +75,8 @@ class TwigExtensionTest extends UnitTestCase {
    * @dataProvider providerTestEscaping
    */
   public function testEscaping($template, $expected) {
-    $twig = new \Twig_Environment(NULL, [
+    $loader = new \Twig_Loader_Filesystem();
+    $twig = new \Twig_Environment($loader, [
       'debug' => TRUE,
       'cache' => FALSE,
       'autoescape' => 'html',
@@ -83,7 +84,8 @@ class TwigExtensionTest extends UnitTestCase {
     ]);
     $twig->addExtension($this->systemUnderTest);
 
-    $nodes = $twig->parse($twig->tokenize($template));
+    $name = '__string_template_test__';
+    $nodes = $twig->parse($twig->tokenize(new \Twig_Source($template, $name)));
 
     $this->assertSame($expected, $nodes->getNode('body')
       ->getNode(0)
@@ -111,12 +113,12 @@ class TwigExtensionTest extends UnitTestCase {
       ['{{ path(name = "foo", parameters = foo) }}', TRUE],
       [
         '{{ path(name = "foo", parameters = { foo: ["foo", "bar"] }) }}',
-        TRUE
+        TRUE,
       ],
       ['{{ path(name = "foo", parameters = { foo: foo }) }}', TRUE],
       [
         '{{ path(name = "foo", parameters = { foo: "foo", bar: "bar" }) }}',
-        TRUE
+        TRUE,
       ],
     ];
   }
@@ -135,7 +137,7 @@ class TwigExtensionTest extends UnitTestCase {
       ->method('getActiveTheme')
       ->willReturn($active_theme);
 
-    $loader = new \Twig_Loader_String();
+    $loader = new StringLoader();
     $twig = new \Twig_Environment($loader);
     $twig->addExtension($this->systemUnderTest);
     $result = $twig->render('{{ active_theme() }}');
@@ -146,15 +148,18 @@ class TwigExtensionTest extends UnitTestCase {
    * Tests the format_date filter.
    */
   public function testFormatDate() {
-    $this->dateFormatter->expects($this->exactly(2))
+    $this->dateFormatter->expects($this->exactly(1))
       ->method('format')
-      ->willReturn('1978-11-19');
+      ->will($this->returnCallback(function ($timestamp) {
+        return date('Y-m-d', $timestamp);
+      }));
 
     $loader = new StringLoader();
     $twig = new \Twig_Environment($loader);
     $twig->addExtension($this->systemUnderTest);
-    $result = $twig->render('{{ time|format_date("html_date") }}');
-    $this->assertEquals($this->dateFormatter->format('html_date'), $result);
+    $timestamp = strtotime('1978-11-19');
+    $result = $twig->render('{{ time|format_date("html_date") }}', ['time' => $timestamp]);
+    $this->assertEquals('1978-11-19', $result);
   }
 
   /**
@@ -172,7 +177,7 @@ class TwigExtensionTest extends UnitTestCase {
       ->method('getActiveTheme')
       ->willReturn($active_theme);
 
-    $loader = new \Twig_Loader_String();
+    $loader = new StringLoader();
     $twig = new \Twig_Environment($loader);
     $twig->addExtension($this->systemUnderTest);
     $result = $twig->render('{{ active_theme_path() }}');
@@ -185,7 +190,8 @@ class TwigExtensionTest extends UnitTestCase {
    * @covers ::escapeFilter
    */
   public function testSafeStringEscaping() {
-    $twig = new \Twig_Environment(NULL, [
+    $loader = new \Twig_Loader_Filesystem();
+    $twig = new \Twig_Environment($loader, [
       'debug' => TRUE,
       'cache' => FALSE,
       'autoescape' => 'html',
@@ -269,7 +275,8 @@ class TwigExtensionTest extends UnitTestCase {
    * @covers ::bubbleArgMetadata
    */
   public function testEscapeWithGeneratedLink() {
-    $twig = new \Twig_Environment(NULL, [
+    $loader = new \Twig_Loader_Filesystem();
+    $twig = new \Twig_Environment($loader, [
         'debug' => TRUE,
         'cache' => FALSE,
         'autoescape' => 'html',
@@ -327,7 +334,8 @@ class TwigExtensionTest extends UnitTestCase {
    * @covers ::createAttribute
    */
   public function testCreateAttribute() {
-    $loader = new StringLoader();
+    $name = '__string_template_test_1__';
+    $loader = new \Twig_Loader_Array([$name => "{% for iteration in iterations %}<div{{ create_attribute(iteration) }}></div>{% endfor %}"]);
     $twig = new \Twig_Environment($loader);
     $twig->addExtension($this->systemUnderTest);
 
@@ -336,12 +344,15 @@ class TwigExtensionTest extends UnitTestCase {
       ['id' => 'puppies', 'data-value' => 'foo', 'data-lang' => 'en'],
       [],
     ];
-    $result = $twig->render("{% for iteration in iterations %}<div{{ create_attribute(iteration) }}></div>{% endfor %}", ['iterations' => $iterations]);
+    $result = $twig->render($name, ['iterations' => $iterations]);
     $expected = '<div class="kittens" data-toggle="modal" data-lang="es"></div><div id="puppies" data-value="foo" data-lang="en"></div><div></div>';
     $this->assertEquals($expected, $result);
 
     // Test default creation of empty attribute object and using its method.
-    $result = $twig->render("<div{{ create_attribute().addClass('meow') }}></div>");
+    $name = '__string_template_test_2__';
+    $loader = new \Twig_Loader_Array([$name => "<div{{ create_attribute().addClass('meow') }}></div>"]);
+    $twig->setLoader($loader);
+    $result = $twig->render($name);
     $expected = '<div class="meow"></div>';
     $this->assertEquals($expected, $result);
   }

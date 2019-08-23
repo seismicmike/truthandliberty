@@ -2,9 +2,10 @@
 
 namespace Drupal\Core\Cache;
 
+use Drupal\Component\Assertion\Inspector;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Database\Connection;
-use Drupal\Core\Database\SchemaObjectExistsException;
+use Drupal\Core\Database\DatabaseException;
 
 /**
  * Defines a default cache implementation.
@@ -15,6 +16,30 @@ use Drupal\Core\Database\SchemaObjectExistsException;
  * @ingroup cache
  */
 class DatabaseBackend implements CacheBackendInterface {
+
+  /**
+   * The default maximum number of rows that this cache bin table can store.
+   *
+   * This maximum is introduced to ensure that the database is not filled with
+   * hundred of thousand of cache entries with gigabytes in size.
+   *
+   * Read about how to change it in the @link cache Cache API topic. @endlink
+   */
+  const DEFAULT_MAX_ROWS = 5000;
+
+  /**
+   * -1 means infinite allows numbers of rows for the cache backend.
+   */
+  const MAXIMUM_NONE = -1;
+
+  /**
+   * The maximum number of rows that this cache bin table is allowed to store.
+   *
+   * @see ::MAXIMUM_NONE
+   *
+   * @var int
+   */
+  protected $maxRows;
 
   /**
    * @var string
@@ -45,14 +70,18 @@ class DatabaseBackend implements CacheBackendInterface {
    *   The cache tags checksum provider.
    * @param string $bin
    *   The cache bin for which the object is created.
+   * @param int $max_rows
+   *   (optional) The maximum number of rows that are allowed in this cache bin
+   *   table.
    */
-  public function __construct(Connection $connection, CacheTagsChecksumInterface $checksum_provider, $bin) {
+  public function __construct(Connection $connection, CacheTagsChecksumInterface $checksum_provider, $bin, $max_rows = NULL) {
     // All cache tables should be prefixed with 'cache_'.
     $bin = 'cache_' . $bin;
 
     $this->bin = $bin;
     $this->connection = $connection;
     $this->checksumProvider = $checksum_provider;
+    $this->maxRows = $max_rows === NULL ? static::DEFAULT_MAX_ROWS : $max_rows;
   }
 
   /**
@@ -106,7 +135,7 @@ class DatabaseBackend implements CacheBackendInterface {
    * data as appropriate.
    *
    * @param object $cache
-   *   An item loaded from cache_get() or cache_get_multiple().
+   *   An item loaded from self::get() or self::getMultiple().
    * @param bool $allow_invalid
    *   If FALSE, the method returns FALSE if the cache item is not valid.
    *
@@ -194,7 +223,7 @@ class DatabaseBackend implements CacheBackendInterface {
         'tags' => [],
       ];
 
-      assert('\Drupal\Component\Assertion\Inspector::assertAllStrings($item[\'tags\'])', 'Cache Tags must be strings.');
+      assert(Inspector::assertAllStrings($item['tags']), 'Cache Tags must be strings.');
       $item['tags'] = array_unique($item['tags']);
       // Sort the cache tags so that they are stored consistently in the DB.
       sort($item['tags']);
@@ -326,6 +355,22 @@ class DatabaseBackend implements CacheBackendInterface {
    */
   public function garbageCollection() {
     try {
+      // Bounded size cache bin, using FIFO.
+      if ($this->maxRows !== static::MAXIMUM_NONE) {
+        $first_invalid_create_time = $this->connection->select($this->bin)
+          ->fields($this->bin, ['created'])
+          ->orderBy("{$this->bin}.created", 'DESC')
+          ->range($this->maxRows, $this->maxRows + 1)
+          ->execute()
+          ->fetchField();
+
+        if ($first_invalid_create_time) {
+          $this->connection->delete($this->bin)
+            ->condition('created', $first_invalid_create_time, '<=')
+            ->execute();
+        }
+      }
+
       $this->connection->delete($this->bin)
         ->condition('expire', Cache::PERMANENT, '<>')
         ->condition('expire', REQUEST_TIME, '<')
@@ -365,7 +410,7 @@ class DatabaseBackend implements CacheBackendInterface {
     // If another process has already created the cache table, attempting to
     // recreate it will throw an exception. In this case just catch the
     // exception and do nothing.
-    catch (SchemaObjectExistsException $e) {
+    catch (DatabaseException $e) {
       return TRUE;
     }
     return FALSE;
@@ -417,6 +462,8 @@ class DatabaseBackend implements CacheBackendInterface {
 
   /**
    * Defines the schema for the {cache_*} bin tables.
+   *
+   * @internal
    */
   public function schemaDefinition() {
     $schema = [
@@ -472,10 +519,20 @@ class DatabaseBackend implements CacheBackendInterface {
       ],
       'indexes' => [
         'expire' => ['expire'],
+        'created' => ['created'],
       ],
       'primary key' => ['cid'],
     ];
     return $schema;
+  }
+
+  /**
+   * The maximum number of rows that this cache bin table is allowed to store.
+   *
+   * @return int
+   */
+  public function getMaxRows() {
+    return $this->maxRows;
   }
 
 }

@@ -67,7 +67,7 @@ function locale_translation_get_projects(array $project_names = []) {
       locale_translation_build_projects();
     }
     $projects = \Drupal::service('locale.project')->getAll();
-    array_walk($projects, function(&$project) {
+    array_walk($projects, function (&$project) {
       $project = (object) $project;
     });
   }
@@ -271,7 +271,7 @@ function locale_translation_source_build($project, $langcode, $filename = NULL) 
       'version' => $project->version,
       'type' => LOCALE_TRANSLATION_LOCAL,
       'filename' => locale_translation_build_server_pattern($source, basename($source->server_pattern)),
-      'directory' => locale_translation_build_server_pattern($source, drupal_dirname($source->server_pattern)),
+      'directory' => locale_translation_build_server_pattern($source, \Drupal::service('file_system')->dirname($source->server_pattern)),
     ];
     $files[LOCALE_TRANSLATION_LOCAL]->uri = $files[LOCALE_TRANSLATION_LOCAL]->directory . '/' . $files[LOCALE_TRANSLATION_LOCAL]->filename;
   }
@@ -329,10 +329,11 @@ function locale_cron_fill_queue() {
   // Determine which project+language should be updated.
   $last = REQUEST_TIME - $config->get('translation.update_interval_days') * 3600 * 24;
   $projects = \Drupal::service('locale.project')->getAll();
-  $projects = array_filter($projects, function($project) {
+  $projects = array_filter($projects, function ($project) {
     return $project['status'] == 1;
   });
-  $files = db_select('locale_file', 'f')
+  $connection = \Drupal::database();
+  $files = $connection->select('locale_file', 'f')
     ->condition('f.project', array_keys($projects), 'IN')
     ->condition('f.last_checked', $last, '<')
     ->fields('f', ['project', 'langcode'])
@@ -342,7 +343,7 @@ function locale_cron_fill_queue() {
 
     // Update the last_checked timestamp of the project+language that will
     // be checked for updates.
-    db_update('locale_file')
+    $connection->update('locale_file')
       ->fields(['last_checked' => REQUEST_TIME])
       ->condition('project', $file->project)
       ->condition('langcode', $file->langcode)
@@ -377,7 +378,7 @@ function locale_cron_fill_queue() {
 function _locale_translation_file_is_remote($uri) {
   $scheme = file_uri_scheme($uri);
   if ($scheme) {
-    return !drupal_realpath($scheme . '://');
+    return !\Drupal::service('file_system')->realpath($scheme . '://');
   }
   return FALSE;
 }

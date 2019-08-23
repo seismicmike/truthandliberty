@@ -73,14 +73,14 @@ class ConfigEntityUnitTest extends KernelTestBase {
     $entity->save();
 
     // Ensure that the configuration entity can be loaded by UUID.
-    $entity_loaded_by_uuid = \Drupal::entityManager()->loadEntityByUuid($entity_type->id(), $entity->uuid());
+    $entity_loaded_by_uuid = \Drupal::service('entity.repository')->loadEntityByUuid($entity_type->id(), $entity->uuid());
     if (!$entity_loaded_by_uuid) {
       $this->fail(sprintf("Failed to load '%s' entity ID '%s' by UUID '%s'.", $entity_type->id(), $entity->id(), $entity->uuid()));
     }
     // Compare UUIDs as the objects are not identical since
     // $entity->enforceIsNew is FALSE and $entity_loaded_by_uuid->enforceIsNew
     // is NULL.
-    $this->assertIdentical($entity->uuid(), $entity_loaded_by_uuid->uuid());
+    $this->assertSame($entity->uuid(), $entity_loaded_by_uuid->uuid());
 
     $entities = $this->storage->loadByProperties();
     $this->assertEqual(count($entities), 3, 'Three entities are loaded when no properties are specified.');
@@ -97,15 +97,15 @@ class ConfigEntityUnitTest extends KernelTestBase {
     $entity = $this->storage->create([
       'id' => $this->randomMachineName(),
       'label' => $this->randomString(),
-      'style' => 999
+      'style' => 999,
     ]);
     $entity->save();
-    $this->assertIdentical('999', $entity->style);
+    $this->assertSame('999', $entity->style);
     $entity->style = 999;
     $entity->trustData()->save();
-    $this->assertIdentical(999, $entity->style);
+    $this->assertSame(999, $entity->style);
     $entity->save();
-    $this->assertIdentical('999', $entity->style);
+    $this->assertSame('999', $entity->style);
   }
 
 }

@@ -9,6 +9,7 @@ use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\Sql\SqlContentEntityStorage;
 use Drupal\Core\Render\Markup;
+use Drupal\field\Entity\FieldConfig;
 use Drupal\field\FieldConfigInterface;
 use Drupal\field\FieldStorageConfigInterface;
 use Drupal\system\ActionConfigEntityInterface;
@@ -128,6 +129,14 @@ function views_views_data() {
     ],
   ];
 
+  $data['views']['display_link'] = [
+    'title' => t('Link to display'),
+    'help' => t('Displays a link to a path-based display of this view while keeping the filter criteria, sort criteria, pager settings and contextual filters.'),
+    'area' => [
+      'id' => 'display_link',
+    ],
+  ];
+
   // Registers an entity area handler per entity type.
   foreach (\Drupal::entityManager()->getDefinitions() as $entity_type_id => $entity_type) {
     // Excludes entity types, which cannot be rendered.
@@ -169,7 +178,6 @@ function views_views_data() {
       $data = NestedArray::mergeDeep($data, $views_data->getViewsData());
     }
   }
-
 
   // Field modules can implement hook_field_views_data() to override the default
   // behavior for adding fields.
@@ -248,7 +256,7 @@ function views_entity_field_label($entity_type, $field_name) {
   $label_counter = [];
   $all_labels = [];
   // Count the amount of fields per label per field storage.
-  foreach (array_keys(\Drupal::entityManager()->getBundleInfo($entity_type)) as $bundle) {
+  foreach (array_keys(\Drupal::service('entity_type.bundle.info')->getBundleInfo($entity_type)) as $bundle) {
     $bundle_fields = array_filter(\Drupal::entityManager()->getFieldDefinitions($entity_type, $bundle), function ($field_definition) {
       return $field_definition instanceof FieldConfigInterface;
     });
@@ -265,7 +273,7 @@ function views_entity_field_label($entity_type, $field_name) {
   // Sort the field labels by it most used label and return the most used one.
   // If the counts are equal, sort by the label to ensure the result is
   // deterministic.
-  uksort($label_counter, function($a, $b) use ($label_counter) {
+  uksort($label_counter, function ($a, $b) use ($label_counter) {
     if ($label_counter[$a] === $label_counter[$b]) {
       return strcmp($a, $b);
     }
@@ -352,6 +360,53 @@ function views_field_default_views_data(FieldStorageConfigInterface $field_stora
     ];
   }
 
+  // Determine if the fields are translatable.
+  $bundles_names = $field_storage->getBundles();
+  $translation_join_type = FALSE;
+  $fields = [];
+  $translatable_configs = [];
+  $untranslatable_configs = [];
+  $untranslatable_config_bundles = [];
+
+  foreach ($bundles_names as $bundle) {
+    $fields[$bundle] = FieldConfig::loadByName($entity_type->id(), $bundle, $field_name);
+  }
+  foreach ($fields as $bundle => $config_entity) {
+    if (!empty($config_entity)) {
+      if ($config_entity->isTranslatable()) {
+        $translatable_configs[$bundle] = $config_entity;
+      }
+      else {
+        $untranslatable_configs[$bundle] = $config_entity;
+      }
+    }
+    else {
+      // https://www.drupal.org/node/2451657#comment-11462881
+      \Drupal::logger('views')->error(
+        'A non-existent config entity name returned by FieldStorageConfigInterface::getBundles(): entity type: %entity_type, bundle: %bundle, field name: %field',
+        [
+          '%entity_type' => $entity_type->id(),
+          '%bundle' => $bundle,
+          '%field' => $field_name,
+        ]
+      );
+    }
+  }
+
+  // If the field is translatable on all the bundles, there will be a join on
+  // the langcode.
+  if (!empty($translatable_configs) && empty($untranslatable_configs)) {
+    $translation_join_type = 'language';
+  }
+  // If the field is translatable only on certain bundles, there will be a join
+  // on langcode OR bundle name.
+  elseif (!empty($translatable_configs) && !empty($untranslatable_configs)) {
+    foreach ($untranslatable_configs as $config) {
+      $untranslatable_config_bundles[] = $config->getTargetBundle();
+    }
+    $translation_join_type = 'language_bundle';
+  }
+
   // Build the relationships between the field table and the entity tables.
   $table_alias = $field_tables[EntityStorageInterface::FIELD_LOAD_CURRENT]['alias'];
   if ($data_table) {
@@ -362,7 +417,6 @@ function views_field_default_views_data(FieldStorageConfigInterface $field_stora
       'field' => 'entity_id',
       'extra' => [
         ['field' => 'deleted', 'value' => 0, 'numeric' => TRUE],
-        ['left_field' => 'langcode', 'field' => 'langcode'],
       ],
     ];
   }
@@ -378,6 +432,24 @@ function views_field_default_views_data(FieldStorageConfigInterface $field_stora
     ];
   }
 
+  if ($translation_join_type === 'language_bundle') {
+    $data[$table_alias]['table']['join'][$data_table]['join_id'] = 'field_or_language_join';
+    $data[$table_alias]['table']['join'][$data_table]['extra'][] = [
+      'left_field' => 'langcode',
+      'field' => 'langcode',
+    ];
+    $data[$table_alias]['table']['join'][$data_table]['extra'][] = [
+      'field' => 'bundle',
+      'value' => $untranslatable_config_bundles,
+    ];
+  }
+  elseif ($translation_join_type === 'language') {
+    $data[$table_alias]['table']['join'][$data_table]['extra'][] = [
+      'left_field' => 'langcode',
+      'field' => 'langcode',
+    ];
+  }
+
   if ($supports_revisions) {
     $table_alias = $field_tables[EntityStorageInterface::FIELD_LOAD_REVISION]['alias'];
     if ($entity_revision_data_table) {
@@ -388,7 +460,6 @@ function views_field_default_views_data(FieldStorageConfigInterface $field_stora
         'field' => 'revision_id',
         'extra' => [
           ['field' => 'deleted', 'value' => 0, 'numeric' => TRUE],
-          ['left_field' => 'langcode', 'field' => 'langcode'],
         ],
       ];
     }
@@ -401,6 +472,23 @@ function views_field_default_views_data(FieldStorageConfigInterface $field_stora
         'extra' => [
           ['field' => 'deleted', 'value' => 0, 'numeric' => TRUE],
         ],
+      ];
+    }
+    if ($translation_join_type === 'language_bundle') {
+      $data[$table_alias]['table']['join'][$entity_revision_data_table]['join_id'] = 'field_or_language_join';
+      $data[$table_alias]['table']['join'][$entity_revision_data_table]['extra'][] = [
+        'left_field' => 'langcode',
+        'field' => 'langcode',
+      ];
+      $data[$table_alias]['table']['join'][$entity_revision_data_table]['extra'][] = [
+        'value' => $untranslatable_config_bundles,
+        'field' => 'bundle',
+      ];
+    }
+    elseif ($translation_join_type === 'language') {
+      $data[$table_alias]['table']['join'][$entity_revision_data_table]['extra'][] = [
+        'left_field' => 'langcode',
+        'field' => 'langcode',
       ];
     }
   }
@@ -515,9 +603,8 @@ function views_field_default_views_data(FieldStorageConfigInterface $field_stora
           $filter = 'boolean';
         }
         break;
-      case 'text':
       case 'blob':
-        // It does not make sense to sort by blob or text.
+        // It does not make sense to sort by blob.
         $allow_sort = FALSE;
       default:
         $filter = 'string';

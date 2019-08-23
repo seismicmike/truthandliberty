@@ -74,7 +74,7 @@ class ViewAjaxControllerTest extends UnitTestCase {
     $this->renderer = $this->getMock('\Drupal\Core\Render\RendererInterface');
     $this->renderer->expects($this->any())
       ->method('render')
-      ->will($this->returnCallback(function(array &$elements) {
+      ->will($this->returnCallback(function (array &$elements) {
         $elements['#attached'] = [];
         return isset($elements['#markup']) ? $elements['#markup'] : '';
       }));
@@ -261,6 +261,26 @@ class ViewAjaxControllerTest extends UnitTestCase {
   }
 
   /**
+   * Tests a valid view with arguments.
+   */
+  public function testAjaxViewWithHtmlEntityArguments() {
+    $request = new Request();
+    $request->request->set('view_name', 'test_view');
+    $request->request->set('view_display_id', 'page_1');
+    $request->request->set('view_args', 'arg1 &amp; arg2/arg3');
+
+    list($view, $executable) = $this->setupValidMocks();
+    $executable->expects($this->once())
+      ->method('preview')
+      ->with('page_1', ['arg1 & arg2', 'arg3']);
+
+    $response = $this->viewAjaxController->ajaxView($request);
+    $this->assertTrue($response instanceof ViewAjaxResponse);
+
+    $this->assertViewResultCommand($response);
+  }
+
+  /**
    * Tests a valid view with a pager.
    */
   public function testAjaxViewWithPager() {
@@ -344,8 +364,7 @@ class ViewAjaxControllerTest extends UnitTestCase {
     $display_handler->expects($this->never())
       ->method('setOption');
     $display_handler->expects($this->any())
-      ->method('getOption')
-      ->with('use_ajax')
+      ->method('ajaxEnabled')
       ->willReturn($use_ajax);
 
     $display_collection = $this->getMockBuilder('Drupal\views\DisplayPluginCollection')
