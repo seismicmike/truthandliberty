@@ -19,6 +19,8 @@ module:
   colorbutton: 0
   comment: 0
   config: 0
+  config_filter: 0
+  config_split: 0
   contact: 0
   contact_formatter: 0
   contextual: 0
