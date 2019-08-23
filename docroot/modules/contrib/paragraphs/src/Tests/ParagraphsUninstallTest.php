@@ -40,15 +40,24 @@ class ParagraphsUninstallTest extends WebTestBase {
     $this->drupalPostForm('admin/modules/uninstall', ['uninstall[paragraphs_demo]' => TRUE], t('Uninstall'));
     $this->drupalPostForm(NULL, [], t('Uninstall'));
 
+    // Delete library data.
+    $this->clickLink('Remove Paragraphs library items');
+    $this->drupalPostForm(NULL, [], t('Delete all Paragraphs library items'));
+
+    // Uninstall the library module.
+    $this->drupalPostForm('admin/modules/uninstall', ['uninstall[paragraphs_library]' => TRUE], t('Uninstall'));
+    $this->drupalPostForm(NULL, [], t('Uninstall'));
+
     // Delete paragraphs data.
-    $this->clickLink('Remove paragraph entities');
-    $this->drupalPostForm(NULL, [], t('Delete all paragraph entities'));
+    $this->clickLink('Remove Paragraphs');
+    $this->drupalPostForm(NULL, [], t('Delete all Paragraphs'));
 
     // Uninstall the module paragraphs.
     $this->drupalPostForm('admin/modules/uninstall', ['uninstall[paragraphs]' => TRUE], t('Uninstall'));
     $this->drupalPostForm(NULL, [], t('Uninstall'));
     $this->assertText(t('The selected modules have been uninstalled.'));
     $this->assertNoText(t('Paragraphs demo'));
+    $this->assertNoText(t('Paragraphs library'));
     $this->assertNoText(t('Paragraphs'));
   }
 

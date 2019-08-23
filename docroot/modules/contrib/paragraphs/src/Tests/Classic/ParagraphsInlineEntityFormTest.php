@@ -23,7 +23,7 @@ class ParagraphsInlineEntityFormTest extends ParagraphsTestBase {
    */
   public function testParagraphsIEFPreview() {
     // Create article content type with a paragraphs field.
-    $this->addParagraphedContentType('article', 'field_paragraphs');
+    $this->addParagraphedContentType('article', 'field_paragraphs', 'entity_reference_paragraphs');
     $this->loginAsAdmin(['create article content', 'edit any article content']);
 
     // Create the paragraphs type simple.
@@ -59,7 +59,7 @@ class ParagraphsInlineEntityFormTest extends ParagraphsTestBase {
       'title[0][value]' => 'Dummy1',
       'field_paragraphs[0][subform][field_article][0][inline_entity_form][title][0][value]' => 'Dummy2',
     ];
-    $this->drupalPostForm(NULL, $edit, t('Save and publish'));
+    $this->drupalPostForm(NULL, $edit, t('Save'));
 
     // Go back into edit page.
     $node = $this->getNodeByTitle('Dummy1');
@@ -75,13 +75,12 @@ class ParagraphsInlineEntityFormTest extends ParagraphsTestBase {
   public function testParagraphsIEFChangeOrder() {
 
     // Create article content type with a paragraphs field.
-    $this->addParagraphedContentType('article', 'field_paragraphs');
+    $this->addParagraphedContentType('article', 'field_paragraphs', 'entity_reference_paragraphs');
     $this->loginAsAdmin(['create article content', 'edit any article content']);
 
     // Create the paragraphs type simple.
     $this->addParagraphsType('simple');
     $this->addParagraphsType('text');
-
 
     // Create a reference to an article.
     $this->fieldUIAddNewField('admin/structure/paragraphs_type/simple', 'article', 'Article', 'field_ui:entity_reference:node', [
@@ -121,7 +120,7 @@ class ParagraphsInlineEntityFormTest extends ParagraphsTestBase {
       'field_paragraphs[0][subform][field_article][0][inline_entity_form][title][0][value]' => 'Basic page 1',
     ];
 
-    $this->drupalPostForm(NULL, $edit, t('Save and publish'));
+    $this->drupalPostForm(NULL, $edit, t('Save'));
 
     // Go back into edit page.
     $node = $this->getNodeByTitle('Article 1');
@@ -136,7 +135,7 @@ class ParagraphsInlineEntityFormTest extends ParagraphsTestBase {
       'field_paragraphs[0][_weight]' => -1,
       'field_paragraphs[1][_weight]' => -2,
     ];
-    $this->drupalPostForm(NULL, $edit, t('Save and keep published'));
+    $this->drupalPostForm(NULL, $edit, t('Save'));
   }
 
 }
