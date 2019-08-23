@@ -65,7 +65,8 @@
     "jquery/timepicker": "^1.11",
     "progress-tracker/progress-tracker": "^1.4",
     "signature_pad/signature_pad": "^2.3",
-    "wikimedia/composer-merge-plugin": "~1.4"
+    "wikimedia/composer-merge-plugin": "~1.4",
+    "drush/drush": "~9"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
@@ -109,6 +110,7 @@
       "docroot/themes/custom/{$name}": [
         "type:drupal-custom-theme"
       ],
+      "drush/contrib/{$name}": ["type:drupal-drush"],
       "docroot/libraries/{$name}": [
         "type:drupal-library",
         "type:bower-asset",
