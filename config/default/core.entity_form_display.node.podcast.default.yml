@@ -1,20 +1,16 @@
-uuid: 4e6adc80-5529-467b-a27a-d1d459226aae
+uuid: b97aee41-ff43-4b1b-a93b-e71cea8715ae
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.flexpage.body
-    - field.field.node.flexpage.field_fp_section
-    - field.field.node.flexpage.field_metatags
-    - node.type.flexpage
+    - field.field.node.podcast.body
+    - node.type.podcast
   module:
-    - metatag
-    - paragraphs
     - path
     - text
-id: node.flexpage.default
+id: node.podcast.default
 targetEntityType: node
-bundle: flexpage
+bundle: podcast
 mode: default
 content:
   body:
@@ -32,24 +28,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_fp_section:
-    type: entity_reference_paragraphs
-    weight: 123
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
-    region: content
-  field_metatags:
-    weight: 122
-    settings: {  }
-    third_party_settings: {  }
-    type: metatag_firehose
-    region: content
   path:
     type: path
     weight: 30

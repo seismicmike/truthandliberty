@@ -1,0 +1,28 @@
+uuid: 0f35581f-2cfd-4ebc-bef7-e14ebe435ec2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.podcast.body
+    - node.type.podcast
+  module:
+    - text
+    - user
+id: node.podcast.default
+targetEntityType: node
+bundle: podcast
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

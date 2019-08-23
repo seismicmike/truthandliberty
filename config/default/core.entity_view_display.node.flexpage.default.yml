@@ -4,8 +4,12 @@ status: true
 dependencies:
   config:
     - field.field.node.flexpage.body
+    - field.field.node.flexpage.field_fp_section
+    - field.field.node.flexpage.field_metatags
     - node.type.flexpage
   module:
+    - entity_reference_revisions
+    - metatag
     - text
     - user
 id: node.flexpage.default
@@ -19,6 +23,22 @@ content:
     weight: 101
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_fp_section:
+    type: entity_reference_revisions_entity_view
+    weight: 103
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_metatags:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
     region: content
   links:
     weight: 100

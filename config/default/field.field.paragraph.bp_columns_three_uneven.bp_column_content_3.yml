@@ -4,16 +4,13 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.bp_column_content_3
-    - paragraphs.paragraphs_type.bp_accordion
     - paragraphs.paragraphs_type.bp_blank
     - paragraphs.paragraphs_type.bp_block
     - paragraphs.paragraphs_type.bp_carousel
     - paragraphs.paragraphs_type.bp_column_wrapper
     - paragraphs.paragraphs_type.bp_columns
     - paragraphs.paragraphs_type.bp_columns_three_uneven
-    - paragraphs.paragraphs_type.bp_columns_two_uneven
     - paragraphs.paragraphs_type.bp_contact
-    - paragraphs.paragraphs_type.bp_image
     - paragraphs.paragraphs_type.bp_modal
     - paragraphs.paragraphs_type.bp_simple
     - paragraphs.paragraphs_type.bp_tabs
@@ -37,14 +34,11 @@ settings:
   handler_settings:
     target_bundles:
       bp_simple: bp_simple
-      bp_image: bp_image
       bp_blank: bp_blank
-      bp_accordion: bp_accordion
       bp_carousel: bp_carousel
       bp_column_wrapper: bp_column_wrapper
       bp_columns: bp_columns
       bp_columns_three_uneven: bp_columns_three_uneven
-      bp_columns_two_uneven: bp_columns_two_uneven
       bp_contact: bp_contact
       bp_block: bp_block
       bp_modal: bp_modal

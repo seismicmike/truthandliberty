@@ -1,19 +1,17 @@
-uuid: 2b27b01b-7af0-422f-9241-beedde767057
+uuid: 62184f16-6c99-4d69-a4cd-f20cad41d846
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.bp_tab_section
-    - paragraphs.paragraphs_type.bp_tabs
+    - field.storage.node.field_fp_section
+    - node.type.flexpage
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: FlNny-5i8B1ymfc7qsy80hhSnFGXG2HAIBPHxAd7cNM
-id: paragraph.bp_tabs.bp_tab_section
-field_name: bp_tab_section
-entity_type: paragraph
-bundle: bp_tabs
-label: Tab
+id: node.flexpage.field_fp_section
+field_name: field_fp_section
+entity_type: node
+bundle: flexpage
+label: Section
 description: ''
 required: false
 translatable: false
@@ -22,11 +20,9 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    target_bundles: {  }
+    negate: 0
+    target_bundles: null
     target_bundles_drag_drop:
-      bp_tab_section:
-        enabled: true
-        weight: 16
       bp_accordion:
         weight: 17
         enabled: false
@@ -42,31 +38,37 @@ settings:
       bp_carousel:
         weight: 21
         enabled: false
-      bp_columns:
+      bp_column_wrapper:
         weight: 22
         enabled: false
-      bp_columns_three_uneven:
+      bp_columns:
         weight: 23
         enabled: false
-      bp_columns_two_uneven:
+      bp_columns_three_uneven:
         weight: 24
         enabled: false
-      bp_contact:
+      bp_columns_two_uneven:
         weight: 25
         enabled: false
-      bp_image:
+      bp_contact:
         weight: 26
         enabled: false
-      bp_modal:
+      bp_image:
         weight: 27
         enabled: false
-      bp_simple:
+      bp_modal:
         weight: 28
         enabled: false
-      bp_tabs:
+      bp_simple:
         weight: 29
         enabled: false
-      bp_view:
+      bp_tab_section:
         weight: 30
+        enabled: false
+      bp_tabs:
+        weight: 31
+        enabled: false
+      bp_view:
+        weight: 32
         enabled: false
 field_type: entity_reference_revisions
