@@ -1,0 +1,9 @@
+uuid: 6d445224-0fbf-4873-8eb2-2855ae14141a
+langcode: en
+status: true
+dependencies: {  }
+id: c_sidebar_section
+label: 'Sidebar Content'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

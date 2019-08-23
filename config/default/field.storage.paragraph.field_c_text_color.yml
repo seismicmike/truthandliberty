@@ -1,0 +1,27 @@
+uuid: b63d2e80-a146-4664-a2e8-f644a44d7a7e
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_c_text_color
+field_name: field_c_text_color
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: c-text-light
+      label: Light
+    -
+      value: c-text-dark
+      label: Dark
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

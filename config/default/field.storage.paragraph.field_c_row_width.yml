@@ -1,0 +1,33 @@
+uuid: 19ff4c5e-a673-4e1b-b1b0-ed24e13454fe
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_c_row_width
+field_name: field_c_row_width
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: grid-container
+      label: 'Standard Row'
+    -
+      value: grid-container-slick
+      label: 'Standard Row with slider'
+    -
+      value: grid-container-middle
+      label: 'Standard Row (align middle)'
+    -
+      value: grid-container-fluid
+      label: 'Row without gutters (edge-to-edge)'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

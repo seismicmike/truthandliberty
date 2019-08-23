@@ -1,0 +1,23 @@
+uuid: 28a30cce-b612-4628-b5b2-3717a8a0f581
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_c_padding_bottom
+    - paragraphs.paragraphs_type.c_section
+  module:
+    - options
+id: paragraph.c_section.field_c_padding_bottom
+field_name: field_c_padding_bottom
+entity_type: paragraph
+bundle: c_section
+label: 'Bottom Margin'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: c-padding-bottom-zero
+default_value_callback: ''
+settings: {  }
+field_type: list_string

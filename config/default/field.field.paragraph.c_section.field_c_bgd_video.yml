@@ -1,0 +1,26 @@
+uuid: be79bdf4-c607-43df-82da-9e03d4a2c2e8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_c_bgd_video
+    - paragraphs.paragraphs_type.c_section
+  module:
+    - video
+id: paragraph.c_section.field_c_bgd_video
+field_name: field_c_bgd_video
+entity_type: paragraph
+bundle: c_section
+label: 'Background Video'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_extensions: ''
+  file_directory: 'videos/[date:custom:Y]-[date:custom:m]'
+  max_filesize: ''
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: video

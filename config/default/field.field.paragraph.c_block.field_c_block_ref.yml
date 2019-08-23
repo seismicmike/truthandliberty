@@ -1,0 +1,22 @@
+uuid: f823051f-5693-4ba4-b723-1cf2e64fbe89
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_c_block_ref
+    - paragraphs.paragraphs_type.c_block
+  module:
+    - block_field
+id: paragraph.c_block.field_c_block_ref
+field_name: field_c_block_ref
+entity_type: paragraph
+bundle: c_block
+label: Block
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  plugin_ids: {  }
+field_type: block_field

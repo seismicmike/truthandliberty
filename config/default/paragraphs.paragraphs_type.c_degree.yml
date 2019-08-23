@@ -1,0 +1,9 @@
+uuid: 7ab512e0-da3f-400b-8765-74a85bc012f1
+langcode: en
+status: true
+dependencies: {  }
+id: c_degree
+label: Degree
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

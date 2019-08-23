@@ -1,27 +1,17 @@
-uuid: bac5896f-83e3-4d0c-8096-418eac3d2415
+uuid: 2a943fd5-02be-44d3-b8fd-b965aa17f73e
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.flexpage.body
     - node.type.flexpage
   module:
-    - text
     - user
 id: node.flexpage.teaser
 targetEntityType: node
 bundle: flexpage
 mode: teaser
 content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
-    weight: 101
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    region: content
   links:
     weight: 100
     settings: {  }

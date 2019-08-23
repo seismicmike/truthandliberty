@@ -1,0 +1,21 @@
+uuid: 212391f5-e5de-4f9f-a7f6-61a09145a33e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_c_text_color
+    - paragraphs.paragraphs_type.c_section
+  module:
+    - options
+id: paragraph.c_section.field_c_text_color
+field_name: field_c_text_color
+entity_type: paragraph
+bundle: c_section
+label: 'Text Color'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

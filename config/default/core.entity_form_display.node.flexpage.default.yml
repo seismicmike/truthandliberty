@@ -1,55 +1,22 @@
-uuid: 4e6adc80-5529-467b-a27a-d1d459226aae
+uuid: c0d1ae1a-4912-419b-a954-c4ec8870b5f8
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.flexpage.body
-    - field.field.node.flexpage.field_fp_section
-    - field.field.node.flexpage.field_metatags
     - node.type.flexpage
   module:
-    - metatag
-    - paragraphs
     - path
-    - text
 id: node.flexpage.default
 targetEntityType: node
 bundle: flexpage
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 121
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-    third_party_settings: {  }
-    region: content
   created:
     type: datetime_timestamp
     weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_fp_section:
-    type: entity_reference_paragraphs
-    weight: 123
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
-    region: content
-  field_metatags:
-    weight: 122
-    settings: {  }
-    third_party_settings: {  }
-    type: metatag_firehose
-    region: content
   path:
     type: path
     weight: 30

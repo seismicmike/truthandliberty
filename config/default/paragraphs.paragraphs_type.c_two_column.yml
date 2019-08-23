@@ -1,0 +1,9 @@
+uuid: cc5839c2-c17c-4952-947f-f2bed96811d3
+langcode: en
+status: true
+dependencies: {  }
+id: c_two_column
+label: 'Two column (with photo)'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

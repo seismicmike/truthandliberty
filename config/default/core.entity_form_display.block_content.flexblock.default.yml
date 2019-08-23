@@ -1,0 +1,35 @@
+uuid: 325e575a-2daf-498f-a502-736fd0763343
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.flexblock
+    - field.field.block_content.flexblock.field_fb_section
+  module:
+    - paragraphs
+id: block_content.flexblock.default
+targetEntityType: block_content
+bundle: flexblock
+mode: default
+content:
+  field_fb_section:
+    type: entity_reference_paragraphs
+    weight: 27
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

@@ -1,0 +1,21 @@
+uuid: cda8276a-20f1-46a7-af34-f97967e91c3b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.c_block.field_c_block_ref
+    - paragraphs.paragraphs_type.c_block
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: paragraph.c_block.preview
+targetEntityType: paragraph
+bundle: c_block
+mode: preview
+content: {  }
+hidden:
+  field_c_block_ref: true
