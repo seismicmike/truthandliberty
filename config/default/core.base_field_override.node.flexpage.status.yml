@@ -1,0 +1,22 @@
+uuid: 5e0f6a0f-8b80-45af-932f-e24162efcddd
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.flexpage
+id: node.flexpage.status
+field_name: status
+entity_type: node
+bundle: flexpage
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

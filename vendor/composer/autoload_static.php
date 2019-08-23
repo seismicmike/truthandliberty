@@ -105,6 +105,7 @@ class ComposerStaticInit3e6ba3f1eb6d2238b74d0798c37d7b35
         array (
             'Composer\\Semver\\' => 16,
             'Composer\\Installers\\' => 20,
+            'CommerceGuys\\Addressing\\' => 24,
         ),
         'B' => 
         array (
@@ -311,6 +312,10 @@ class ComposerStaticInit3e6ba3f1eb6d2238b74d0798c37d7b35
         'Composer\\Installers\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
+        ),
+        'CommerceGuys\\Addressing\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/commerceguys/addressing/src',
         ),
         'Brumann\\Polyfill\\' => 
         array (

@@ -17,47 +17,50 @@ settings:
         -
           name: Formatting
           items:
+            - Format
+            - Styles
             - Bold
             - Italic
+            - Underline
             - Strike
+            - '-'
             - Superscript
             - Subscript
             - '-'
-            - RemoveFormat
-        -
-          name: Linking
-          items:
-            - DrupalLink
-            - DrupalUnlink
+            - '-'
+            - JustifyLeft
+            - JustifyCenter
+            - JustifyRight
+            - '-'
         -
           name: Lists
           items:
             - BulletedList
             - NumberedList
-        -
-          name: Media
-          items:
-            - Blockquote
-            - DrupalImage
-            - Table
             - HorizontalRule
-        -
-          name: 'Block Formatting'
-          items:
-            - Format
+            - quote
         -
           name: Tools
           items:
+            - DrupalLink
+            - DrupalUnlink
             - ShowBlocks
             - Source
+            - RemoveFormat
   plugins:
     stylescombo:
       styles: ''
+    language:
+      language_list: un
+    colorbutton:
+      colors: ''
+    linkit:
+      linkit_profile: ''
 image_upload:
   status: true
   scheme: public
   directory: inline-images
   max_size: ''
   max_dimensions:
-    width: 0
-    height: 0
+    width: null
+    height: null

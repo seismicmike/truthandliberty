@@ -1,0 +1,30 @@
+uuid: bac5896f-83e3-4d0c-8096-418eac3d2415
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.flexpage.body
+    - node.type.flexpage
+  module:
+    - text
+    - user
+id: node.flexpage.teaser
+targetEntityType: node
+bundle: flexpage
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

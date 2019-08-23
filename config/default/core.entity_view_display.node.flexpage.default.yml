@@ -1,0 +1,28 @@
+uuid: a04d5a54-f8c2-4df3-ac23-4bfe9496572e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.flexpage.body
+    - node.type.flexpage
+  module:
+    - text
+    - user
+id: node.flexpage.default
+targetEntityType: node
+bundle: flexpage
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

@@ -1,6 +1,9 @@
 module:
+  address: 0
   admin_toolbar: 0
   admin_toolbar_tools: 0
+  adminimal_admin_toolbar: 0
+  anchor_link: 0
   antibot: 0
   autocomplete_deluxe: 0
   automated_cron: 0
@@ -9,6 +12,7 @@ module:
   big_pipe: 0
   block: 0
   block_content: 0
+  block_field: 0
   bootstrap_paragraphs: 0
   breakpoint: 0
   checklistapi: 0
@@ -22,11 +26,16 @@ module:
   config_filter: 0
   config_split: 0
   contact: 0
+  contact_block: 0
   contact_formatter: 0
+  contact_storage: 0
   contextual: 0
+  ctools: 0
   datetime: 0
   dynamic_page_cache: 0
   editor: 0
+  embed: 0
+  entity_embed: 0
   entity_reference_revisions: 0
   field: 0
   field_ui: 0
@@ -35,6 +44,9 @@ module:
   help: 0
   history: 0
   image: 0
+  layout_builder: 0
+  layout_builder_modal: 0
+  layout_builder_restrictions: 0
   layout_discovery: 0
   link: 0
   linkit: 0
@@ -68,11 +80,14 @@ module:
   toolbar: 0
   tour: 0
   user: 0
+  vendor_stream_wrapper: 0
   video: 0
+  video_embed_field: 0
   views_ui: 0
   viewsreference: 0
   ds: 1
   menu_link_content: 1
+  pathauto: 1
   ds_extras: 2
   views: 10
   standard: 1000
