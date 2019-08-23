@@ -1,9 +1,0 @@
-uuid: ae72e6fa-2261-4687-9ef3-bca24e924334
-langcode: en
-status: true
-dependencies: {  }
-_core:
-  default_config_hash: ddtZ4X8geXjWvsFH9Mfu0mZBoWO4T72bd6ahXfAUMNE
-id: bp_contact
-label: 'Contact Form'
-behavior_plugins: {  }

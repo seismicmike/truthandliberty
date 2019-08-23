@@ -6,7 +6,6 @@ use Drupal\Component\Utility\Xss;
 use Drupal\Core\Form\FormInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
-use Drupal\Core\Url;
 use Drupal\user\Entity\User;
 
 /**
@@ -84,10 +83,10 @@ class ChecklistapiChecklistForm implements FormInterface {
         $title = Xss::filter($item['#title']);
         if ($saved_item) {
           // Append completion details.
-          $title .= t('<span class="completion-details"> - Completed @time by @user</a>', [
+          $title .= '<span class="completion-details"> - ' . t('Completed @time by @user', [
             '@time' => format_date($saved_item['#completed'], 'short'),
             '@user' => User::load($saved_item['#uid'])->getUsername(),
-          ]);
+          ]) . '</span>';
         }
         // Set default value.
         $default_value = FALSE;
@@ -171,8 +170,17 @@ class ChecklistapiChecklistForm implements FormInterface {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    /** @var \Drupal\checklistapi\ChecklistapiChecklist $checklist */
+    $checklist = $form['#checklist'];
+
+    // Save progress.
     $values = $form_state->getValue('checklistapi');
-    $form['#checklist']->saveProgress($values);
+    $checklist->saveProgress($values);
+
+    // Preserve the active tab after submission.
+    $form_state->setRedirect($checklist->getRouteName(), [], [
+      'fragment' => $values['checklistapi__active_tab'],
+    ]);
   }
 
   /**

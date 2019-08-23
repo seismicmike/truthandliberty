@@ -14,21 +14,30 @@ define('SEO_CHECKLIST_GA_QUERY_STRING', 'utm_source=seo_checklist&utm_medium=bac
 /**
  * Implements hook_checklistapi_checklist_info().
  *
- * @see _seo_checklist_preprocess_checklist_info()
+ * @see _seo_checklist_preprocess_checklist_items()
  */
 function seo_checklist_checklistapi_checklist_info() {
-  /** @var \Drupal\Core\Render\RendererInterface $renderer */
-  $renderer = \Drupal::service('renderer');
-
-  $getting_started = ['#theme' => 'seo_checklist_getting_started'];
-
   $definitions = [];
   $definitions['seo_checklist'] = [
     '#title' => t('SEO checklist'),
     '#description' => t('Keep track of your Drupal Search Engine Optimization tasks.'),
     '#path' => '/admin/config/search/seo-checklist',
+    '#callback' => 'seo_checklist_checklistapi_checklist_items',
     '#help' => t("<p>Check off each SEO-related task as you complete it. Don't forget to click the <em>Save</em> button!</p>"),
+  ];
+  return $definitions;
+}
 
+/**
+ * Implements callback_checklistapi_checklist_items() for seo_checklist.
+ */
+function seo_checklist_checklistapi_checklist_items() {
+  /** @var \Drupal\Core\Render\RendererInterface $renderer */
+  $renderer = \Drupal::service('renderer');
+
+  $getting_started = ['#theme' => 'seo_checklist_getting_started'];
+
+  $items = [
     // Getting started.
     'getting_started' => [
       '#title' => t('Getting started'),
@@ -47,7 +56,6 @@ function seo_checklist_checklistapi_checklist_info() {
           'page' => 19,
         ],
         '#module' => 'seo_checklist',
-        '#configure' => 'checklistapi.checklists.seo_checklist',
       ],
       'install_and_enable_coffee_module' => [
         '#title' => t('[Optional] Install and Enable Coffee module'),
@@ -394,7 +402,7 @@ function seo_checklist_checklistapi_checklist_info() {
         '#description' => t('Easy Breadcrumb uses the current URL (path alias) and the current page title to automatically create breadcrumbs.'),
         '#book_ref' => [
           'chapter' => 6,
-          'page' =>136 ,
+          'page' => 136,
         ],
         '#module' => 'easy_breadcrumb',
       ],
@@ -800,16 +808,16 @@ function seo_checklist_checklistapi_checklist_info() {
 
   ];
 
-  return _seo_checklist_preprocess_checklist_info($definitions);
+  return _seo_checklist_preprocess_checklist_items($items);
 }
 
 /**
  * Adds support for SEO Checklist's augmented checklist definitions schema.
  *
- * @param array $definitions
+ * @param array $items
  *   An array of checklist definitions as defined by
- *   hook_checklistapi_checklist_info(), optionally with any of the following
- *   key-pair additions to the checklist items:
+ *   callback_checklistapi_checklist_items(), optionally with any of the
+ *   following key-pair additions to the checklist items:
  *   - #book_ref: (optional) A reference to where more information may be found
  *     in the Drupal 8 SEO book, with the following key-value pairs:
  *     - #chapter: The chapter number as an integer.
@@ -828,109 +836,107 @@ function seo_checklist_checklistapi_checklist_info() {
  *
  * @internal
  */
-function _seo_checklist_preprocess_checklist_info($definitions) {
+function _seo_checklist_preprocess_checklist_items($items) {
   $module_handler = \Drupal::moduleHandler();
   $access_manager = \Drupal::accessManager();
   $current_user = \Drupal::currentUser();
   /** @var \Drupal\Core\Routing\RouteProviderInterface $route_provider */
   $route_provider = \Drupal::service('router.route_provider');
-  foreach ($definitions as &$definition) {
-    foreach ($definition as &$group) {
-      if (is_array($group)) {
-        foreach ($group as &$item) {
-          if (is_array($item)) {
-            // Add book reference.
-            if (isset($item['#book_ref'])) {
-              $page = isset($item['#book_ref']['page']) ? $item['#book_ref']['page'] : FALSE;
-              if ($page) {
-                $string = 'See <a href=":url">Drupal 8 SEO</a> Chapter @chapter, p. @page.';
-              }
-              else {
-                $string = 'See <a href=":url">Drupal 8 SEO</a> Chapter @chapter.';
-              }
-              $args = [
-                ':url' => 'https://www.drupal8seo.com/',
-                '@chapter' => $item['#book_ref']['chapter'],
-                '@page' => $page,
+  foreach ($items as &$group) {
+    if (is_array($group)) {
+      foreach ($group as &$item) {
+        if (is_array($item)) {
+          // Add book reference.
+          if (isset($item['#book_ref'])) {
+            $page = isset($item['#book_ref']['page']) ? $item['#book_ref']['page'] : FALSE;
+            if ($page) {
+              $string = 'See <a href=":url">Drupal 8 SEO</a> Chapter @chapter, p. @page.';
+            }
+            else {
+              $string = 'See <a href=":url">Drupal 8 SEO</a> Chapter @chapter.';
+            }
+            $args = [
+              ':url' => 'https://www.drupal8seo.com/',
+              '@chapter' => $item['#book_ref']['chapter'],
+              '@page' => $page,
+            ];
+            $bookref = '<em class="book-link">' . t($string, $args) . '</em>';
+            $description = isset($item['#description']) ? "{$item['#description']} " : '';
+            $item['#description'] = $description . $bookref;
+            unset($item['#book_ref']);
+          }
+
+          // Made module-related additions.
+          if (isset($item['#module'])) {
+            $module_name = $item['#module'];
+            $module_url_fragment_safe_name = str_replace('_', '-', $module_name);
+            $enabled = $module_handler->moduleExists($module_name);
+
+            // Pre-check installed modules.
+            $item['#default_value'] = $enabled;
+
+            // Add CLI commands to description.
+            $item['#description'] .= '</p><p class="cli-commands">'
+              . "Composer: <code>composer require drupal/{$module_name}</code><br />"
+              . "Drupal Console: <code>drupal module:install {$module_name} --latest</code><br />"
+              . "Drush: <code>drush dl {$module_name} && drush en {$module_name}</code>";
+
+            // Add module links.
+            $item['project_page'] = [
+              '#text' => t('Download'),
+              '#url' => Url::fromUri("https://www.drupal.org/project/{$module_name}"),
+            ];
+            if ($access_manager->checkNamedRoute('system.modules_list', [], $current_user)) {
+              $item['modules_page'] = [
+                '#text' => t('Install'),
+                '#url' => Url::fromRoute('system.modules_list', [], [
+                  'fragment' => "module-{$module_url_fragment_safe_name}",
+                ]),
               ];
-              $bookref = '<em class="book-link">' . t($string, $args) . '</em>';
-              $description = isset($item['#description']) ? "{$item['#description']} " : '';
-              $item['#description'] = $description . $bookref;
-              unset($item['#book_ref']);
             }
-
-            // Made module-related additions.
-            if (isset($item['#module'])) {
-              $module_name = $item['#module'];
-              $module_url_fragment_safe_name = str_replace('_', '-', $module_name);
-              $enabled = $module_handler->moduleExists($module_name);
-
-              // Pre-check installed modules.
-              $item['#default_value'] = $enabled;
-
-              // Add CLI commands to description.
-              $item['#description'] .= '</p><p class="cli-commands">'
-                . "Composer: <code>composer require drupal/{$module_name}</code><br />"
-                . "Drupal Console: <code>drupal module:install {$module_name} --latest</code><br />"
-                . "Drush: <code>drush dl {$module_name} && drush en {$module_name}</code>";
-
-              // Add module links.
-              $item['project_page'] = [
-                '#text' => t('Download'),
-                '#url' => Url::fromUri("https://www.drupal.org/project/{$module_name}"),
+            if ($enabled && $access_manager->checkNamedRoute('user.admin_permissions', [], $current_user)) {
+              $item['permissions_page'] = [
+                '#text' => t('Configure permissions'),
+                '#url' => Url::fromRoute('user.admin_permissions', [], [
+                  'fragment' => "module-{$module_url_fragment_safe_name}",
+                ]),
               ];
-              if ($access_manager->checkNamedRoute('system.modules_list', [], $current_user)) {
-                $item['modules_page'] = [
-                  '#text' => t('Install'),
-                  '#url' => Url::fromRoute('system.modules_list', [], [
-                    'fragment' => "module-{$module_url_fragment_safe_name}",
-                  ]),
-                ];
-              }
-              if ($enabled && $access_manager->checkNamedRoute('user.admin_permissions', [], $current_user)) {
-                $item['permissions_page'] = [
-                  '#text' => t('Configure permissions'),
-                  '#url' => Url::fromRoute('user.admin_permissions', [], [
-                    'fragment' => "module-{$module_url_fragment_safe_name}",
-                  ]),
-                ];
-              }
-
-              unset($item['#module']);
             }
 
-            // Add SEO training camp links.
-            if (isset($item['#seo_training_camp'])) {
-              $item['seo_training_camp'] = [
-                '#text' => t('SEO training camp'),
-                '#url' => $item['#seo_training_camp'],
+            unset($item['#module']);
+          }
+
+          // Add SEO training camp links.
+          if (isset($item['#seo_training_camp'])) {
+            $item['seo_training_camp'] = [
+              '#text' => t('SEO training camp'),
+              '#url' => $item['#seo_training_camp'],
+            ];
+            unset($item['#seo_training_camp']);
+          }
+
+          // Add Configure link.
+          if (isset($item['#configure'])) {
+            $route_name = $item['#configure'];
+            try {
+              $route_exists = (bool) $route_provider->getRouteByName($route_name);
+            }
+            catch (RouteNotFoundException $e) {
+              $route_exists = FALSE;
+            }
+            if ($route_exists && $access_manager->checkNamedRoute($route_name, [], $current_user)) {
+              $item['configure'] = [
+                '#text' => t('Configure'),
+                '#url' => Url::fromRoute($route_name),
               ];
-              unset($item['#seo_training_camp']);
             }
-
-            // Add Configure link.
-            if (isset($item['#configure'])) {
-              $route_name = $item['#configure'];
-              try {
-                $route_exists = (bool) $route_provider->getRouteByName($route_name);
-              }
-              catch (RouteNotFoundException $e) {
-                $route_exists = FALSE;
-              }
-              if ($route_exists && $access_manager->checkNamedRoute($route_name, [], $current_user)) {
-                $item['configure'] = [
-                  '#text' => t('Configure'),
-                  '#url' => Url::fromRoute($route_name),
-                ];
-              }
-              unset($item['#configure']);
-            }
+            unset($item['#configure']);
           }
         }
       }
     }
   }
-  return $definitions;
+  return $items;
 }
 
 /**

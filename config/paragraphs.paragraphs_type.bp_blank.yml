@@ -1,9 +1,0 @@
-uuid: 31ab3099-d2a1-4f01-8fd8-ad3ab6ec6994
-langcode: en
-status: true
-dependencies: {  }
-_core:
-  default_config_hash: P0WNbbdDx4xYSWL4kmWW2S2BA3igTb5k7HIxNAtHyU8
-id: bp_blank
-label: Blank
-behavior_plugins: {  }
