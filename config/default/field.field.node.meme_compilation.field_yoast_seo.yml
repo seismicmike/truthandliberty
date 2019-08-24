@@ -1,0 +1,21 @@
+uuid: 81e1812e-b28d-449c-839c-b4a93ffbace7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_yoast_seo
+    - node.type.meme_compilation
+  module:
+    - yoast_seo
+id: node.meme_compilation.field_yoast_seo
+field_name: field_yoast_seo
+entity_type: node
+bundle: meme_compilation
+label: 'Real-time SEO'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: yoast_seo

@@ -1,0 +1,21 @@
+uuid: 334b214a-0f1a-417f-ac27-f6c076b09f27
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_tags
+    - node.type.book_review
+  module:
+    - metatag
+id: node.book_review.field_meta_tags
+field_name: field_meta_tags
+entity_type: node
+bundle: book_review
+label: 'Meta tags'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

@@ -1,0 +1,17 @@
+uuid: 45b97769-ffb4-4aad-851e-54e8fd5bbaf1
+langcode: en
+status: true
+dependencies:
+  module:
+    - w3c_validator
+title: 'Default cron handler'
+id: w3c_validator_cron
+weight: 0
+module: w3c_validator
+callback: w3c_validator_cron
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database

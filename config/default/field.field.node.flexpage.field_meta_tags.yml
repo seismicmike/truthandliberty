@@ -1,0 +1,21 @@
+uuid: 91ba9e36-564c-48c0-a83c-7d12909d8196
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_tags
+    - node.type.flexpage
+  module:
+    - metatag
+id: node.flexpage.field_meta_tags
+field_name: field_meta_tags
+entity_type: node
+bundle: flexpage
+label: 'Meta tags'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

@@ -1,7 +1,7 @@
 progress:
-  '#changed': 1566617731
+  '#changed': 1566618721
   '#changed_by': '1'
-  '#completed_items': 39
+  '#completed_items': 42
   '#items':
     install_and_enable_seo_checklist_module:
       '#completed': 1566603326
@@ -119,4 +119,13 @@ progress:
       '#uid': '1'
     configure_search_404_module:
       '#completed': 1566617731
+      '#uid': '1'
+    install_and_enable_yoast_seo_module:
+      '#completed': 1566618721
+      '#uid': '1'
+    install_and_enable_diff_module:
+      '#completed': 1566618721
+      '#uid': '1'
+    install_and_enable_scheduler_module:
+      '#completed': 1566618721
       '#uid': '1'

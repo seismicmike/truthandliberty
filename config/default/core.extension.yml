@@ -33,6 +33,7 @@ module:
   contextual: 0
   ctools: 0
   datetime: 0
+  diff: 0
   dynamic_page_cache: 0
   easy_breadcrumb: 0
   editor: 0
@@ -75,6 +76,7 @@ module:
   redirect_404: 0
   rh_node: 0
   rh_taxonomy: 0
+  scheduler: 0
   search: 0
   search404: 0
   seo_checklist: 0
@@ -98,6 +100,7 @@ module:
   views_ui: 0
   viewsreference: 0
   w3c_validator: 0
+  yoast_seo: 0
   ds: 1
   menu_link_content: 1
   pathauto: 1
