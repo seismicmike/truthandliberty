@@ -1,7 +1,7 @@
 progress:
-  '#changed': 1566618721
+  '#changed': 1566620282
   '#changed_by': '1'
-  '#completed_items': 42
+  '#completed_items': 46
   '#items':
     install_and_enable_seo_checklist_module:
       '#completed': 1566603326
@@ -123,9 +123,21 @@ progress:
     install_and_enable_yoast_seo_module:
       '#completed': 1566618721
       '#uid': '1'
+    configure_yoast_seo_module:
+      '#completed': 1566620173
+      '#uid': '1'
+    turn_on_create_new_revisions_for_all_content:
+      '#completed': 1566620173
+      '#uid': '1'
     install_and_enable_diff_module:
       '#completed': 1566618721
       '#uid': '1'
+    configure_the_diff_module:
+      '#completed': 1566620173
+      '#uid': '1'
     install_and_enable_scheduler_module:
       '#completed': 1566618721
+      '#uid': '1'
+    configure_the_scheduler_module:
+      '#completed': 1566620173
       '#uid': '1'

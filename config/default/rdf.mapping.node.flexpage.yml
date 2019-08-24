@@ -9,7 +9,8 @@ dependencies:
 id: node.flexpage
 targetEntityType: node
 bundle: flexpage
-types: {  }
+types:
+  - 'schema:WebPage'
 fieldMappings:
   title:
     properties:

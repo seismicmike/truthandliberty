@@ -9,7 +9,8 @@ dependencies:
 id: node.podcast
 targetEntityType: node
 bundle: podcast
-types: {  }
+types:
+  - ''
 fieldMappings:
   title:
     properties:

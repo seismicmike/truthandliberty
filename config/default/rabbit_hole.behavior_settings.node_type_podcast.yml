@@ -1,0 +1,11 @@
+uuid: 8f9f8203-ee6a-4757-b9bb-439970a71e22
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.podcast
+id: node_type_podcast
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301

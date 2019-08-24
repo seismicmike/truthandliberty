@@ -9,7 +9,8 @@ dependencies:
 id: node.news
 targetEntityType: node
 bundle: news
-types: {  }
+types:
+  - 'schema:NewsArticle'
 fieldMappings:
   title:
     properties:

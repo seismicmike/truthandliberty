@@ -9,7 +9,8 @@ dependencies:
 id: node.book_review
 targetEntityType: node
 bundle: book_review
-types: {  }
+types:
+  - 'schema:Article'
 fieldMappings:
   title:
     properties:

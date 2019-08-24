@@ -4,10 +4,23 @@ status: true
 dependencies:
   module:
     - menu_ui
+    - scheduler
 third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
+  scheduler:
+    expand_fieldset: null
+    fields_display_mode: null
+    publish_enable: true
+    publish_past_date: null
+    publish_past_date_created: false
+    publish_required: false
+    publish_revision: true
+    publish_touch: true
+    unpublish_enable: false
+    unpublish_required: false
+    unpublish_revision: false
 name: 'Book Review'
 type: book_review
 description: ''
