@@ -1,11 +1,11 @@
 uuid: 9f15adb8-973f-4bc2-ae5d-e50f598d457e
 name: 'Truth & Liberty'
 mail: truthandliberty1689@gmail.com
-slogan: ''
+slogan: 'Reformed Theology | Austrian Economics | Libertarian Polity'
 page:
   403: ''
   404: ''
-  front: /node
+  front: /node/6
 admin_compact_mode: false
 weight_select_max: 100
 langcode: en
