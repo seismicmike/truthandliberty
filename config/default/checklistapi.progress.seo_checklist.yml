@@ -1,7 +1,7 @@
 progress:
-  '#changed': 1566620282
+  '#changed': 1566621670
   '#changed_by': '1'
-  '#completed_items': 46
+  '#completed_items': 55
   '#items':
     install_and_enable_seo_checklist_module:
       '#completed': 1566603326
@@ -140,4 +140,31 @@ progress:
       '#uid': '1'
     configure_the_scheduler_module:
       '#completed': 1566620173
+      '#uid': '1'
+    install_and_enable_security_review_module:
+      '#completed': 1566620651
+      '#uid': '1'
+    configure_security_review_module:
+      '#completed': 1566620906
+      '#uid': '1'
+    adjust_performance_admin_settings:
+      '#completed': 1566620906
+      '#uid': '1'
+    install_and_enable_advanced_css_js_aggregation_module:
+      '#completed': 1566620651
+      '#uid': '1'
+    configure_advanced_cssjs_aggregation_module:
+      '#completed': 1566620906
+      '#uid': '1'
+    configure_image_styles:
+      '#completed': 1566621346
+      '#uid': '1'
+    install_and_enable_amp_module_theme_and_php_library_using_composer:
+      '#completed': 1566621116
+      '#uid': '1'
+    install_and_enable_share_buttons_by_addtoany:
+      '#completed': 1566621116
+      '#uid': '1'
+    configure_share_buttons_by_addtoany:
+      '#completed': 1566621670
       '#uid': '1'
