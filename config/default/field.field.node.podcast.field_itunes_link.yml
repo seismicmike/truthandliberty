@@ -1,0 +1,23 @@
+uuid: 5fce00f6-4433-463c-8147-b89672d0ca68
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_itunes_link
+    - node.type.podcast
+  module:
+    - link
+id: node.podcast.field_itunes_link
+field_name: field_itunes_link
+entity_type: node
+bundle: podcast
+label: 'iTunes Link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

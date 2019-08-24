@@ -1,7 +1,7 @@
 progress:
-  '#changed': 1566609481
+  '#changed': 1566612488
   '#changed_by': '1'
-  '#completed_items': 22
+  '#completed_items': 27
   '#items':
     install_and_enable_seo_checklist_module:
       '#completed': 1566603326
@@ -65,6 +65,21 @@ progress:
       '#uid': '1'
     get_a_google_account:
       '#completed': 1566609481
+      '#uid': '1'
+    install_and_enable_google_analytics_module:
+      '#completed': 1566610445
+      '#uid': '1'
+    configure_google_analytics_module:
+      '#completed': 1566610445
+      '#uid': '1'
+    sign_in_to_google_analytics_and_create_an_analytics_property_for_your_website:
+      '#completed': 1566610445
+      '#uid': '1'
+    install_and_enable_easy_breadcrumbs_module:
+      '#completed': 1566611070
+      '#uid': '1'
+    configure_easy_breadcrumbs_module:
+      '#completed': 1566612488
       '#uid': '1'
     install_and_enable_linkit_module:
       '#completed': 1566603326

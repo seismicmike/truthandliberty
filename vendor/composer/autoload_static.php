@@ -540,6 +540,13 @@ class ComposerStaticInitd4268e547116fcdaebb9ed6fca5ed11b
                 0 => __DIR__ . '/..' . '/pear/pear_exception',
             ),
         ),
+        'H' => 
+        array (
+            'HtmlValidator' => 
+            array (
+                0 => __DIR__ . '/..' . '/rexxars/html-validator/library',
+            ),
+        ),
         'E' => 
         array (
             'EasyRdf_' => 

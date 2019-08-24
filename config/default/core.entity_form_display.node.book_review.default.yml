@@ -4,8 +4,14 @@ status: true
 dependencies:
   config:
     - field.field.node.book_review.body
+    - field.field.node.book_review.field_category
+    - field.field.node.book_review.field_image
+    - field.field.node.book_review.field_link
+    - image.style.thumbnail
     - node.type.book_review
   module:
+    - image
+    - link
     - path
     - text
 id: node.book_review.default
@@ -28,6 +34,31 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_category:
+    weight: 124
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_image:
+    weight: 122
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_link:
+    weight: 123
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
   path:
     type: path
     weight: 30

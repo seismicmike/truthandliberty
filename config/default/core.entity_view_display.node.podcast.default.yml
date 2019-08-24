@@ -4,8 +4,16 @@ status: true
 dependencies:
   config:
     - field.field.node.podcast.body
+    - field.field.node.podcast.field_category
+    - field.field.node.podcast.field_image
+    - field.field.node.podcast.field_itunes_link
+    - field.field.node.podcast.field_spotify_link
+    - field.field.node.podcast.field_stitcher
+    - field.field.node.podcast.field_youtube_channel
     - node.type.podcast
   module:
+    - image
+    - link
     - text
     - user
 id: node.podcast.default
@@ -19,6 +27,71 @@ content:
     weight: 101
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_category:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_image:
+    weight: 103
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_itunes_link:
+    weight: 104
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_spotify_link:
+    weight: 107
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_stitcher:
+    weight: 106
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_youtube_channel:
+    weight: 105
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
     region: content
   links:
     weight: 100
