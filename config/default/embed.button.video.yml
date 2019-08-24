@@ -1,0 +1,26 @@
+uuid: 7886d9dc-713a-40e6-abaf-488e27f400ba
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.full
+    - media.type.remote_video
+    - media.type.video
+  content:
+    - 'file:file:c73d3a44-86a4-44fa-a373-36cf17513f94'
+  module:
+    - entity_embed
+    - media
+label: Video
+id: video
+type_id: entity
+type_settings:
+  entity_type: media
+  bundles:
+    - remote_video
+    - video
+  display_plugins:
+    - 'view_mode:media.full'
+  entity_browser: ''
+  entity_browser_settings: {  }
+icon_uuid: c73d3a44-86a4-44fa-a373-36cf17513f94

@@ -50,3 +50,15 @@ fieldMappings:
   field_tags:
     properties:
       - 'schema:about'
+  field_article_image_banner:
+    properties:
+      - 'schema:image'
+  field_category:
+    properties:
+      - 'schema:text'
+  field_date:
+    properties:
+      - 'schema:datePublished'
+  field_metatags:
+    properties:
+      - 'schema:text'

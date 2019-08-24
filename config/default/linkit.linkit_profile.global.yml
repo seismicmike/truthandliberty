@@ -1,0 +1,31 @@
+uuid: 3e3532e8-48b8-48a5-9a3a-f977e658d64f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: global
+label: Global
+description: ''
+attributes:
+  target:
+    id: target
+    weight: 0
+    settings:
+      widget_type: simple_checkbox
+matchers:
+  c3bd677d-69e1-4d94-8992-9a50f1bebc3e:
+    uuid: c3bd677d-69e1-4d94-8992-9a50f1bebc3e
+    id: 'entity:node'
+    weight: 0
+    settings:
+      result_description: ''
+      bundles:
+        article: article
+        book_review: book_review
+        flexpage: flexpage
+        meme_compilation: meme_compilation
+        news: news
+        podcast: podcast
+      group_by_bundle: true
+      include_unpublished: false

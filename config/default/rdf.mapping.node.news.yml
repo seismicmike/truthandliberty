@@ -1,0 +1,31 @@
+uuid: 534f8496-c78d-4f07-bd5c-bc3c2d138e5f
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.news
+  module:
+    - node
+id: node.news
+targetEntityType: node
+bundle: news
+types: {  }
+fieldMappings:
+  title:
+    properties:
+      - 'schema:name'
+  body:
+    properties:
+      - 'schema:text'
+  field_category:
+    properties:
+      - 'schema:text'
+  field_image:
+    properties:
+      - 'schema:image'
+  field_link:
+    properties:
+      - 'schema:relatedLink'
+  field_tags:
+    properties:
+      - 'schema:text'

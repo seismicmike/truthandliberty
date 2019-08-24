@@ -1,7 +1,7 @@
 progress:
-  '#changed': 1566612488
+  '#changed': 1566617731
   '#changed_by': '1'
-  '#completed_items': 27
+  '#completed_items': 39
   '#items':
     install_and_enable_seo_checklist_module:
       '#completed': 1566603326
@@ -81,6 +81,42 @@ progress:
     configure_easy_breadcrumbs_module:
       '#completed': 1566612488
       '#uid': '1'
+    install_and_enable_rdf_ui_module:
+      '#completed': 1566617731
+      '#uid': '1'
+    set_schemaorg_schemas_for_your_content:
+      '#completed': 1566617731
+      '#uid': '1'
     install_and_enable_linkit_module:
       '#completed': 1566603326
+      '#uid': '1'
+    configure_linkit_module:
+      '#completed': 1566617731
+      '#uid': '1'
+    configure_text_formats_to_use_linkit_module:
+      '#completed': 1566617731
+      '#uid': '1'
+    install_and_enable_d8_editor_advanced_link_module:
+      '#completed': 1566617731
+      '#uid': '1'
+    configure_text_formats_to_use_d8_editor_advanced_link_module:
+      '#completed': 1566617731
+      '#uid': '1'
+    install_and_enable_w3c_validator_module:
+      '#completed': 1566617731
+      '#uid': '1'
+    configure_w3c_validator_module:
+      '#completed': 1566617731
+      '#uid': '1'
+    install_and_enable_sitemap_module:
+      '#completed': 1566617731
+      '#uid': '1'
+    configure_sitemap_module:
+      '#completed': 1566617731
+      '#uid': '1'
+    install_and_enable_search_404_module:
+      '#completed': 1566617731
+      '#uid': '1'
+    configure_search_404_module:
+      '#completed': 1566617731
       '#uid': '1'

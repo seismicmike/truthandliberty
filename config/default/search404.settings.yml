@@ -1,7 +1,7 @@
 search404_redirect_301: false
 search404_do_custom_search: false
-search404_custom_search_path: search/@keys
-search404_jump: false
+search404_custom_search_path: ''
+search404_jump: true
 search404_skip_auto_search: false
 search404_disable_error_message: false
 search404_use_or: false

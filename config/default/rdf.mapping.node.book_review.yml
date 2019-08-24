@@ -1,0 +1,28 @@
+uuid: 48316676-6bd5-49bb-8a52-89598ce39174
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.book_review
+  module:
+    - node
+id: node.book_review
+targetEntityType: node
+bundle: book_review
+types: {  }
+fieldMappings:
+  title:
+    properties:
+      - 'schema:name'
+  body:
+    properties:
+      - 'schema:text'
+  field_category:
+    properties:
+      - 'schema:text'
+  field_image:
+    properties:
+      - 'schema:image'
+  field_link:
+    properties:
+      - 'schema:relatedLink'
