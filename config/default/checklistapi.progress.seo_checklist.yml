@@ -1,7 +1,7 @@
 progress:
-  '#changed': 1566603936
+  '#changed': 1566609481
   '#changed_by': '1'
-  '#completed_items': 15
+  '#completed_items': 22
   '#items':
     install_and_enable_seo_checklist_module:
       '#completed': 1566603326
@@ -17,6 +17,9 @@ progress:
       '#uid': '1'
     install_composer_command_line_tool:
       '#completed': 1566603541
+      '#uid': '1'
+    install_console_command_line_tool:
+      '#completed': 1566608988
       '#uid': '1'
     install_drush_command_line_tool:
       '#completed': 1566603541
@@ -44,6 +47,24 @@ progress:
       '#uid': '1'
     install_and_enable_metatag_module:
       '#completed': 1566603326
+      '#uid': '1'
+    set_metatags_for_your_site:
+      '#completed': 1566609010
+      '#uid': '1'
+    install_and_enable_alternate_hreflang_module:
+      '#completed': 1566608988
+      '#uid': '1'
+    install_and_enable_xml_sitemap_module:
+      '#completed': 1566609481
+      '#uid': '1'
+    configure_xml_sitemap_module:
+      '#completed': 1566609481
+      '#uid': '1'
+    set_up_cron:
+      '#completed': 1566609481
+      '#uid': '1'
+    get_a_google_account:
+      '#completed': 1566609481
       '#uid': '1'
     install_and_enable_linkit_module:
       '#completed': 1566603326
