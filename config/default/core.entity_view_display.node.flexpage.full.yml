@@ -4,11 +4,11 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.full
+    - field.field.node.flexpage.field_metatags
     - field.field.node.flexpage.layout_builder__layout
     - node.type.flexpage
   module:
     - layout_builder
-    - layout_discovery
     - user
 third_party_settings:
   layout_builder:
@@ -16,19 +16,9 @@ third_party_settings:
     enabled: true
     sections:
       -
-        layout_id: layout_onecol
+        layout_id: layout_builder_blank
         layout_settings: {  }
-        components:
-          bd0c0009-b7f8-43fd-886a-440633149695:
-            uuid: bd0c0009-b7f8-43fd-886a-440633149695
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'extra_field_block:node:flexpage:links'
-            additional: {  }
-            weight: 0
+        components: {  }
         third_party_settings: {  }
 id: node.flexpage.full
 targetEntityType: node
@@ -41,4 +31,5 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_metatags: true
   layout_builder__layout: true

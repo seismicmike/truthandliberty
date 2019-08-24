@@ -1,0 +1,28 @@
+uuid: a23d8a35-5901-42a4-83fc-92723d209b4c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.meme_compilation.body
+    - node.type.meme_compilation
+  module:
+    - text
+    - user
+id: node.meme_compilation.default
+targetEntityType: node
+bundle: meme_compilation
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

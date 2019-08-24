@@ -3,10 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.flexpage.field_metatags
+    - field.field.node.flexpage.layout_builder__layout
     - node.type.flexpage
   module:
     - layout_builder
     - layout_discovery
+    - metatag
     - user
 third_party_settings:
   layout_builder:
@@ -27,15 +30,38 @@ third_party_settings:
               id: 'extra_field_block:node:flexpage:links'
             additional: {  }
             weight: 0
+          35bfdf86-9602-46d9-bf09-a183cb901595:
+            uuid: 35bfdf86-9602-46d9-bf09-a183cb901595
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:flexpage:field_metatags'
+              formatter:
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+                type: metatag_empty_formatter
+            additional: {  }
+            weight: 1
         third_party_settings: {  }
 id: node.flexpage.default
 targetEntityType: node
 bundle: flexpage
 mode: default
 content:
+  field_metatags:
+    weight: 101
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
   links:
     weight: 100
     settings: {  }
     third_party_settings: {  }
     region: content
-hidden: {  }
+hidden:
+  layout_builder__layout: true

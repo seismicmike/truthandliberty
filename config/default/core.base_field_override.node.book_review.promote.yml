@@ -1,0 +1,22 @@
+uuid: 92cc725f-01fc-4521-b10f-8e534a013abc
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.book_review
+id: node.book_review.promote
+field_name: promote
+entity_type: node
+bundle: book_review
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

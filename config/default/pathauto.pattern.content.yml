@@ -1,0 +1,25 @@
+uuid: 15b5809a-334c-4aba-90ff-1daae6790885
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: content
+label: Content
+type: 'canonical_entities:node'
+pattern: '[node:content-type]/[node:title]'
+selection_criteria:
+  c0118199-c56d-4729-910c-7594b9d693e2:
+    id: node_type
+    bundles:
+      article: article
+      book_review: book_review
+      news: news
+      podcast: podcast
+    negate: false
+    context_mapping:
+      node: node
+    uuid: c0118199-c56d-4729-910c-7594b9d693e2
+selection_logic: and
+weight: -5
+relationships: {  }

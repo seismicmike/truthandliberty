@@ -1,0 +1,53 @@
+uuid: 221d24b7-d4a4-4455-9c78-c1d2001d8547
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.c_section.field_c_admin_title
+    - field.field.paragraph.c_section.field_c_bdg_image_parallax
+    - field.field.paragraph.c_section.field_c_bgd_image
+    - field.field.paragraph.c_section.field_c_component
+    - field.field.paragraph.c_section.field_c_heading
+    - field.field.paragraph.c_section.field_c_heading_alignment
+    - field.field.paragraph.c_section.field_c_padding_bottom
+    - field.field.paragraph.c_section.field_c_padding_top
+    - field.field.paragraph.c_section.field_c_row_width
+    - field.field.paragraph.c_section.field_c_text_color
+    - paragraphs.paragraphs_type.c_section
+  module:
+    - layout_builder
+    - options
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: paragraph.c_section.preview
+targetEntityType: paragraph
+bundle: c_section
+mode: preview
+content:
+  field_c_admin_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_c_row_width:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+hidden:
+  field_c_bdg_image_parallax: true
+  field_c_bgd_image: true
+  field_c_component: true
+  field_c_heading: true
+  field_c_heading_alignment: true
+  field_c_padding_bottom: true
+  field_c_padding_top: true
+  field_c_text_color: true

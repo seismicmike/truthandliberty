@@ -1,0 +1,28 @@
+uuid: e17cc054-7102-4741-83bc-dcd4cbf0c352
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.book_review.body
+    - node.type.book_review
+  module:
+    - text
+    - user
+id: node.book_review.default
+targetEntityType: node
+bundle: book_review
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

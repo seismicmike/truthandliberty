@@ -1,0 +1,22 @@
+uuid: 067e5cac-7c57-4ef8-9b20-d60a378b0229
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.meme_compilation
+  module:
+    - text
+id: node.meme_compilation.body
+field_name: body
+entity_type: node
+bundle: meme_compilation
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

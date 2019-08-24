@@ -19,6 +19,7 @@ module:
   ckeditor: 0
   ckeditor_quote: 0
   ckeditor_youtube: 0
+  coffee: 0
   color: 0
   colorbutton: 0
   comment: 0
@@ -44,6 +45,7 @@ module:
   filter: 0
   help: 0
   history: 0
+  hreflang: 0
   image: 0
   layout_builder: 0
   layout_builder_modal: 0

@@ -17,33 +17,14 @@ dependencies:
   module:
     - entity_reference_revisions
     - image
-    - options
 id: paragraph.c_section.default
 targetEntityType: paragraph
 bundle: c_section
 mode: default
 content:
-  field_c_admin_title:
-    weight: 0
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_c_bdg_image_parallax:
-    weight: 10
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
   field_c_bgd_image:
-    weight: 1
-    label: above
+    weight: 0
+    label: hidden
     settings:
       image_style: ''
       image_link: ''
@@ -51,8 +32,8 @@ content:
     type: image
     region: content
   field_c_component:
-    weight: 4
-    label: above
+    weight: 2
+    label: hidden
     settings:
       view_mode: default
       link: ''
@@ -60,45 +41,17 @@ content:
     type: entity_reference_revisions_entity_view
     region: content
   field_c_heading:
-    weight: 5
-    label: above
+    weight: 1
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
-  field_c_heading_alignment:
-    weight: 6
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-  field_c_padding_bottom:
-    weight: 3
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-  field_c_padding_top:
-    weight: 9
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-  field_c_row_width:
-    weight: 7
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-  field_c_text_color:
-    weight: 8
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-hidden: {  }
+hidden:
+  field_c_admin_title: true
+  field_c_bdg_image_parallax: true
+  field_c_heading_alignment: true
+  field_c_padding_bottom: true
+  field_c_padding_top: true
+  field_c_row_width: true
+  field_c_text_color: true

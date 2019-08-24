@@ -1,0 +1,30 @@
+uuid: d0efa802-0466-4e70-851d-0ebf35b2d338
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.meme_compilation.body
+    - node.type.meme_compilation
+  module:
+    - text
+    - user
+id: node.meme_compilation.teaser
+targetEntityType: node
+bundle: meme_compilation
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

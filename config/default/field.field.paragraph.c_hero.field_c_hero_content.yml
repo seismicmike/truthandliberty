@@ -1,0 +1,109 @@
+uuid: b597d3eb-114b-4822-bb1c-2df8d17985e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_c_hero_content
+    - paragraphs.paragraphs_type.c_block
+    - paragraphs.paragraphs_type.c_hero
+    - paragraphs.paragraphs_type.c_hero_image_banner
+    - paragraphs.paragraphs_type.c_hero_text
+    - paragraphs.paragraphs_type.c_slick_slider
+  module:
+    - entity_reference_revisions
+id: paragraph.c_hero.field_c_hero_content
+field_name: field_c_hero_content
+entity_type: paragraph
+bundle: c_hero
+label: 'Hero Content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      c_block: c_block
+      c_hero_image_banner: c_hero_image_banner
+      c_hero_text: c_hero_text
+      c_slick_slider: c_slick_slider
+    target_bundles_drag_drop:
+      c_accordion:
+        weight: 26
+        enabled: false
+      c_accordions:
+        weight: 27
+        enabled: false
+      c_block:
+        enabled: true
+        weight: 28
+      c_body:
+        weight: 29
+        enabled: false
+      c_cta:
+        weight: 30
+        enabled: false
+      c_degree:
+        weight: 31
+        enabled: false
+      c_flexblock:
+        weight: 32
+        enabled: false
+      c_flexblock_column:
+        weight: 33
+        enabled: false
+      c_hero:
+        weight: 34
+        enabled: false
+      c_hero_image_banner:
+        enabled: true
+        weight: 35
+      c_hero_text:
+        enabled: true
+        weight: 36
+      c_image:
+        weight: 37
+        enabled: false
+      c_section:
+        weight: 38
+        enabled: false
+      c_sidebar_section:
+        weight: 39
+        enabled: false
+      c_simple_section:
+        weight: 40
+        enabled: false
+      c_slick_slider:
+        enabled: true
+        weight: 41
+      c_slide:
+        weight: 42
+        enabled: false
+      c_stat:
+        weight: 43
+        enabled: false
+      c_stats:
+        weight: 44
+        enabled: false
+      c_tab:
+        weight: 45
+        enabled: false
+      c_tabs:
+        weight: 46
+        enabled: false
+      c_timeline:
+        weight: 47
+        enabled: false
+      c_timeline_item:
+        weight: 48
+        enabled: false
+      c_two_column:
+        weight: 49
+        enabled: false
+      c_video:
+        weight: 50
+        enabled: false
+field_type: entity_reference_revisions
