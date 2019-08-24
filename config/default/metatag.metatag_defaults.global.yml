@@ -7,5 +7,8 @@ _core:
 id: global
 label: Global
 tags:
-  canonical_url: '[current-page:url]'
+  keywords: 'Gordon Clark, Murray Rothbard, Libertarianism, Scripturalism, Anarcho-Capitalism, Economics, Reformed Theology, Politics'
   title: '[current-page:title] | [site:name]'
+  canonical_url: '[current-page:url]'
+  description: 'Truth & Liberty analyzes news and events from a Scripturalist worldview. The Bible alone is the Word of God. Truth is that which is revealed by God and what logically follows. What logically follows is Reformed Theology, Austrian Economics, and Libertarian Polity.'
+  abstract: 'Truth & Liberty promotes Clarkian Scripturalism. Reformed Theology, Austrian Economics, and Libertarian Polity.'
