@@ -1,9 +1,13 @@
 {
   "name": "seismicmike/truthandliberty",
-  "description": "Website code for Truth & Liberty.",
   "type": "project",
-  "license": "GPL-2.0+",
+  "description": "truthandliberty.me",
+  "license": "GPL-2.0-only",
   "require": {
+    "acquia/blt": "^10.0",
+    "acquia/drupal-spec-tool": "*",
+    "acquia/lightning": "^4.0.0",
+    "acquia/memcache-settings": "*",
     "ckeditor-plugin/colorbutton": "^4.11",
     "ckeditor-plugin/panelbutton": "^4.11",
     "ckeditor/autogrow": "^4.11",
@@ -13,6 +17,8 @@
     "ckeditor/link": "^4.11",
     "composer/installers": "^1.7",
     "cweagans/composer-patches": "^1.6",
+    "drupal/acquia_connector": "^1.5.0",
+    "drupal/acquia_purge": "^1.0-beta3",
     "drupal/address": "^1.7",
     "drupal/addtoany": "^1.12",
     "drupal/admin_toolbar": "^1.27",
@@ -29,6 +35,7 @@
     "drupal/ckeditor_quote": "^1.0@alpha",
     "drupal/ckeditor_youtube": "^1.2",
     "drupal/coffee": "^1.0@beta",
+    "drupal/cog": "^1.0.0",
     "drupal/colorbutton": "^1.1",
     "drupal/config_filter": "^1.4",
     "drupal/config_ignore": "^2.1",
@@ -47,6 +54,7 @@
     "drupal/entity_embed": "^1.0",
     "drupal/entity_reference_revisions": "^1.6",
     "drupal/eu_cookie_compliance": "^1.8",
+    "drupal/features": "^3.8.0",
     "drupal/field_group": "^1.0",
     "drupal/google_analytics": "^3.0",
     "drupal/google_tag": "^1.1",
@@ -59,13 +67,16 @@
     "drupal/panelbutton": "^1.2",
     "drupal/paragraphs": "^1.9",
     "drupal/pathauto": "^1.4",
+    "drupal/qa_accounts": "^1.0.0-alpha1",
     "drupal/rabbit_hole": "^1.0@beta",
     "drupal/rdfui": "1.x-dev",
     "drupal/redirect": "^1.4",
     "drupal/scheduler": "^1.1",
     "drupal/search404": "^1.0",
+    "drupal/seckit": "^1.0.0-alpha2",
     "drupal/security_review": "1.x-dev",
     "drupal/seo_checklist": "^4.1",
+    "drupal/shield": "^1.2.0",
     "drupal/simple_sitemap": "^3.3",
     "drupal/sitemap": "^1.5",
     "drupal/smart_trim": "^1.1",
@@ -84,30 +95,29 @@
     "jquery/select2": "^4.0",
     "jquery/textcounter": "^0.8.0",
     "jquery/timepicker": "^1.11",
+    "php": ">=7.1",
     "progress-tracker/progress-tracker": "^1.4",
     "signature_pad/signature_pad": "^2.3",
     "wikimedia/composer-merge-plugin": "~1.4"
   },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
+  "require-dev": {
+    "acquia/blt-require-dev": "^10.0.0-alpha1"
+  },
   "config": {
+    "platform": {
+      "php": "7.2"
+    },
     "sort-packages": true
   },
   "extra": {
-    "_readme": [
-      "By default Drupal loads the autoloader from ./vendor/autoload.php.",
-      "To change the autoloader you can edit ./autoload.php.",
-      "This file specifies the packages.drupal.org repository.",
-      "You can read more about this composer repository at:",
-      "https://www.drupal.org/node/2718229"
-    ],
-    "merge-plugin": {
-      "include": [
-      ],
-      "recurse": false,
-      "replace": false,
-      "merge-extra": false
+    "composer-exit-on-patch-failure": true,
+    "drupal-scaffold": {
+      "initial": {
+        "sites/default/default.services.yml": "sites/default/services.yml",
+        "sites/default/default.settings.php": "sites/default/settings.php"
+      }
     },
+    "enable-patching": true,
     "installer-paths": {
       "docroot/core": [
         "type:drupal-core"
@@ -115,55 +125,61 @@
       "docroot/modules/contrib/{$name}": [
         "type:drupal-module"
       ],
+      "docroot/modules/custom/{$name}": [
+        "type:drupal-custom-module"
+      ],
       "docroot/profiles/contrib/{$name}": [
         "type:drupal-profile"
+      ],
+      "docroot/profiles/custom/{$name}": [
+        "type:drupal-custom-profile"
       ],
       "docroot/themes/contrib/{$name}": [
         "type:drupal-theme"
       ],
-      "docroot/drush/contrib/{$name}": [
-        "type:drupal-drush"
-      ],
-      "docroot/modules/custom/{$name}": [
-        "type:drupal-custom-module"
-      ],
       "docroot/themes/custom/{$name}": [
         "type:drupal-custom-theme"
       ],
-      "drush/contrib/{$name}": ["type:drupal-drush"],
       "docroot/libraries/{$name}": [
         "type:drupal-library",
         "type:bower-asset",
         "type:npm-asset"
+      ],
+      "drush/Commands/{$name}": [
+        "type:drupal-drush"
       ]
     },
+    "installer-types": [
+      "bower-asset",
+      "npm-asset"
+    ],
     "patchLevel": {
       "drupal/core": "-p2"
     },
     "patches": {
       "drupal/core": {
-        "Issue #2985882": "https://www.drupal.org/files/issues/2018-07-16/2985882-entityfield-2.patch",
-        "Issue #3065474": "https://www.drupal.org/files/issues/2019-07-02/3065474--layout-builder-quickedit.patch"
+        "Issue #2985882": "https://www.drupal.org/files/issues/2018-07-16/2985882-entityfield-2.patch"
       }
     }
   },
   "autoload": {
     "psr-4": {
-      "Drupal\\Core\\Composer\\": "core/lib/Drupal/Core/Composer"
+      "Example\\": "blt/src/"
     }
   },
-  "scripts": {
-    "pre-autoload-dump": "Drupal\\Core\\Composer\\Composer::preAutoloadDump",
-    "post-autoload-dump": [
-      "Drupal\\Core\\Composer\\Composer::ensureHtaccess"
-    ],
-    "post-package-install": "Drupal\\Core\\Composer\\Composer::vendorTestCodeCleanup",
-    "post-package-update": "Drupal\\Core\\Composer\\Composer::vendorTestCodeCleanup"
+  "autoload-dev": {
+    "psr-4": {
+      "Drupal\\Tests\\PHPUnit\\": "tests/phpunit/src/"
+    }
   },
   "repositories": {
-    "drupal.core": {
+    "drupal": {
       "type": "composer",
       "url": "https://packages.drupal.org/8"
+    },
+    "asset-packagist": {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
     },
     "algolia.places": {
       "_webform": true,
@@ -474,5 +490,18 @@
         }
       }
     }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "post-create-project-cmd": [
+      "blt internal:create-project:init-repo"
+    ],
+    "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+    "nuke": [
+      "rm -rf vendor composer.lock docroot/core docroot/modules/contrib docroot/profiles/contrib docroot/themes/contrib",
+      "@composer clearcache --ansi",
+      "@composer install --ansi"
+    ]
   }
 }
