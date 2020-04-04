@@ -1,11 +1,8 @@
 module:
   address: 0
-  addtoany: 0
   admin_toolbar: 0
   admin_toolbar_tools: 0
   adminimal_admin_toolbar: 0
-  advagg: 0
-  amp: 0
   anchor_link: 0
   antibot: 0
   autocomplete_deluxe: 0
@@ -22,7 +19,6 @@ module:
   ckeditor: 0
   ckeditor_quote: 0
   ckeditor_youtube: 0
-  coffee: 0
   color: 0
   colorbutton: 0
   comment: 0
@@ -36,24 +32,17 @@ module:
   contextual: 0
   ctools: 0
   datetime: 0
-  diff: 0
   dynamic_page_cache: 0
-  easy_breadcrumb: 0
   editor: 0
-  editor_advanced_link: 0
   embed: 0
   entity_embed: 0
   entity_reference_revisions: 0
   field: 0
-  field_group: 0
   field_ui: 0
   file: 0
   filter: 0
-  google_analytics: 0
-  google_tag: 0
   help: 0
   history: 0
-  hreflang: 0
   image: 0
   layout_builder: 0
   layout_builder_modal: 0
@@ -71,24 +60,19 @@ module:
   panelbutton: 0
   paragraphs: 0
   path: 0
+  path_alias: 0
   quickedit: 0
   rabbit_hole: 0
   rdf: 0
-  rdfui: 0
   redirect: 0
   redirect_404: 0
   rh_node: 0
   rh_taxonomy: 0
-  scheduler: 0
   search: 0
-  search404: 0
-  security_review: 0
   seo_checklist: 0
   shortcut: 0
   simple_sitemap: 0
-  sitemap: 0
   smart_trim: 0
-  social_media: 0
   syslog: 0
   system: 0
   taxonomy: 0
@@ -96,15 +80,12 @@ module:
   token: 0
   toolbar: 0
   tour: 0
-  ultimate_cron: 0
   user: 0
   vendor_stream_wrapper: 0
   video: 0
   video_embed_field: 0
   views_ui: 0
   viewsreference: 0
-  w3c_validator: 0
-  yoast_seo: 0
   ds: 1
   menu_link_content: 1
   pathauto: 1

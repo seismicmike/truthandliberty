@@ -16,6 +16,7 @@ settings:
           name: Formatting
           items:
             - Format
+            - Styles
             - Bold
             - Italic
             - Underline
@@ -37,14 +38,8 @@ settings:
         -
           name: Links
           items:
-            - Linkit
             - DrupalLink
             - DrupalUnlink
-        -
-          name: Media
-          items:
-            - video
-            - image
         -
           name: Tools
           items:
@@ -59,7 +54,7 @@ settings:
     colorbutton:
       colors: ''
     linkit:
-      linkit_profile: global
+      linkit_profile: ''
 image_upload:
   status: false
   scheme: public

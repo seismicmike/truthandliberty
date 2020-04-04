@@ -1,31 +1,18 @@
-uuid: c3d81ce8-4654-403c-8afa-d49918a29a42
+uuid: 7e3b6091-e489-4ab5-b6cc-b5f9a1462358
 langcode: en
 status: true
 dependencies:
   module:
     - menu_ui
-    - scheduler
 third_party_settings:
   menu_ui:
     available_menus:
       - main
     parent: 'main:'
-  scheduler:
-    expand_fieldset: null
-    fields_display_mode: null
-    publish_enable: false
-    publish_past_date: null
-    publish_past_date_created: false
-    publish_required: false
-    publish_revision: false
-    publish_touch: false
-    unpublish_enable: false
-    unpublish_required: false
-    unpublish_revision: false
 name: Flexpage
 type: flexpage
 description: ''
 help: ''
 new_revision: true
-preview_mode: 0
+preview_mode: 1
 display_submitted: false

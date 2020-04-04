@@ -24,6 +24,9 @@ interface LayoutBuilderRestrictionInterface extends PluginInspectionInterface {
    *   At a minimum, the entity, view_mode, layout, and region.
    *   Depending on the plugin, they may or may not ignore some of
    *   these contexts.
+   *
+   * @return array
+   *   A modified block definition array.
    */
   public function alterBlockDefinitions(array $definitions, array $context);
 
@@ -34,11 +37,14 @@ interface LayoutBuilderRestrictionInterface extends PluginInspectionInterface {
    * A plugin can manipulate the definitions as needed.
    *
    * @param array $definitions
-   *   All the available block definitions.
+   *   All the available layout definitions.
    * @param array $context
    *   At a minimum, the entity, view_mode, layout, and region.
    *   Depending on the plugin, they may or may not ignore some of
    *   these contexts.
+   *
+   * @return array
+   *   A modified layout definition array.
    */
   public function alterSectionDefinitions(array $definitions, array $context);
 
@@ -63,5 +69,20 @@ interface LayoutBuilderRestrictionInterface extends PluginInspectionInterface {
    *   the restriction.
    */
   public function blockAllowedinContext(SectionStorageInterface $section_storage, $delta_from, $delta_to, $region_to, $block_uuid, $preceding_block_uuid = NULL);
+
+  /**
+   * Returns an array of allowed inline blocks in a given context.
+   *
+   * @param \Drupal\layout_builder\SectionStorageInterface $section_storage
+   *   The section storage.
+   * @param int $delta
+   *   The delta of the section to splice.
+   * @param string $region
+   *   The region the block is going in.
+   *
+   * @return array
+   *   An array of allowed inline block types.
+   */
+  public function inlineBlocksAllowedinContext(SectionStorageInterface $section_storage, $delta, $region);
 
 }

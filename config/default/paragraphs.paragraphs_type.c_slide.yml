@@ -1,9 +1,0 @@
-uuid: c63e414f-061e-40b0-9c6a-f51dea18fcad
-langcode: en
-status: true
-dependencies: {  }
-id: c_slide
-label: Slide
-icon_uuid: null
-description: ''
-behavior_plugins: {  }

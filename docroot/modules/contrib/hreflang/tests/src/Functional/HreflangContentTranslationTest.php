@@ -12,6 +12,11 @@ use Drupal\Tests\node\Functional\NodeTestBase;
 class HreflangContentTranslationTest extends NodeTestBase {
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Modules to enable.
    *
    * @var array
@@ -40,15 +45,23 @@ class HreflangContentTranslationTest extends NodeTestBase {
     $edit = ['site_frontpage' => '/node/1'];
     $this->drupalPostForm('admin/config/system/site-information', $edit, 'Save configuration');
     $this->drupalGet('');
-    $this->assertRaw('<link rel="alternate" hreflang="en" href="' . $base_url . '/" />', 'English hreflang found on English page.');
-    $this->assertRaw('<link rel="alternate" hreflang="fr" href="' . $base_url . '/fr" />', 'French hreflang found on English page.');
-    $this->assertNoRaw('<link rel="alternate" hreflang="en" href="' . $base_url . '/node/1" />', 'English hreflang found on English page.');
-    $this->assertNoRaw('<link rel="alternate" hreflang="fr" href="' . $base_url . '/fr/node/1" />', 'French hreflang found on English page.');
+    // English hreflang found on English page.
+    $this->assertRaw('<link rel="alternate" hreflang="en" href="' . $base_url . '/" />');
+    // French hreflang found on English page.
+    $this->assertRaw('<link rel="alternate" hreflang="fr" href="' . $base_url . '/fr" />');
+    // English hreflang found on English page.
+    $this->assertNoRaw('<link rel="alternate" hreflang="en" href="' . $base_url . '/node/1" />');
+    // French hreflang found on English page.
+    $this->assertNoRaw('<link rel="alternate" hreflang="fr" href="' . $base_url . '/fr/node/1" />');
     $this->drupalGet('fr');
-    $this->assertRaw('<link rel="alternate" hreflang="en" href="' . $base_url . '/" />', 'English hreflang found on French page.');
-    $this->assertRaw('<link rel="alternate" hreflang="fr" href="' . $base_url . '/fr" />', 'French hreflang found on French page.');
-    $this->assertNoRaw('<link rel="alternate" hreflang="en" href="' . $base_url . '/node/1" />', 'English hreflang found on French page.');
-    $this->assertNoRaw('<link rel="alternate" hreflang="fr" href="' . $base_url . '/fr/node/1" />', 'French hreflang found on French page.');
+    // English hreflang found on French page.
+    $this->assertRaw('<link rel="alternate" hreflang="en" href="' . $base_url . '/" />');
+    // French hreflang found on French page.
+    $this->assertRaw('<link rel="alternate" hreflang="fr" href="' . $base_url . '/fr" />');
+    // English hreflang found on French page.
+    $this->assertNoRaw('<link rel="alternate" hreflang="en" href="' . $base_url . '/node/1" />');
+    // French hreflang found on French page.
+    $this->assertNoRaw('<link rel="alternate" hreflang="fr" href="' . $base_url . '/fr/node/1" />');
   }
 
 }

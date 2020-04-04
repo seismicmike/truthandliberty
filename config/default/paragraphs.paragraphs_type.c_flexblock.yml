@@ -1,9 +1,0 @@
-uuid: 207a5e89-071c-4dcd-8f4c-0401a6816f81
-langcode: en
-status: true
-dependencies: {  }
-id: c_flexblock
-label: Column(s)
-icon_uuid: null
-description: ''
-behavior_plugins: {  }

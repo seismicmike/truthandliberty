@@ -1,9 +1,0 @@
-uuid: 86b368a7-55ac-4c63-96d5-405b5803f1fc
-langcode: en
-status: true
-dependencies: {  }
-id: c_stats
-label: Stats
-icon_uuid: null
-description: ''
-behavior_plugins: {  }

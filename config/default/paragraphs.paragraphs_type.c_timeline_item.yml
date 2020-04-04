@@ -1,9 +1,0 @@
-uuid: 5e2ad1ad-9a56-489b-9ce6-608c94092c6d
-langcode: en
-status: true
-dependencies: {  }
-id: c_timeline_item
-label: 'Timeline Item'
-icon_uuid: null
-description: ''
-behavior_plugins: {  }

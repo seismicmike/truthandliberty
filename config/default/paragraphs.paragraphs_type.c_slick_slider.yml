@@ -1,9 +1,0 @@
-uuid: 462f17c3-f6eb-4ed2-880f-14d99ae403a7
-langcode: en
-status: true
-dependencies: {  }
-id: c_slick_slider
-label: Slideshow
-icon_uuid: null
-description: ''
-behavior_plugins: {  }

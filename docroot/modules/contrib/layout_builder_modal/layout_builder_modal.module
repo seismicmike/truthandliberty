@@ -48,7 +48,9 @@ function layout_builder_modal_link_alter(&$variables) {
     return;
   }
 
-  if ($url->getRouteName() !== 'layout_builder.add_block') {
+  $route_name = $url->getRouteName();
+
+  if ($route_name !== 'layout_builder.add_block' && $route_name !== 'layout_builder.update_block') {
     return;
   }
 

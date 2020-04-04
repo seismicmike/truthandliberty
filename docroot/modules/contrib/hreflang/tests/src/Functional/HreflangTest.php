@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\hreflang\Functional;
 
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Tests\BrowserTestBase;
 
 /**
@@ -10,6 +11,14 @@ use Drupal\Tests\BrowserTestBase;
  * @group hreflang
  */
 class HreflangTest extends BrowserTestBase {
+
+  use StringTranslationTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
   /**
    * Modules to enable.
    *
@@ -29,28 +38,28 @@ class HreflangTest extends BrowserTestBase {
     $edit = ['predefined_langcode' => 'fr'];
     $this->drupalPostForm('admin/config/regional/language/add', $edit, 'Add language');
     $this->drupalGet('admin');
-    $this->assertRaw('<link rel="alternate" hreflang="fr" href="' . $base_url . '/fr/admin" />', 'French hreflang found on English page.');
-    $this->assertRaw('<link rel="alternate" hreflang="en" href="' . $base_url . '/admin" />', 'English hreflang found on English page.');
+    $this->assertSession()->responseContains('<link rel="alternate" hreflang="fr" href="' . $base_url . '/fr/admin" />');
+    $this->assertSession()->responseContains('<link rel="alternate" hreflang="en" href="' . $base_url . '/admin" />');
     $this->drupalGet('fr/admin');
-    $this->assertRaw('<link rel="alternate" hreflang="fr" href="' . $base_url . '/fr/admin" />', 'French hreflang found on French page.');
-    $this->assertRaw('<link rel="alternate" hreflang="en" href="' . $base_url . '/admin" />', 'English hreflang found on French page.');
+    $this->assertSession()->responseContains('<link rel="alternate" hreflang="fr" href="' . $base_url . '/fr/admin" />');
+    $this->assertSession()->responseContains('<link rel="alternate" hreflang="en" href="' . $base_url . '/admin" />');
 
     // Disable URL detection and enable session detection.
     $edit = [
       'language_interface[enabled][language-url]' => FALSE,
       'language_interface[enabled][language-session]' => '1',
     ];
-    $this->drupalPostForm('admin/config/regional/language/detection', $edit, t('Save settings'));
+    $this->drupalPostForm('admin/config/regional/language/detection', $edit, $this->t('Save settings'));
 
     $this->drupalGet('admin');
-    $this->assertRaw('<link rel="alternate" hreflang="fr" href="' . $base_url . '/admin?language=fr" />', 'French hreflang found on default page.');
-    $this->assertRaw('<link rel="alternate" hreflang="en" href="' . $base_url . '/admin" />', 'English hreflang found on default page.');
+    $this->assertSession()->responseContains('<link rel="alternate" hreflang="fr" href="' . $base_url . '/admin?language=fr" />');
+    $this->assertSession()->responseContains('<link rel="alternate" hreflang="en" href="' . $base_url . '/admin" />');
     $this->drupalGet('admin', ['query' => ['language' => 'en']]);
-    $this->assertRaw('<link rel="alternate" hreflang="fr" href="' . $base_url . '/admin?language=fr" />', 'French hreflang found on English page.');
-    $this->assertRaw('<link rel="alternate" hreflang="en" href="' . $base_url . '/admin?language=en" />', 'English hreflang found on English page.');
+    $this->assertSession()->responseContains('<link rel="alternate" hreflang="fr" href="' . $base_url . '/admin?language=fr" />');
+    $this->assertSession()->responseContains('<link rel="alternate" hreflang="en" href="' . $base_url . '/admin?language=en" />');
     $this->drupalGet('admin', ['query' => ['language' => 'fr']]);
-    $this->assertRaw('<link rel="alternate" hreflang="fr" href="' . $base_url . '/admin?language=fr" />', 'French hreflang found on French page.');
-    $this->assertRaw('<link rel="alternate" hreflang="en" href="' . $base_url . '/admin?language=en" />', 'English hreflang found on French page.');
+    $this->assertSession()->responseContains('<link rel="alternate" hreflang="fr" href="' . $base_url . '/admin?language=fr" />');
+    $this->assertSession()->responseContains('<link rel="alternate" hreflang="en" href="' . $base_url . '/admin?language=en" />');
   }
 
 }

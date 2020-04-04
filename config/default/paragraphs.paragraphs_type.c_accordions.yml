@@ -1,9 +1,0 @@
-uuid: da494633-9074-47d3-9d4e-ff47a44b9daf
-langcode: en
-status: true
-dependencies: {  }
-id: c_accordions
-label: Accordions
-icon_uuid: null
-description: ''
-behavior_plugins: {  }

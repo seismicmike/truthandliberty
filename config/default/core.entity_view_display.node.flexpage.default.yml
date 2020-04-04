@@ -1,115 +1,28 @@
-uuid: f9d77552-0313-45b5-ba1e-f93be045123d
+uuid: a04d5a54-f8c2-4df3-ac23-4bfe9496572e
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.flexpage.field_meta_tags
-    - field.field.node.flexpage.field_metatags
-    - field.field.node.flexpage.field_yoast_seo
-    - field.field.node.flexpage.layout_builder__layout
+    - field.field.node.flexpage.body
     - node.type.flexpage
   module:
-    - layout_builder
-    - layout_discovery
-    - metatag
+    - text
     - user
-third_party_settings:
-  layout_builder:
-    allow_custom: false
-    enabled: true
-    sections:
-      -
-        layout_id: layout_onecol
-        layout_settings: {  }
-        components:
-          a14a8569-218b-4bdf-842a-d30fa241f4fb:
-            uuid: a14a8569-218b-4bdf-842a-d30fa241f4fb
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'extra_field_block:node:flexpage:links'
-            additional: {  }
-            weight: 0
-          35bfdf86-9602-46d9-bf09-a183cb901595:
-            uuid: 35bfdf86-9602-46d9-bf09-a183cb901595
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:flexpage:field_metatags'
-              formatter:
-                label: above
-                settings: {  }
-                third_party_settings: {  }
-                type: metatag_empty_formatter
-            additional: {  }
-            weight: 1
-          22c00233-482f-4b51-aeac-4b808699feed:
-            uuid: 22c00233-482f-4b51-aeac-4b808699feed
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:flexpage:field_meta_tags'
-              formatter:
-                label: above
-                settings: {  }
-                third_party_settings: {  }
-                type: metatag_empty_formatter
-            additional: {  }
-            weight: 2
-          1bd9548f-a529-4218-bdd8-9824f5618f1b:
-            uuid: 1bd9548f-a529-4218-bdd8-9824f5618f1b
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:flexpage:field_yoast_seo'
-              formatter:
-                label: above
-                settings:
-                  link_to_entity: false
-                third_party_settings: {  }
-                type: string
-            additional: {  }
-            weight: 3
-        third_party_settings: {  }
 id: node.flexpage.default
 targetEntityType: node
 bundle: flexpage
 mode: default
 content:
-  field_meta_tags:
-    weight: 102
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: metatag_empty_formatter
-    region: content
-  field_metatags:
+  body:
+    label: hidden
+    type: text_default
     weight: 101
-    label: above
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
-    region: content
-  field_yoast_seo:
-    weight: 103
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
     region: content
   links:
     weight: 100
     settings: {  }
     third_party_settings: {  }
     region: content
-hidden:
-  layout_builder__layout: true
+hidden: {  }

@@ -45,6 +45,7 @@ return array(
     'Lullabot\\AMP\\Spec\\ValidationRulesFactory' => $vendorDir . '/lullabot/amp/src/Spec/validator-generated.php',
     'Lullabot\\AMP\\Spec\\ValidatorInfo' => $vendorDir . '/lullabot/amp/src/Spec/validator-generated.php',
     'Lullabot\\AMP\\Spec\\ValidatorRules' => $vendorDir . '/lullabot/amp/src/Spec/validator-generated.php',
+    'PEAR_Exception' => $vendorDir . '/pear/pear_exception/PEAR/Exception.php',
     'ParseError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/ParseError.php',
     'SebastianBergmann\\Diff\\Chunk' => $vendorDir . '/sebastian/diff/src/Chunk.php',
     'SebastianBergmann\\Diff\\ConfigurationException' => $vendorDir . '/sebastian/diff/src/Exception/ConfigurationException.php',

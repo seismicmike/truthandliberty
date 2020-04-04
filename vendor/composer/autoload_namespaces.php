@@ -10,7 +10,6 @@ return array(
     'Stack' => array($vendorDir . '/stack/builder/src'),
     'Sabberworm\\CSS' => array($vendorDir . '/sabberworm/php-css-parser/lib'),
     'QueryPath' => array($vendorDir . '/querypath/querypath/src'),
-    'PEAR' => array($vendorDir . '/pear/pear_exception'),
     'KubAT\\PhpSimple\\HtmlDomParser' => array($vendorDir . '/kub-at/php-simple-html-dom-parser/src'),
     'HtmlValidator' => array($vendorDir . '/rexxars/html-validator/library'),
     'HTMLPurifier' => array($vendorDir . '/ezyang/htmlpurifier/library'),

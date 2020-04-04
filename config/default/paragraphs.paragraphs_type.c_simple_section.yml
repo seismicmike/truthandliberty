@@ -1,9 +1,0 @@
-uuid: 64aba22b-5684-4e69-b7a0-849fc9fd4420
-langcode: en
-status: true
-dependencies: {  }
-id: c_simple_section
-label: 'Primary Content'
-icon_uuid: null
-description: ''
-behavior_plugins: {  }
