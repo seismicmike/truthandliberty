@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains tl_events.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tl_events_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tl_events module.
+    case 'help.page.tl_events':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('TL Events') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tl_events_theme() {
+  return [
+    'tl_events' => [
+      'render element' => 'children',
+    ],
+  ];
+}

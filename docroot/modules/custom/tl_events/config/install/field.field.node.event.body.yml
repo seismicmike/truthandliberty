@@ -1,14 +1,11 @@
-uuid: 9095d420-7b12-430c-8911-e5778d60f01c
 langcode: en
 status: true
 dependencies:
-  config:
-    - field.storage.node.body
-    - node.type.event
-  module:
-    - text
-_core:
-  default_config_hash: qpTi-EOw6bkTgELEU--jZ6P_ixPm8MZZRYHoPJizUMk
+    config:
+        - field.storage.node.body
+        - node.type.event
+    module:
+        - text
 id: node.event.body
 field_name: body
 entity_type: node
@@ -20,6 +17,5 @@ translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  display_summary: true
-  required_summary: false
+    display_summary: true
 field_type: text_with_summary
