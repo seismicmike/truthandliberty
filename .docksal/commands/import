@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+## Sync remote db and files to local environment.
+##
+## Usage: fin sync dev
+##        fin sync test
+##        fin sync live
+##
+## Append "--skip-updates" to skip updb and configuration imports.
+##
+## Example: fin sync dev --skip-updates
+##
+fin drush cache-clear drush
+echo "Running composer install"
+composer install
+echo "Dropping all tables on local"
+fin drush sql-drop -y
+echo "Downloading database"
+echo "Importing database"
+gunzip < $1 | fin db import 2>/dev/null
+echo "Clearing Caches"
+fin drush cache-rebuild
+fin drush sqlq "TRUNCATE cache_entity" --no-interaction --ansi
+
+if [[ $@ == *no-dev* ]]
+then
+  echo "Skipping local setup"
+else
+  echo "Enabling Dev Modules"
+  fin drush updb -y
+  fin drush config-import -y
+  fin drush config-import -y
+fi
+
+fin drush cache-rebuild
+
+echo "Sync is complete"
+echo "Admin login:"
+fin drush uli
