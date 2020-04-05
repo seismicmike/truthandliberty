@@ -1,0 +1,14 @@
+uuid: facaed84-bf7d-4cc0-9d9d-9605c0c0929c
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.book_review_creator
+  module:
+    - user
+id: user_remove_role_action.book_review_creator
+label: 'Remove the Book Review creator role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: book_review_creator

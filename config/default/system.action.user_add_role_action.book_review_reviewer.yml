@@ -1,0 +1,14 @@
+uuid: 62ea3940-3a78-4e1c-9bc0-6265a199b440
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.book_review_reviewer
+  module:
+    - user
+id: user_add_role_action.book_review_reviewer
+label: 'Add the Book Review reviewer role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: book_review_reviewer

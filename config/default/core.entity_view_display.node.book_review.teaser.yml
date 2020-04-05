@@ -1,0 +1,41 @@
+uuid: d75b83d5-93f7-4a60-a417-ac36aa8e410c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.book_review.body
+    - field.field.node.book_review.field_book_amazon_link
+    - field.field.node.book_review.field_book_author
+    - field.field.node.book_review.field_book_cover
+    - field.field.node.book_review.field_topics
+    - field.field.node.book_review.layout_selection
+    - node.type.book_review
+  module:
+    - text
+    - user
+id: node.book_review.teaser
+targetEntityType: node
+bundle: book_review
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_book_amazon_link: true
+  field_book_author: true
+  field_book_cover: true
+  field_topics: true
+  layout_selection: true
+  search_api_excerpt: true

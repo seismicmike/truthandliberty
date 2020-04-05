@@ -1,0 +1,27 @@
+uuid: a4de340e-59fa-4747-9091-d9c55dec3f73
+langcode: en
+status: true
+dependencies: {  }
+id: blog_post_creator
+label: 'Blog Post creator'
+weight: 7
+is_admin: false
+permissions:
+  - 'access ckeditor_media_browser entity browser pages'
+  - 'access contextual links'
+  - 'access image_browser entity browser pages'
+  - 'access in-place editing'
+  - 'access media_browser entity browser pages'
+  - 'access toolbar'
+  - 'configure any layout'
+  - 'create blog_post content'
+  - 'create url aliases'
+  - 'edit own blog_post content'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition review'
+  - 'use moderation sidebar'
+  - 'use text format rich_text'
+  - 'view any unpublished content'
+  - 'view blog_post revisions'
+  - 'view latest version'
+  - 'view own unpublished content'

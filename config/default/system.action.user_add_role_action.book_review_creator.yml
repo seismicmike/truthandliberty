@@ -1,0 +1,14 @@
+uuid: 8223f089-634c-4dde-b538-b34ef33a25b2
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.book_review_creator
+  module:
+    - user
+id: user_add_role_action.book_review_creator
+label: 'Add the Book Review creator role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: book_review_creator

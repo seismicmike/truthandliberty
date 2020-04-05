@@ -1,10 +1,10 @@
-uuid: 86b03b32-d6ad-4f66-a3ff-a5a49eae8bf4
+uuid: 9536457d-2e62-4f38-ad67-ae2735f178e4
 langcode: en
 status: true
 dependencies: {  }
-id: event_creator
-label: 'Event creator'
-weight: 7
+id: book_review_creator
+label: 'Book Review creator'
+weight: 9
 is_admin: false
 permissions:
   - 'access ckeditor_media_browser entity browser pages'
@@ -14,14 +14,14 @@ permissions:
   - 'access media_browser entity browser pages'
   - 'access toolbar'
   - 'configure any layout'
-  - 'create event content'
+  - 'create book_review content'
   - 'create url aliases'
-  - 'edit own event content'
+  - 'edit own book_review content'
   - 'use editorial transition create_new_draft'
   - 'use editorial transition review'
   - 'use moderation sidebar'
   - 'use text format rich_text'
   - 'view any unpublished content'
-  - 'view event revisions'
+  - 'view book_review revisions'
   - 'view latest version'
   - 'view own unpublished content'

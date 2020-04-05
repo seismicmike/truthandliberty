@@ -1,0 +1,19 @@
+uuid: 790efe9b-c2e7-4367-a235-d49ab6f1926a
+langcode: en
+status: true
+dependencies: {  }
+id: book_review_reviewer
+label: 'Book Review reviewer'
+weight: 10
+is_admin: false
+permissions:
+  - 'access content overview'
+  - 'access toolbar'
+  - 'delete any book_review content'
+  - 'edit any book_review content'
+  - 'use editorial transition archive'
+  - 'use editorial transition publish'
+  - 'use editorial transition review'
+  - 'use moderation sidebar'
+  - 'view any unpublished content'
+  - 'view latest version'

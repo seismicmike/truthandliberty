@@ -1,0 +1,21 @@
+uuid: f95e6bc5-7555-4595-9e53-19164d69c235
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.layout_selection
+    - node.type.book_review
+id: node.book_review.layout_selection
+field_name: layout_selection
+entity_type: node
+bundle: book_review
+label: Layout
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: layout_library
+  handler_settings: {  }
+field_type: entity_reference

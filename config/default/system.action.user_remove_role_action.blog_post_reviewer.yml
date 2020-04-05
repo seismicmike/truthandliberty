@@ -1,0 +1,14 @@
+uuid: 2500b4d8-6f43-48e1-b124-9bd96d922a63
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.blog_post_reviewer
+  module:
+    - user
+id: user_remove_role_action.blog_post_reviewer
+label: 'Remove the Blog Post reviewer role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: blog_post_reviewer

@@ -1,16 +1,16 @@
-uuid: 8a54eaab-b4fa-40bd-b7f1-eccbb9a48811
+uuid: 9f273b78-f68a-4a06-8a8b-03e992dad079
 langcode: en
 status: true
 dependencies: {  }
-id: event_reviewer
-label: 'Event reviewer'
+id: blog_post_reviewer
+label: 'Blog Post reviewer'
 weight: 8
 is_admin: false
 permissions:
   - 'access content overview'
   - 'access toolbar'
-  - 'delete any event content'
-  - 'edit any event content'
+  - 'delete any blog_post content'
+  - 'edit any blog_post content'
   - 'use editorial transition archive'
   - 'use editorial transition publish'
   - 'use editorial transition review'

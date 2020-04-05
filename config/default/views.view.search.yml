@@ -76,7 +76,8 @@ display:
         options:
           view_modes:
             'entity:node':
-              event: default
+              blog_post: default
+              book_review: default
               landing_page: teaser
               page: teaser
       fields:

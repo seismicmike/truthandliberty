@@ -1,17 +1,18 @@
-uuid: 3f0cca1d-658c-47e8-acba-cf5417b48d84
+uuid: f6add557-8225-4127-bd1f-0fd1a26645e8
 langcode: en
 status: true
 dependencies:
   module:
-    - datetime
     - node
-id: node.field_event_date
-field_name: field_event_date
+id: node.field_book_author
+field_name: field_book_author
 entity_type: node
-type: datetime
+type: string
 settings:
-  datetime_type: datetime
-module: datetime
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
 locked: false
 cardinality: 1
 translatable: true
