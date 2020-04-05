@@ -40,7 +40,8 @@ command-hooks:
 # Configuration settings for new git repository.
 git:
   default_branch: master
-  remotes: {  }
+  remotes:
+    - 'https://github.com/seismicmike/truthandliberty'
 deploy:
   # When manually deploying a tag, also tag the source repository.
   tag_source: true
