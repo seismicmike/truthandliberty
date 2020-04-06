@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.book_review.field_book_author
     - field.field.node.book_review.field_book_cover
     - field.field.node.book_review.field_topics
+    - field.field.node.book_review.layout_builder__layout
     - field.field.node.book_review.layout_selection
     - node.type.book_review
   module:
@@ -140,4 +141,5 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  layout_builder__layout: true
