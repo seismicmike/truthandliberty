@@ -1,6 +1,0 @@
-name: 'TL Events'
-type: module
-description: 'TL Events'
-core: 8.x
-package: 'Custom'
-core_version_requirement: ^8
