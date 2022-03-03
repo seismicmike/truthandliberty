@@ -1,0 +1,9 @@
+uuid: d18c3225-b628-4e0a-ac82-3e22bffd7d74
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: gc0UpAJyuWA40vADrfp-ZrW9KcXejAQz3yau6c8hKiw
+id: featured_media_layout__slider
+label: Slider
+classes: component-featured-media--layout-slider

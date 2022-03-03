@@ -1,0 +1,17 @@
+// -----------------------------------------------------------------------------
+// Abstracts/Variables: Header
+// Header-related settings to be used globally.
+// -----------------------------------------------------------------------------
+
+$header-padding-top: em(50px);
+$header-padding-top-sm: em(25px);
+$header-padding-fixed: 1em;
+
+$header-logo-height-top-mobile: 2em;
+$header-logo-height-top: em(44px);
+$header-logo-height-fixed-mobile: 1.8em;
+$header-logo-height-fixed: 2em;
+
+$header-height-top-mobile: $header-padding-top-sm + $header-padding-top-sm + $header-logo-height-top-mobile;
+$header-height-top: $header-padding-top + $header-padding-top-sm + $header-logo-height-top;
+$header-height-fixed: $header-padding-fixed + $header-padding-fixed + $header-logo-height-fixed;

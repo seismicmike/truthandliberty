@@ -1,0 +1,182 @@
+@charset 'UTF-8';
+
+// -----------------------------------------------------------------------------
+// Libraries/Paragraph: hero slide
+// -----------------------------------------------------------------------------
+
+/**
+ * Globals
+ * An import of all abstracts
+ */
+@import '../../globals';
+
+/**
+ * Component
+ */
+.component-hero-slide,
+.component-hero-slide.swiper-slide {
+  // The "!important" tags are set to override swiper-slider styles.
+  @include flex();
+  height: $component-hero-title-height;
+  max-height: $component-hero-title-height-max;
+  min-height: $component-hero-title-height-min;
+  position: relative;
+  width: 100vw !important;
+
+  .media {
+    @include trbl();
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+    z-index: 0;
+
+    &.media--type-image {
+      .media__media {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+
+        > picture,
+        img {
+          display: block;
+          height: auto;
+          left: 50%;
+          min-height: 100%;
+          min-width: 100%;
+          object-fit: cover;
+          position: absolute;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: auto;
+        }
+      }
+    }
+
+    &.media--type-remote-video {
+      .media__media {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+
+        div {
+          height: 100%;
+          width: 100%;
+        }
+
+        iframe {
+          left: 50%;
+          pointer-events: none;
+          position: absolute;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 2;
+        }
+      }
+    }
+
+    &.media--type-video {
+      .media__media {
+        video {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .component-hero-slide__inner {
+    @include container();
+    @include flex();
+    @include flex-x(flex-direction, column);
+    @include flex-x(justify-content, center);
+    position: relative;
+    height: 100%;
+    z-index: 1;
+  }
+}
+
+// default slide content
+.component-hero-slide {
+  background-color: $color-black;
+
+  .component-hero-slide__inner {
+    color: $color-white;
+    padding: 0 15vw;
+
+    @include media('>=lg') {
+      padding: 0 8vw;
+    }
+
+    @include media('>=xl') {
+      padding: 0;
+    }
+  }
+
+  .component-hero-slide__title {
+    .component-hero-slide__title-super {
+      @include type-header(h3, light, included);
+      display: block;
+      margin: 0;
+    }
+
+    .component-hero-slide__title-main {
+      @include type-header(h1, light, included);
+      display: block;
+      margin: 0;
+    }
+  }
+
+  .component-hero-slide__link {
+    @include btn($style: secondary);
+  }
+
+  .component-hero-slide__footer:not(:empty) {
+    margin-top: $gap-vertical-sm-plus;
+  }
+
+  .field--name-field-content {
+    @include container(
+      $width: $container-md,
+      $align: left
+    );
+    padding-left: 0.75vw;
+
+    @include media('>=xl') {
+      padding-left: 0.55rem;
+    }
+  }
+}
+
+// light slide content
+.component-hero-slide.component-hero-slide--light {
+  .component-hero-slide__title,
+  .component-hero-slide__title .component-hero-slide__title-super,
+  .component-hero-slide__title .component-hero-slide__title-main,
+  .component-hero-slide__inner {
+    color: $color-white;
+  }
+
+  .component-hero-slide__link {
+    @include btn(secondary);
+  }
+}
+
+// dark slide content
+.component-hero-slide.component-hero-slide--dark {
+  background-color: transparent;
+
+  .component-hero-slide__title,
+  .component-hero-slide__title .component-hero-slide__title-super,
+  .component-hero-slide__title .component-hero-slide__title-main,
+  .component-hero-slide__inner {
+    color: $color-black;
+  }
+
+  .component-hero-slide__link {
+    @include btn(primary);
+  }
+}

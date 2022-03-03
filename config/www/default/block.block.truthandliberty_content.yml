@@ -1,0 +1,22 @@
+uuid: ac687638-c130-40c7-bcb5-c14ee64059c0
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - truthandliberty
+_core:
+  default_config_hash: BL6Gcw5Us0zai1ADadlNYLxlEblMedc_3C3lF0PjtCE
+id: truthandliberty_content
+theme: truthandliberty
+region: content
+weight: -8
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }

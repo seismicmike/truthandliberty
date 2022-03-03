@@ -1,0 +1,22 @@
+uuid: 0e8bc1c5-8e80-4222-bd75-1ab46e75680b
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - truthandliberty
+_core:
+  default_config_hash: VV9kqYMqLSoPSMw-XVpo0auKK0RfnbQTkqYPVQxqaV0
+id: truthandliberty_help
+theme: truthandliberty
+region: pre_content
+weight: -7
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: '0'
+visibility: {  }

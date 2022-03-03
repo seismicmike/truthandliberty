@@ -1,0 +1,22 @@
+uuid: 4ef80290-2b9e-4767-8e5a-0e069b308d12
+langcode: en
+status: true
+dependencies:
+  theme:
+    - truthandliberty
+_core:
+  default_config_hash: V7GM1m6Qh500cQE7LWZV8lRuwLqXdjR0S2kSk8pEv6g
+id: truthandliberty_secondary_local_tasks
+theme: truthandliberty
+region: pre_content
+weight: -3
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Secondary tabs'
+  provider: core
+  label_display: '0'
+  primary: false
+  secondary: true
+visibility: {  }

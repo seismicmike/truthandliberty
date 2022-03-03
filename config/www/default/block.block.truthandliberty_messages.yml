@@ -1,0 +1,22 @@
+uuid: fe0f48a5-6e29-45fc-9e42-83e3befa727d
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - truthandliberty
+_core:
+  default_config_hash: KfyaTPRJEcAyy2e5AxEfWQnuHcn4WrfvcWek7lSmHZQ
+id: truthandliberty_messages
+theme: truthandliberty
+region: pre_content
+weight: -6
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

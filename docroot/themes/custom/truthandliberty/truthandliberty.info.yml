@@ -1,0 +1,42 @@
+name: truthandliberty
+type: theme
+description: 'A feature-filled starter theme that works well with the truthandliberty profile of the same name.'
+package: VMLY&R
+core_version_requirement: ^8 | ^9
+base theme: bazo
+
+ckeditor_stylesheets:
+  - css/ckeditor-typography.css
+
+logo: icons/logo2.png
+features:
+  favicon: true
+libraries:
+  - truthandliberty/global
+libraries-extend:
+  blazy/loading:
+    - truthandliberty/blazy
+  system/base:
+    - truthandliberty/system-base--ajax
+libraries-override:
+  contextual/drupal.contextual-links:
+    css:
+      component:
+        css/contextual.module.css: css/contrib-overrides/contextual/contextual.module.css
+      theme:
+        css/contextual.theme.css: css/contrib-overrides/contextual/contextual.theme.css
+        css/contextual.icons.theme.css: css/contrib-overrides/contextual/contextual.icons.theme.css
+  contextual/drupal.contextual-toolbar:
+    css:
+      component:
+        css/contextual.toolbar.css: css/contrib-overrides/contextual/contextual.toolbar.css
+
+regions:
+  page_top: 'Page top'
+  header: 'Header'
+  pre_content: 'Pre-content'
+  content: Content
+  post_content: 'Post-content'
+  footer_first: 'Footer: First'
+  footer_second: 'Footer: Second'
+  page_bottom: 'Page bottom'

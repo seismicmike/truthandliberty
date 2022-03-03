@@ -1,0 +1,25 @@
+// -----------------------------------------------------------------------------
+// Abstracts/Variables: Colors
+// Global colors and color map
+// -----------------------------------------------------------------------------
+
+$color-white: #FFFFFF;
+$color-lightest-grey: #EEEEEE;
+$color-light-grey: #DDDDDD;
+$color-grey: #999999;
+$color-dark-grey: #333333;
+$color-black: #000000;
+$color-blue: #0080FF;
+$color-dark-blue: #0055A9;
+
+$colors: (
+  'light': $color-white,
+  'dark': $color-black,
+  'white': $color-white,
+  'light-grey': $color-light-grey,
+  'grey': $color-grey,
+  'dark-grey': $color-dark-grey,
+  'black': $color-black,
+  'blue': $color-blue,
+  'dark-blue': $color-dark-blue
+) !default;
