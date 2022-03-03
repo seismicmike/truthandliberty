@@ -1,0 +1,46 @@
+@charset 'UTF-8';
+
+// -----------------------------------------------------------------------------
+// Libraries/Region: Header
+// -----------------------------------------------------------------------------
+
+/**
+ * Globals
+ * An import of all abstracts
+ */
+@import '../../globals';
+
+/**
+ * Region
+ */
+.region-header {
+  background-color: $color-dark-grey;
+  padding-bottom: $gap-vertical-sm;
+  padding-top: $gap-vertical-sm;
+
+  .region-header__content {
+    @include gap-horizontal();
+  }
+
+  .block-system-branding-block__content {
+    @include flex();
+    @include flex-x(align-items, center);
+
+    a {
+      @include link-base();
+    }
+
+    .site-logo,
+    .site-logo img {
+      display: block;
+      font-size: 4rem;
+      height: 1em;
+      overflow: hidden;
+      width: 1em;
+    }
+
+    .site-name {
+      margin: 0 $gap-horizontal-sm;
+    }
+  }
+}

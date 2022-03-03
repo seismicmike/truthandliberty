@@ -1,0 +1,45 @@
+// -----------------------------------------------------------------------------
+// Base: Inputs
+// Themed inputs, buttons, and form item groups
+// -----------------------------------------------------------------------------
+
+// basic inputs
+input,
+textarea,
+select {
+  border: 0.125rem solid $color-dark-grey;
+  border-radius: 0;
+  color: $color-dark-grey;
+  max-width: 100%;
+  outline: 0 none;
+  padding: 0.5em 1em;
+  transition: $transition-base;
+
+  &:focus {
+    border-color: $color-black;
+    color: $color-black;
+  }
+
+  &:disabled {
+    background-color: $color-light-grey;
+  }
+}
+
+// input submit buttons
+input[type='button'],
+input[type='reset'],
+input[type='submit'] {
+  @include btn(primary);
+}
+
+// form item groups
+.form-item {
+  .description {
+    color: $color-dark-grey;
+  }
+}
+
+//form button
+.form-actions {
+  margin-top: 2rem;
+}

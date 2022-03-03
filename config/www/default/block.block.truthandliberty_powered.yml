@@ -1,0 +1,22 @@
+uuid: a3fe87a4-d65c-4484-8a43-c12aff311823
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - truthandliberty
+_core:
+  default_config_hash: 5kL_iZM_xia3Z8bgsyiZgQphxMGhI8gt2HYo8r5Z7OE
+id: truthandliberty_powered
+theme: truthandliberty
+region: header
+weight: 0
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }
