@@ -8,8 +8,8 @@ _core:
   default_config_hash: V7GM1m6Qh500cQE7LWZV8lRuwLqXdjR0S2kSk8pEv6g
 id: truthandliberty_secondary_local_tasks
 theme: truthandliberty
-region: header
-weight: -2
+region: pre_content
+weight: -3
 provider: null
 plugin: local_tasks_block
 settings:

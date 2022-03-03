@@ -10,8 +10,8 @@ _core:
   default_config_hash: VV9kqYMqLSoPSMw-XVpo0auKK0RfnbQTkqYPVQxqaV0
 id: truthandliberty_help
 theme: truthandliberty
-region: header
-weight: 0
+region: pre_content
+weight: -7
 provider: null
 plugin: help_block
 settings:

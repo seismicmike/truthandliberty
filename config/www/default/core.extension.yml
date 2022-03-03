@@ -111,11 +111,9 @@ module:
   paragraphs: 11
   blackbird: 1000
 theme:
-  bartik: 0
   seven: 0
   claro: 0
   gin: 0
-  olivero: 0
   stable: 0
   classy: 0
   bazo: 0

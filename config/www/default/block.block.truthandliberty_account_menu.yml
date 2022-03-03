@@ -12,8 +12,8 @@ _core:
   default_config_hash: 19CmBQT7OL-3VRx-isvQ5jfGekABppTKv1h5rHK376s
 id: truthandliberty_account_menu
 theme: truthandliberty
-region: header
-weight: -4
+region: footer_second
+weight: -7
 provider: null
 plugin: 'system_menu_block:account'
 settings:

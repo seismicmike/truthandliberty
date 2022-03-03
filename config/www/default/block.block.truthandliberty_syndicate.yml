@@ -10,8 +10,8 @@ _core:
   default_config_hash: jGkBUnwRXYacHWTR8hjjwn_a_PRM-Xj_xSHoB0WIfEo
 id: truthandliberty_syndicate
 theme: truthandliberty
-region: header
-weight: 0
+region: footer_first
+weight: -6
 provider: null
 plugin: node_syndicate_block
 settings:

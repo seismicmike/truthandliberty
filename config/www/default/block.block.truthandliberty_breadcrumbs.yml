@@ -10,8 +10,8 @@ _core:
   default_config_hash: XMsRP1YhWAcorbrFWZglMYJ_SgWHyF3fyCh5vDXaUN4
 id: truthandliberty_breadcrumbs
 theme: truthandliberty
-region: header
-weight: 0
+region: pre_content
+weight: -8
 provider: null
 plugin: system_breadcrumb_block
 settings:

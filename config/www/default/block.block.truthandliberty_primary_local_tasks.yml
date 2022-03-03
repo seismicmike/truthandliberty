@@ -8,7 +8,7 @@ _core:
   default_config_hash: ra6f6AXShbzKP9r6uPc9cfCx2KuomlPqmt1WWPUuDf0
 id: truthandliberty_primary_local_tasks
 theme: truthandliberty
-region: header
+region: pre_content
 weight: -4
 provider: null
 plugin: local_tasks_block

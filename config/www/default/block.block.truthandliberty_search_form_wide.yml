@@ -11,7 +11,7 @@ _core:
 id: truthandliberty_search_form_wide
 theme: truthandliberty
 region: header
-weight: -5
+weight: -6
 provider: null
 plugin: search_form_block
 settings:

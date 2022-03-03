@@ -8,7 +8,7 @@ _core:
   default_config_hash: WImvmaBdDpwIqobqbDWebBnyxssRvrNEnZSQbOsvOe4
 id: truthandliberty_page_title
 theme: truthandliberty
-region: header
+region: pre_content
 weight: -5
 provider: null
 plugin: page_title_block
