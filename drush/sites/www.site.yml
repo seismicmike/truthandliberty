@@ -1,7 +1,7 @@
 local:
   site-env: local
   root: /var/www/docroot
-  uri: http://www.PROJECTNAME.docksal
+  uri: http://www.truthandliberty.docksal
 remote_dev:
   site-env: dev
   host:
