@@ -1,0 +1,25 @@
+uuid: dce58b06-250d-48ca-b4f6-f4a3e5ba26a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.heading.field_heading
+    - field.field.paragraph.heading.field_heading_alignment
+    - field.field.paragraph.heading.field_heading_size
+    - paragraphs.paragraphs_type.heading
+id: paragraph.heading.default
+targetEntityType: paragraph
+bundle: heading
+mode: default
+content:
+  field_heading:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  field_heading_alignment: true
+  field_heading_size: true

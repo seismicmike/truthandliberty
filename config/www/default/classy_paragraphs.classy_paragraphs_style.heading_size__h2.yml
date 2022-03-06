@@ -1,0 +1,7 @@
+uuid: 4f924b4f-93bd-45fe-a2cb-6ab51c93eac5
+langcode: en
+status: true
+dependencies: {  }
+id: heading_size__h2
+label: 'Heading Size H2'
+classes: heading-h2
