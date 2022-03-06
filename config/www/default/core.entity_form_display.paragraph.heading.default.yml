@@ -1,0 +1,58 @@
+uuid: 0a77f77c-2044-4277-aa75-1d40eefb102a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.heading.field_heading
+    - field.field.paragraph.heading.field_heading_alignment
+    - field.field.paragraph.heading.field_heading_size
+    - paragraphs.paragraphs_type.heading
+  module:
+    - field_group
+third_party_settings:
+  field_group:
+    group_settings:
+      children:
+        - field_heading_size
+        - field_heading_alignment
+      parent_name: ''
+      weight: 0
+      format_type: settings
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        visible_for_roles:
+          site_administrator: site_administrator
+          content_editor: content_editor
+          administrator: 0
+          authenticated: 0
+      label: Settings
+id: paragraph.heading.default
+targetEntityType: paragraph
+bundle: heading
+mode: default
+content:
+  field_heading:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_heading_alignment:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_heading_size:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+hidden:
+  created: true
+  status: true
