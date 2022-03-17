@@ -1,0 +1,73 @@
+name: truthandliberty
+recipe: drupal9
+excludes:
+  - drush
+  - node_modules
+  - themesrc/node_modules
+  # - docroot/core
+  - docroot/vendor
+  - docroot/modules/contrib
+  - vendor
+config:
+  php: '7.4'
+  webroot: docroot
+services:
+  appserver:
+    build:
+      - "composer global require drupal/coder"
+      - "/var/www/.composer/vendor/bin/phpcs --config-set installed_paths /var/www/.composer/vendor/drupal/coder/coder_sniffer"
+    xdebug: true
+    config:
+      php: lando/config/php.ini
+    overrides:
+      environment:
+        XDEBUG_MODE:
+        LANDO_HOST_IP: "172.17.0.1"
+        PHP_IDE_CONFIG: "serverName=appserver"
+      extra_hosts:
+        - ${LANDO_HOST_NAME_DEV:-host}:${LANDO_HOST_GATEWAY_DEV:-host-gateway}
+  node:
+    type: node
+    build:
+      - npm install
+      - npm install -G gulp
+
+tooling:
+  node:
+    service: node
+  npm:
+    service: node
+    dir: /app/source/
+  gulp:
+    service: node
+    dir: /app/source/
+  xdebug-on:
+    service: appserver
+    description: Enable xdebug for Apache.
+    cmd: docker-php-ext-enable xdebug && /etc/init.d/apache2 reload && echo "Enabling xdebug"
+    user: root
+  xdebug-off:
+    service: appserver
+    description: Disable xdebug for Apache
+    cmd: rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload && echo "Disabling xdebug"
+    user: root
+  drupalcs:
+    service: appserver
+    cmd: "/app/vendor/bin/phpcs --standard=Drupal,DrupalPractice -n --extensions=php,module,inc,install,test,profile,theme --ignore=*.pages,*.inc,*.yml,.docksal,*.png,*.js,*.jpg,settings.php,*.woff,*.eot,*.ttf,*.otf,*.woff2"
+    description: Run phpcs Drupal Coding Standards against a given file or directory
+  drupalcbf:
+    service: appserver
+    cmd: "/app/vendor/bin/phpcbf --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme --ignore=*.pages,*.inc,*.yml,.docksal,*.png,*.js,*.jpg,settings.php,*.woff,*.eot,*.ttf,*.otf,*.woff2"
+    description: Automatically fix Drupal coding standards suggestions.
+  phpunit:
+    service: appserver
+    cmd: vendor/bin/phpunit --configuration web/core
+    description: Run PHPUnit tests on a specific file or Drupal module.
+  drupal-check:
+    service: appserver
+    cmd: vendor/bin/drupal-check -ad
+    description: Check Drupal code for deprecations and discover bugs via static analysis.
+  events:
+    pre-start:
+      - appserver: composer install
+      - nodejs: npm install
