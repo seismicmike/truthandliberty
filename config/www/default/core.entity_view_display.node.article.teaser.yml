@@ -1,0 +1,38 @@
+uuid: c561cad7-3204-416c-9281-0fcddf6dca4c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.article.field_article_hero
+    - field.field.node.article.field_article_preamble
+    - field.field.node.article.field_author
+    - field.field.node.article.field_category
+    - field.field.node.article.field_components
+    - field.field.node.article.field_date
+    - field.field.node.article.field_social_share
+    - field.field.node.article.field_tags
+    - node.type.article
+  module:
+    - user
+id: node.article.teaser
+targetEntityType: node
+bundle: article
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_article_hero: true
+  field_article_preamble: true
+  field_author: true
+  field_category: true
+  field_components: true
+  field_date: true
+  field_social_share: true
+  field_tags: true
+  search_api_excerpt: true
+  social_sharing: true

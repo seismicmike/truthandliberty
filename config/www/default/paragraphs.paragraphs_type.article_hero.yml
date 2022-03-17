@@ -1,0 +1,10 @@
+uuid: de4da469-490b-45f3-a0f0-18879520365c
+langcode: en
+status: true
+dependencies: {  }
+id: article_hero
+label: 'Article Hero'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

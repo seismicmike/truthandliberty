@@ -1,0 +1,79 @@
+uuid: ca904e10-2f83-4079-855a-c546a5f01ee7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_article_hero
+    - node.type.article
+    - paragraphs.paragraphs_type.article_hero
+  module:
+    - entity_reference_revisions
+id: node.article.field_article_hero
+field_name: field_article_hero
+entity_type: node
+bundle: article
+label: Hero
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      article_hero: article_hero
+    target_bundles_drag_drop:
+      accordion:
+        weight: 18
+        enabled: false
+      accordion_item:
+        weight: 19
+        enabled: false
+      article_hero:
+        enabled: true
+        weight: 20
+      content:
+        weight: 21
+        enabled: false
+      embed_block:
+        weight: 22
+        enabled: false
+      embed_iframe:
+        weight: 23
+        enabled: false
+      embed_view:
+        weight: 24
+        enabled: false
+      featured_content:
+        weight: 25
+        enabled: false
+      featured_links:
+        weight: 26
+        enabled: false
+      featured_media:
+        weight: 27
+        enabled: false
+      heading:
+        weight: 28
+        enabled: false
+      hero:
+        weight: 29
+        enabled: false
+      hero_slide:
+        weight: 30
+        enabled: false
+      pullquote:
+        weight: 31
+        enabled: false
+      section:
+        weight: 32
+        enabled: false
+      tabs:
+        weight: 33
+        enabled: false
+      tabs_tab:
+        weight: 34
+        enabled: false
+field_type: entity_reference_revisions

@@ -1,0 +1,144 @@
+uuid: d8d3edec-2f9e-4d11-85e7-7aeedd4b8e2e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.article.field_article_hero
+    - field.field.node.article.field_article_preamble
+    - field.field.node.article.field_author
+    - field.field.node.article.field_category
+    - field.field.node.article.field_components
+    - field.field.node.article.field_date
+    - field.field.node.article.field_social_share
+    - field.field.node.article.field_tags
+    - node.type.article
+  module:
+    - datetime
+    - entity_reference_revisions
+    - field_group
+    - user
+third_party_settings:
+  field_group:
+    group_hero_container:
+      children:
+        - field_article_hero
+        - group_by
+        - group_category_container
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: hero__container
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Hero Container'
+    group_by:
+      children:
+        - field_author
+        - field_date
+      parent_name: group_hero_container
+      weight: 20
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: containier__byline
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: By
+    group_category_container:
+      children:
+        - field_category
+      parent_name: group_hero_container
+      weight: 20
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: container__category
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Category Container'
+id: node.article.full
+targetEntityType: node
+bundle: article
+mode: full
+content:
+  field_article_hero:
+    type: entity_reference_revisions_entity_view
+    weight: 6
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_article_preamble:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_author:
+    weight: 0
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_category:
+    weight: 4
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_components:
+    weight: 3
+    label: hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
+  field_date:
+    weight: 1
+    label: hidden
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  social_sharing:
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_social_share: true
+  field_tags: true
+  links: true
+  search_api_excerpt: true

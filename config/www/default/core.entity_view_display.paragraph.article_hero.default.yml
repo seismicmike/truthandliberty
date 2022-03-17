@@ -1,0 +1,33 @@
+uuid: ed106ff3-1cf6-476c-8cb2-dec808cf7a0c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.article_hero.field_hero_promo_text
+    - field.field.paragraph.article_hero.field_media_background
+    - field.field.paragraph.article_hero.field_paragraph_view_mode
+    - paragraphs.paragraphs_type.article_hero
+id: paragraph.article_hero.default
+targetEntityType: paragraph
+bundle: article_hero
+mode: default
+content:
+  field_hero_promo_text:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_media_background:
+    weight: 0
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden:
+  field_paragraph_view_mode: true
+  search_api_excerpt: true

@@ -51,9 +51,10 @@ fi
 
 if [ -n "$STAGED_FILES" ]
 then
-  lando gulp test
-  lando drupalcs /app/docroot/modules/custom
-  lando drupalcs /app/docroot/themes/custom
+  fin k lint {$STAGED_FILES}
+#   lando gulp test
+#   lando drupalcs /app/docroot/modules/custom
+#   lando drupalcs /app/docroot/themes/custom
 fi
 
 exit $?

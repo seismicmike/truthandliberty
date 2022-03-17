@@ -1,0 +1,19 @@
+uuid: 51f3c371-4530-44c8-a7c3-74bda3f42d4d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_hero_promo_text
+    - paragraphs.paragraphs_type.article_hero
+id: paragraph.article_hero.field_hero_promo_text
+field_name: field_hero_promo_text
+entity_type: paragraph
+bundle: article_hero
+label: 'Hero Promo Text (optional)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

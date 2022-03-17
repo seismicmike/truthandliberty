@@ -1,0 +1,19 @@
+uuid: e7daf52d-a2ae-4829-9965-b68ab07b3612
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - social_sharing
+id: node.field_social_share
+field_name: field_social_share
+entity_type: node
+type: social_sharing
+settings: {  }
+module: social_sharing
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,23 @@
+uuid: 40983397-774a-4530-be77-38dbbf84431c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_paragraph_view_mode
+    - paragraphs.paragraphs_type.article_hero
+  module:
+    - paragraph_view_mode
+id: paragraph.article_hero.field_paragraph_view_mode
+field_name: field_paragraph_view_mode
+entity_type: paragraph
+bundle: article_hero
+label: 'Hero Image Style'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: default
+default_value_callback: ''
+settings: {  }
+field_type: paragraph_view_mode

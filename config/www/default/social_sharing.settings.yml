@@ -1,0 +1,15 @@
+entities:
+  media: 1
+  node: 1
+  comment: 1
+share_services:
+  twitter:
+    value: ''
+    enabled: 1
+    weight: -100
+  facebook:
+    value: ''
+    enabled: 1
+    weight: -100
+_core:
+  default_config_hash: qQk5pr41uXplTb5bGVrlI-UA8fkAG7ChfGDSxlAODlw
