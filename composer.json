@@ -1,12 +1,12 @@
 {
-    "name": "vmlyr-drupal/kit",
-    "description": "Project template for VMLY&R Drupal 8 projects with composer.",
+    "name": "seismicmike/truthandliberty",
+    "description": "Truth and Liberty Drupal Site.",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
-            "name": "Garrett Rathbone",
-            "role": "Technology Specialist"
+            "name": "Mike Lewis",
+            "role": "Webmaster"
         }
     ],
     "repositories": [
