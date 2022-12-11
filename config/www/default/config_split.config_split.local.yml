@@ -1,4 +1,4 @@
-uuid: edd4de7b-4743-4841-8c85-fcd18e7c600a
+uuid: 79b01551-84fc-4375-95ea-9427b6fd0433
 langcode: en
 status: true
 dependencies: {  }
@@ -7,6 +7,7 @@ _core:
 id: local
 label: Local
 description: ''
+weight: -5
 folder: ../config/www/local
 module:
   dblog: 0
@@ -22,4 +23,3 @@ graylist:
   - system.performance
 graylist_dependents: true
 graylist_skip_equal: false
-weight: -5

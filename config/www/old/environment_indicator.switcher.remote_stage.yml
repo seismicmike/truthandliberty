@@ -1,0 +1,12 @@
+uuid: f4767dd4-0f5c-4b96-9632-fa9663d09a89
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: tkxs7gMvV5J2lXrCzrQGrKeVg0Uiwnu3bOGJz_kDqzY
+machine: remote_stage
+description: null
+name: Stage
+url: 'https://test-www.truthandliberty.docksal'
+fg_color: '#e6e6e6'
+bg_color: '#008040'

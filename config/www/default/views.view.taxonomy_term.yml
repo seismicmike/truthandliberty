@@ -1,4 +1,4 @@
-uuid: 9b43adf4-83df-4b19-aac3-e472ebffda4f
+uuid: 9464cdf4-9135-43c4-ba58-20c4b3016a17
 langcode: en
 status: true
 dependencies:
@@ -80,6 +80,7 @@ display:
           exposed: false
           expose:
             label: ''
+            field_identifier: sticky
         created:
           id: created
           table: taxonomy_index
@@ -92,6 +93,7 @@ display:
           exposed: false
           expose:
             label: ''
+            field_identifier: created
           granularity: second
       arguments:
         tid:

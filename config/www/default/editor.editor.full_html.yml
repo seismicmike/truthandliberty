@@ -1,4 +1,4 @@
-uuid: dced70a5-bd83-4ad5-bd48-c4cd9d6011cc
+uuid: 86826b14-d5ad-4b88-a477-d713a07b8aed
 langcode: en
 status: true
 dependencies:
@@ -61,10 +61,6 @@ settings:
     drupallink:
       linkit_enabled: true
       linkit_profile: default
-    language:
-      language_list: un
-    stylescombo:
-      styles: ''
 image_upload:
   status: true
   scheme: public

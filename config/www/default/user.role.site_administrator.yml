@@ -1,7 +1,33 @@
-uuid: fea511fd-9273-426e-92ca-0b9bb1c5f0fb
+uuid: 4fc48c3f-a3dc-4857-be47-f6c3227ff9d2
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.restricted_html
+    - media.type.audio
+    - media.type.file
+    - media.type.image
+    - node.type.page
+    - taxonomy.vocabulary.tags
+  module:
+    - block
+    - block_class
+    - contextual
+    - environment_indicator
+    - file
+    - filter
+    - media
+    - menu_link_attributes
+    - node
+    - paragraphs
+    - path
+    - redirect
+    - search
+    - system
+    - taxonomy
+    - toolbar
 _core:
   default_config_hash: 7BXEixEWkEd1flqYIAXjfIsOoPeyD4AAepftcvQUDKM
 id: site_administrator

@@ -1,3 +1,5 @@
+_core:
+  default_config_hash: BIZhfTth9kW1JD4jc2oTmO7mKyFnt2sK4DjKtuzsfzY
 admin_css: true
 responsive_image: true
 one_pixel: true
@@ -6,5 +8,3 @@ blazy:
   offset: 100
   saveViewportOffsetDelay: 50
   validateDelay: null
-_core:
-  default_config_hash: BIZhfTth9kW1JD4jc2oTmO7mKyFnt2sK4DjKtuzsfzY

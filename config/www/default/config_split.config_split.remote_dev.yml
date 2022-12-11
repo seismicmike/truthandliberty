@@ -1,4 +1,4 @@
-uuid: 9234cff6-141f-4e47-a48a-91d45a11045e
+uuid: 04dc05f0-b357-4d8d-8a20-32a4ab86f593
 langcode: en
 status: true
 dependencies: {  }
@@ -7,6 +7,7 @@ _core:
 id: remote_dev
 label: 'Remote - Dev'
 description: ''
+weight: 0
 folder: ../config/www/remote_dev
 module:
   dblog: 0
@@ -17,4 +18,3 @@ blacklist: {  }
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: true
-weight: 0

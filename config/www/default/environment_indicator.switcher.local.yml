@@ -1,4 +1,4 @@
-uuid: 3a6a27be-d367-40f4-900d-b16b4b3b7325
+uuid: 049ae5ca-beaa-42ad-b09e-61ef3d29e752
 langcode: en
 status: true
 dependencies: {  }
@@ -7,6 +7,7 @@ _core:
 machine: local
 description: null
 name: Local
-url: 'https://www.truthandliberty.docksal'
+weight: null
+url: 'https://truthandliberty.lndo.site'
 fg_color: '#e6e6e6'
 bg_color: '#0080ff'

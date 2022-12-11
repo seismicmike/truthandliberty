@@ -1,4 +1,4 @@
-uuid: f12a639f-a823-4359-89a0-b5806a4afcbb
+uuid: 470f8c8e-3fb7-48a4-aa3e-30354f5db2c0
 langcode: en
 status: true
 dependencies:
@@ -849,6 +849,7 @@ display:
           exposed: false
           expose:
             label: ''
+            field_identifier: created
           granularity: second
           plugin_id: date
           entity_type: user

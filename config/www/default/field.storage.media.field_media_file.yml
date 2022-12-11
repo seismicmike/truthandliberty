@@ -1,13 +1,13 @@
-uuid: 078d6e4b-e169-4f87-bf4c-f8473cd8f686
+uuid: a9895ab0-238f-464b-bbed-852513494cdf
 langcode: en
 status: true
 dependencies:
-  enforced:
-    module:
-      - media
   module:
     - file
     - media
+  enforced:
+    module:
+      - media
 _core:
   default_config_hash: 4GNilUMnj0opT050eZIkWhkfuzu69ClyEr-cHxofjQw
 id: media.field_media_file

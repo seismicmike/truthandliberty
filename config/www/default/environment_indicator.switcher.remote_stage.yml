@@ -1,4 +1,4 @@
-uuid: f4767dd4-0f5c-4b96-9632-fa9663d09a89
+uuid: 1ade87ad-0769-4f11-9688-7cceb8537cad
 langcode: en
 status: true
 dependencies: {  }
@@ -7,6 +7,7 @@ _core:
 machine: remote_stage
 description: null
 name: Stage
-url: 'https://test-www.truthandliberty.docksal'
+weight: null
+url: 'https://stg-www.truthandliberty.me'
 fg_color: '#e6e6e6'
 bg_color: '#008040'

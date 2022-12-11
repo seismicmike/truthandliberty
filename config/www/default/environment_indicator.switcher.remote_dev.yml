@@ -1,4 +1,4 @@
-uuid: 1f651a12-8f74-4b14-ab7d-6f147cbd85e4
+uuid: 506a4774-99f5-48bf-a235-7a9fae9bb78c
 langcode: en
 status: true
 dependencies: {  }
@@ -7,6 +7,7 @@ _core:
 machine: remote_dev
 description: null
 name: Dev
-url: 'https://dev-www.truthandliberty.docksal'
+weight: null
+url: 'https://dev-www.truthandliberty.me'
 fg_color: '#333333'
 bg_color: '#ffcc66'

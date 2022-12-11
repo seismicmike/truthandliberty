@@ -1,4 +1,4 @@
-uuid: 17eaa40b-250b-4d46-a8ae-acb453a19084
+uuid: e39594ba-ff10-48fa-8e26-36f83c88d5e1
 langcode: en
 status: true
 dependencies: {  }
@@ -7,6 +7,7 @@ _core:
 machine: remote_prod
 description: null
 name: Prod
-url: 'https://prod-www.truthandliberty.docksal'
+weight: null
+url: 'https://www.truthandliberty.me'
 fg_color: '#d0d0d0'
 bg_color: '#0d0d0d'

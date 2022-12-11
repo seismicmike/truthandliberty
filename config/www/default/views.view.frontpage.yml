@@ -1,4 +1,4 @@
-uuid: 100edfc1-8569-4d53-b28c-2966922efdfd
+uuid: 445765d1-7b99-48b8-9e61-0f7d24d1ee2a
 langcode: en
 status: true
 dependencies:
@@ -206,6 +206,7 @@ display:
           admin_label: ''
           expose:
             label: ''
+            field_identifier: sticky
           exposed: false
           field: sticky
           group_type: group
@@ -228,6 +229,7 @@ display:
           exposed: false
           expose:
             label: ''
+            field_identifier: created
           granularity: second
           entity_type: node
           entity_field: created

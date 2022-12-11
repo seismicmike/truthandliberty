@@ -1,4 +1,4 @@
-uuid: 19676add-9a10-4dd6-8cd0-1e4274a59e03
+uuid: 0089be07-580e-4808-a20e-7c40201bb36a
 langcode: en
 status: true
 dependencies:
@@ -13,7 +13,6 @@ dependencies:
     - paragraphs.paragraphs_type.featured_content
     - paragraphs.paragraphs_type.featured_links
     - paragraphs.paragraphs_type.featured_media
-    - paragraphs.paragraphs_type.heading
     - paragraphs.paragraphs_type.hero
     - paragraphs.paragraphs_type.pullquote
     - paragraphs.paragraphs_type.section
@@ -49,17 +48,16 @@ settings:
       pullquote: pullquote
       section: section
       tabs: tabs
-      heading: heading
     target_bundles_drag_drop:
+      content:
+        enabled: true
+        weight: -41
       accordion:
         enabled: true
         weight: -40
       accordion_item:
         weight: -39
         enabled: false
-      content:
-        enabled: true
-        weight: -41
       embed_block:
         enabled: true
         weight: -38
@@ -72,20 +70,23 @@ settings:
       featured_content:
         enabled: true
         weight: -35
-      featured_links:
-        enabled: true
-        weight: -31
       featured_media:
         enabled: true
         weight: -34
-      heading:
-        enabled: true
-        weight: 26
       hero:
         enabled: true
         weight: -33
       hero_slide:
         weight: -32
+        enabled: false
+      featured_links:
+        enabled: true
+        weight: -31
+      pod:
+        enabled: true
+        weight: -30
+      pod_pea_content:
+        weight: -29
         enabled: false
       pullquote:
         enabled: true
@@ -93,6 +94,15 @@ settings:
       section:
         enabled: true
         weight: -27
+      slider:
+        enabled: true
+        weight: -26
+      slider_slide_photo:
+        weight: -25
+        enabled: false
+      slider_slide_video:
+        weight: -24
+        enabled: false
       tabs:
         enabled: true
         weight: -23

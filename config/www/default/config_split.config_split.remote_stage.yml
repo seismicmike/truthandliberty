@@ -1,4 +1,4 @@
-uuid: 6cb5c864-1337-401e-9090-0eebd5f7753a
+uuid: a3563908-9475-42bf-89ed-502cfbda9bdf
 langcode: en
 status: true
 dependencies: {  }
@@ -7,6 +7,7 @@ _core:
 id: remote_stage
 label: 'Remote - Stage'
 description: ''
+weight: 0
 folder: ../config/www/remote_stage
 module:
   dblog: 0
@@ -17,4 +18,3 @@ blacklist: {  }
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: true
-weight: 0

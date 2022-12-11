@@ -1,0 +1,12 @@
+uuid: af47c35c-bc7c-44e6-b71c-8396b40f3932
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: cpJPQUyulpVGsVu5s4PHoLIFtC_TmLsc8eDo1gwIioc
+id: featured_links
+label: 'Featured: Links'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }
