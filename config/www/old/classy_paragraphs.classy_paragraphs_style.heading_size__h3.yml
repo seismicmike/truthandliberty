@@ -1,7 +1,0 @@
-uuid: ceb5eba1-3300-4fe9-874d-7eda3e28b460
-langcode: en
-status: true
-dependencies: {  }
-id: heading_size__h3
-label: 'Heading Size H3'
-classes: heading-h3

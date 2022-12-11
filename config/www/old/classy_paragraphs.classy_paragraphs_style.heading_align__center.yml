@@ -1,7 +1,0 @@
-uuid: 36880137-e323-4cb9-84c5-558731048bd4
-langcode: en
-status: true
-dependencies: {  }
-id: heading_align__center
-label: 'Heading Align Center'
-classes: heading-align-center

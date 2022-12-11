@@ -1,7 +1,0 @@
-uuid: 1f812440-7abc-4bda-ab32-8b5fba5ad60f
-langcode: en
-status: true
-dependencies: {  }
-id: heading_size__h4
-label: 'Heading Size H4'
-classes: heading-size-h4

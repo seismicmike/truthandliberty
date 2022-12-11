@@ -1,7 +1,0 @@
-uuid: a08a6c59-421f-48cf-b677-cf7993fe9d90
-langcode: en
-status: true
-dependencies: {  }
-id: heading_align__left
-label: 'Heading Align Left'
-classes: heading-align-left

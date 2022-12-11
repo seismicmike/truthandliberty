@@ -1,7 +1,0 @@
-uuid: 4f46b856-369f-4f2d-bc63-83cad18a1b32
-langcode: en
-status: true
-dependencies: {  }
-id: heading_size__h5
-label: 'Heading Size H5'
-classes: heading-size-h5

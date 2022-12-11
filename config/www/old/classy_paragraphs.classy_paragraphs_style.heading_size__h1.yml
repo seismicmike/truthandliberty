@@ -1,7 +1,0 @@
-uuid: ef2dad70-a1c5-4ef5-a303-af94c95d5be0
-langcode: en
-status: true
-dependencies: {  }
-id: heading_size__h1
-label: 'Heading Size H1'
-classes: heading-h1
