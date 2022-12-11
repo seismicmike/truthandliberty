@@ -1,3 +1,5 @@
+_core:
+  default_config_hash: QdiqmcH9tjpstXqCQKv4G4rHYE4HjWLFkVzyqooqEWM
 favicon:
   use_default: true
 features:
@@ -19,5 +21,3 @@ accent_color: ''
 focus_color: ''
 icon_upload: ''
 show_user_theme_settings: true
-_core:
-  default_config_hash: QdiqmcH9tjpstXqCQKv4G4rHYE4HjWLFkVzyqooqEWM
